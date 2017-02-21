@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>text1</title>
+<style type="text/css">
+    *{
+    	margin: 0;
+    	padding: 0;
+    }
+	li{
+		display: inline-block;
+	    list-style: none;
+	}
+	.clearfix:after {
+		content:".";
+		display:block;
+		clear:both;
+		height:0;
+		font-size:0;
+		line-height:0;
+		}
+	span{
+		display: inline-block;
+		width: 37px;
+		height: 30px;
+		text-align: center;
+		line-height: 30px;
+		margin: 5px;
+		background-color: #F9F7F7;
+		color: #847B84;
+		font-size: 12px;
+		border: 1px solid #ccc;
+	}
+	span:hover{
+		background-color: #EF9400;
+		color: #FFFFFF;
+		cursor: pointer;
+	}
+	.contener{
+		width: 734px;
+		height: 422px;
+		background-color: #ccc;
+		position: relative;
+	}
+	.box{
+		padding: 20px 20px;
+	}
+	h2{
+       vertical-align: sub;
+       display: inline-block;
+       font-weight: bold;
+	}
+	.btnT{
+		width: 100px;
+		height: 40px;
+		text-align: center;
+		line-height: 40px;
+		background-color: red;
+		border: none;
+		cursor: pointer;
+		color: #ffffff;
+	}
+	#divbox{
+		width: 100px;
+		height: 100px;
+		margin-top: 20px;
+		border: 5px solid #000;
+		background-color: #FFF;
+	}
+	#boxchange{
+		width: 300px;
+		height: 200px;
+		background-color: #FFF;
+		border: 15px solid #9C949C;
+		font-size:16px;
+		position: absolute;
+		bottom: 30px;
+		right: 25px;
+		/*display: none;*/
+	}
+	.BCC{
+		margin: 10px;
+		text-align: center;
+		z-index: 100;
+	}
+    .red{
+    	background-color: #9CCE00;
+    	color: #fff;
+    }
+    .red:hover{
+        background-color: #FB0404;
+    }
+    .yellow{
+    	background-color: #EFBD00;
+    	color: #fff;
+    }
+    .yellow:hover{
+        background-color: #FDFD02;
+        color: #000000;
+    }
+    .blue{
+    	background-color: #5A94EF;
+    	color: #fff;
+    }
+    .blue:hover{
+        background-color: #0202FC;
+    }
+    .BCC button{
+        width: 60px;
+        height: 28px;
+        color: #FFFFFF;
+        background-color: #002952;
+        border: 0;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+	#bgC{
+	width: 734px;
+	height: 422px;
+	display: none;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right:0px;
+	background-color: #777;
+	-webkit-filter: opacity(0.4);
+	filter: opacity(0.1);
+	}
+</style>
+</head>
+<body>
+	<div class="contener">
+	 <div id="bgC"></div>
+	   <div class="box">
+		<h2>请为下面的DIV设置样式：</h2>
+		<button class="btnT">点击设置</button>
+		<div class="clearfix"></div>
+		<div id="divbox"></div>
+		<div id="boxchange">
+		   <div class="BCC">
+			<ul>
+				<li>请选择背景色&nbsp;: <span class="red">红</span><span class="yellow">黄</span><span class="blue">蓝</span></li>
+				<li>请选择宽（px）: <span>200</span><span>300</span><span>400</span></li>
+				<li>请选择高（px）：<span>200</span><span>300</span><span>400</span></li>
+			</ul>
+			<button>恢复</button>
+			<button>确定</button>
+		   </div>
+		</div>
+	  </div>
+	</div>
+	<script type="text/javascript">
+	window.onload=function () {
+		 /* body... */
+		var contener = document.getElementsByClassName("contener")[0];
+		var boxC = document.getElementById("boxchange");
+		var divB = document.getElementById("divbox");
+		var spa = boxC.getElementsByTagName("span");
+		var btn = document.getElementsByTagName("button");
+		var bgObj=document.getElementById("bgC");
+		boxC.style.display="none";
+		// 点击弹出设置的DIV
+		btn[0].onclick = function Cl () {
+			 	boxC.style.display="block";
+			 	bgObj.style.display="block";
+
+		}
+		// 点击恢复
+        btn[1].onclick = function () {
+                divB.style.backgroundColor="#FFFFFF";
+                divB.style.width="100px";
+                divB.style.height="100px";
+
+        }
+        // 点击确定
+        btn[2].onclick = function () {
+                boxC.style.display="none";
+			 	bgObj.style.display="none";
+        }
+
+        // //设置span的效果
+        // spa[0].onclick=function red () {
+        // 	   divB.style.backgroundColor="red";
+        // }
+        //  spa[1].onclick=function yellow () {
+        // 	   divB.style.backgroundColor="yellow";
+        // }
+        //  spa[2].onclick=function blue () {
+        // 	   divB.style.backgroundColor="blue";
+        // }
+        // spa[3].onclick=function W2 () {
+        // 	 // body...
+        // 	 divB.style.width="200px";
+        // }
+        //   spa[4].onclick=function W3 () {
+        // 	 // body...
+        // 	 divB.style.width="300px";
+        // }
+        // spa[5].onclick= function W4 () {
+        // 	 // body...
+        // 	 divB.style.width="400px";
+        // }
+        // spa[6].onclick= function H2 () {
+        // 	 // body...
+        // 	 divB.style.height="200px";
+        // }
+        // spa[7].onclick= function H3 () {
+        // 	 // body...
+        // 	 divB.style.height="300px";
+        // }
+        // //  spa[8].onclick=function H4 () {
+        // // 	 // body...
+        // // 	 divB.style.height="400px";
+        // // }
+      //给span绑定事件
+       function setting (name,value) {
+       	 divB.style[name]=value;
+       }
+        spa[0].addEventListener('click',function(){setting('backgroundColor','red')});
+        spa[1].addEventListener('click',function(){setting('backgroundColor','yellow')});
+        spa[2].addEventListener('click',function(){setting('backgroundColor','blue')});
+        spa[3].addEventListener('click',function(){setting('width','200px')});
+        spa[4].addEventListener('click',function(){setting('width','300px')});
+        spa[5].addEventListener('click',function(){setting('width','400px')});
+        spa[6].addEventListener('click',function(){setting('height','200px')});
+        spa[7].addEventListener('click',function(){setting('height','300px')});
+        spa[8].addEventListener('click',function(){setting('height','400px')});
+			
+
+	}
+	</script>
+</body>
+</html>
