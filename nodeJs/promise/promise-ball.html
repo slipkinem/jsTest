@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>promise-ball</title>
+    <script src="node_modules/.3.4.3@bluebird/js/browser/bluebird.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+        }
+        .ball{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+        .ball1{
+            background: red;
+        }
+        .ball2{
+            background: yellow;
+        }
+        .ball3{
+            background: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="ball ball1" style="margin-left: 0;"></div>
+    <div class="ball ball2" style="margin-left: 0;"></div>
+    <div class="ball ball3" style="margin-left: 0;"></div>
+
+    <script>
+        window.onload = function () {
+            var ball1 = document.querySelector('.ball1');
+            var ball2 = document.querySelector('.ball2');
+            var ball3 = document.querySelector('.ball3');
+            //读取animate = fun
+
+//            var Promise = window.Promise;
+            function promiseAnimate(ball,distance) {
+                return new Promise(function (resolve,reject) {
+                    function _animate() {
+                        setTimeout(function () {
+                            var marginLeft = parseInt(ball.style.marginLeft,10);
+                            if(marginLeft === distance){
+                                resolve();
+                            }else{
+                                if(marginLeft < distance ){
+                                    marginLeft ++;
+                                }else {
+                                    marginLeft --;
+                                }
+                                ball.style.marginLeft = marginLeft + 'px';
+                                _animate();
+                            }
+                        },1);
+                    }
+                    _animate();
+                })
+            }
+            promiseAnimate(ball1,100)
+                    .then(function () {
+                        return promiseAnimate(ball2,200)
+                    })
+                    .then(function () {
+                        return promiseAnimate(ball3,300)
+                    })
+                    .then(function () {
+                        return promiseAnimate(ball3,150)
+                    })
+                    .then(function () {
+                        return promiseAnimate(ball2,150)
+                    })
+                    .then(function () {
+                        return promiseAnimate(ball1,150)
+                    })
+        }
+    </script>
+</body>
+</html>
