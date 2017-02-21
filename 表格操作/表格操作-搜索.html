@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表格操作</title>
+	<style type="text/css">
+		table{
+			text-align: center;
+			margin-top: 10px;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			var oRow=document.getElementsByTagName("table")[0].tBodies[0].rows;
+			var oBtn=document.getElementsByTagName("input");
+			var oColor=null;
+			var oFontColor=null;
+
+			oBtn[2].onclick=function(){
+				var newTr=document.createElement("tr");
+			
+			var newTd=document.createElement("td");
+			var arr=["小李","小张","小狗","小猫","小猪","小驴","小马","刘德华","张国成","牛顿"];
+			newTd.innerHTML=arr[parseInt(Math.random()*10)];
+			newTr.appendChild(newTd);
+
+			var newTd=document.createElement("td");
+			newTd.innerHTML=oBtn[0].value;
+			newTr.appendChild(newTd);
+
+			var newTd=document.createElement("td");
+			newTd.innerHTML="男";
+			newTr.appendChild(newTd);
+
+			var newTd=document.createElement("td");
+			newTd.innerHTML="<a href='javascript:;'>删除</a>";
+			newTr.appendChild(newTd);
+
+			document.getElementsByTagName("table")[0].tBodies[0].appendChild(newTr);
+
+			var oA=document.getElementsByTagName("a");
+
+			oBtn[0].value="";
+
+			for(var i = 0, length1 = oA.length; i < length1; i++){
+
+				oA[i].onclick=function(){
+					
+					document.getElementsByTagName("table")[0].tBodies[0].removeChild(this.parentNode.parentNode);	
+					}
+				}add();
+				for(var j = 0, length1 = oTd.length; j < length1; j++){
+					arry[j]=oTd[j].innerHTML;
+				}
+			}
+
+		function add(){	
+			for(var i = 0, length1 = oRow.length; i < length1; i++){
+				if (i%2==1) {
+					oRow[i].style.backgroundColor="red";
+				}else if(i%2==0){
+					oRow[i].style.backgroundColor="yellow";
+				}
+
+				oRow[i].onmouseover=function(){
+					oColor=this.style.backgroundColor;
+					oFontColor=this.style.color;
+					this.style.backgroundColor="#CCC";
+					this.style.color="black";
+				}
+				oRow[i].onmouseout=function(){
+					this.style.backgroundColor=oColor;
+					this.style.color=oFontColor;
+				}
+			}
+		}add();
+
+			var oTd=document.getElementsByTagName("table")[0].tBodies[0].getElementsByTagName("td");
+			oBtn[1].onclick=function(){
+				for(var i = 0, length1 = oTd.length; i < length1; i++){
+
+					var x = oBtn[0].value.toUpperCase();
+					var y = oTd[i].innerText.toUpperCase();
+					var txtValue=x.split(" ");//将输入的文字用空格切割
+					var old=this.style.backgroundColor;
+					var old2=this.style.color;
+					var bFound=false;
+
+					for(k=0;k<txtValue.length;k++){
+						if (y.search(txtValue[k])!=-1) {//判断切割后的存不存在表格中,search方法就是不存在的东西就是返回-1
+  
+							bFound=true;
+							break;
+						}
+					}
+
+					if (bFound && x!="") {
+						oTd[i].style.backgroundColor="#000";
+						oTd[i].style.color="#fff";
+					}else{
+						oTd[i].style.backgroundColor=old;
+						oTd[i].style.color=old2;
+					}
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="text" value="">
+	<input type="button" value="搜索">
+	<input type="button" value="添加">
+	<table border="1" width="30%">
+		<thead>
+			<td>姓名</td>
+			<td>年龄</td>
+			<td>性别</td>
+		</thead>
+		<tbody>
+			<tr>
+				<td>大牛</td>
+				<td>21</td>
+				<td>男</td>
+			</tr>
+			<tr>
+				<td>二牛</td>
+				<td>31</td>
+				<td>女</td>
+			</tr>
+			<tr>
+				<td>小雷</td>
+				<td>44</td>
+				<td>男</td>
+			</tr>
+			<tr>
+				<td>小和</td>
+				<td>43</td>
+				<td>男</td>
+			</tr>
+			<tr>
+				<td>小红</td>
+				<td>23</td>
+				<td>女</td>
+			</tr>
+			<tr>
+				<td>小故</td>
+				<td>14</td>
+				<td>男</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

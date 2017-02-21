@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表格-排序</title>
+	<style>
+		table{
+			margin-top: 10px;
+			text-align: center;
+	}
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			var oBtn=document.getElementsByTagName("input")[0];
+			var oBody=document.getElementsByTagName("table")[0].tBodies[0];
+			var oRow=oBody.rows;
+			var arr=[];
+			var b=true;
+			oBtn.onclick=function(){
+				//1将节点转换成数组
+				for(var i = 0, length1 = oRow.length; i < length1; i++){
+					arr[i]=oRow[i];
+				}
+				//2排序 sort函数
+				if (b) {
+					arr.sort(function (a,b) {
+						return parseInt(a.cells[1].innerHTML)-parseInt(b.cells[1].innerHTML);
+					})
+				}else{
+					arr.sort(function (a,b) {
+						return parseInt(b.cells[1].innerHTML)-parseInt(a.cells[1].innerHTML);
+					})
+				}
+				//3重新插入
+				for(var j = 0, length2 = arr.length; j < length2; j++){
+					oBody.appendChild(arr[j]);
+				}
+				b=!b;
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="button" value="排序">
+	<table border="1" width="30%">
+		<thead>
+			<td>姓名</td>
+			<td>年龄</td>
+			<td>性别</td>
+		</thead>
+		<tbody>
+			<tr>
+				<td>大牛</td>
+				<td>21</td>
+				<td>男</td>
+			</tr>
+			<tr>
+				<td>二牛</td>
+				<td>31</td>
+				<td>女</td>
+			</tr>
+			<tr>
+				<td>小雷</td>
+				<td>44</td>
+				<td>男</td>
+			</tr>
+			<tr>
+				<td>小和</td>
+				<td>43</td>
+				<td>男</td>
+			</tr>
+			<tr>
+				<td>小红</td>
+				<td>23</td>
+				<td>女</td>
+			</tr>
+			<tr>
+				<td>小故</td>
+				<td>14</td>
+				<td>女</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表格操作</title>
+	<style type="text/css">
+		table{
+			text-align: center;
+			margin-top: 10px;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			// alert(document.getElementsByTagName("table")[0].getElementsByTagName("tbody")[0].getElementsByTagName("tr")[2].getElementsByTagName("td")[1].innerHTML);
+			// alert(document.getElementsByTagName("table")[0].tBodies[0].rows[2].cells[1].innerHTML);
+			var oRow=document.getElementsByTagName("table")[0].tBodies[0].rows;
+			var oBtn=document.getElementsByTagName("input");
+			var oColor=null;
+			for(var i = 0, length1 = oRow.length; i < length1; i++){
+				if (i%2==1) {
+					oRow[i].style.backgroundColor="red";
+				}
+				oRow[i].onmouseover=function(){
+					oColor=this.style.backgroundColor;
+					this.style.backgroundColor="blue";
+				}
+				oRow[i].onmouseout=function(){
+					this.style.backgroundColor=oColor;
+				}
+			}
+			oBtn[1].onclick=function(){
+				var newTr=document.createElement("tr");
+			
+			var newTd=document.createElement("td");
+			newTd.innerHTML=parseInt(Math.random()*10);
+			newTr.appendChild(newTd);
+
+			var newTd=document.createElement("td");
+			newTd.innerHTML=oBtn[0].value;
+			newTr.appendChild(newTd);
+
+			var newTd=document.createElement("td");
+			newTd.innerHTML="<a href='javascript:;'>删除</a>";
+			newTr.appendChild(newTd);
+
+			document.getElementsByTagName("table")[0].tBodies[0].appendChild(newTr);
+
+			var oA=document.getElementsByTagName("a");
+			for(var i = 0, length1 = oA.length; i < length1; i++){
+
+				oA[i].onclick=function(){
+					
+					document.getElementsByTagName("table")[0].tBodies[0].removeChild(this.parentNode.parentNode);	
+					}
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<input type="text" value="">
+	<input type="button" value="搜索">
+	<table border="1" width="300px">
+		<thead>
+			<td>姓名</td>
+			<td>年龄</td>
+			<td>性别</td>
+		</thead>
+		<tbody>
+			<tr>
+				<td>大牛</td>
+				<td>21</td>
+				<td>男</td>
+			</tr>
+			<tr>
+				<td>二牛</td>
+				<td>31</td>
+				<td>女</td>
+			</tr>
+			<tr>
+				<td>小雷</td>
+				<td>44</td>
+				<td>男</td>
+			</tr>
+			<tr>
+				<td>小和</td>
+				<td>43</td>
+				<td>男</td>
+			</tr>
+			<tr>
+				<td>小红</td>
+				<td>23</td>
+				<td>女</td>
+			</tr>
+			<tr>
+				<td>小故</td>
+				<td>14</td>
+				<td>男</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
