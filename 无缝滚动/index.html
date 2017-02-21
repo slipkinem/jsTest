@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+  <title>图片滚动</title>
+</head>
+<body>
+<style type="text/css">
+  <!--
+  #demo {
+    background: #FFF;
+    overflow: hidden;
+    border: 1px dashed #CCC;
+    width: 500px;
+    margin: 0 auto;
+  }
+
+  div {
+    border: 5px solid red;
+  }
+
+  #demo img {
+    border: 3px solid #F2F2F2;
+    width: 200px;
+    height: 200px;
+  }
+
+  #indemo {
+    /*float: left;*/
+    width: 800%;
+    clear: both;
+  }
+
+  #demo1 {
+    float: left;
+  }
+
+  -->
+</style>
+<div id="demo">
+  <div id="indemo">
+    <div id="demo1">
+      <a href="#"><img src="img/QQ20160413163915.png" border="0"/></a>
+      <a href="#"><img src="img/QQ20160413163915.png" border="0"/></a>
+      <a href="#"><img src="img/QQ20160413163915.png" border="0"/></a>
+      <a href="#"><img src="img/QQ20160413163915.png" border="0"/></a>
+      <a href="#"><img src="img/QQ20160413163915.png" border="0"/></a>
+      <a href="#"><img src="img/QQ20160413163915.png" border="0"/></a>
+    </div>
+  </div>
+</div>
+<script>
+  <!--
+  var speed = 10;
+  var tab = document.getElementById("demo");
+  var tab1 = document.getElementById("demo1");
+  var aImg = document.getElementsByTagName("img");
+  var tab3 = document.getElementById("indemo");
+  tab1.innerHTML += tab1.innerHTML;
+  function Marquee() {
+    if (tab1.offsetWidth - tab.scrollLeft <= 0) {
+      tab.scrollLeft -= tab1.offsetWidth
+    }
+    else {
+      tab.scrollLeft += 200;
+    }
+  }
+  var MyMar = setInterval(Marquee, speed);
+  tab.onmouseover = function () {
+    clearInterval(MyMar)
+  };
+  tab.onmouseout = function () {
+    MyMar = setInterval(Marquee, speed)
+  };
+  -->
+  // var foo= 1;
+  // function bar(){
+  //  var foo = 10;
+  // 	return;
+  // 	function foo(){}
+  // }
+  //  bar();
+  //  alert(foo);
+
+  // function a(){
+  // 	alert("haha");
+  // }
+  // var a =10;
+  // a();
+  // alert(a);//number
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>延迟显示</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<style type="text/css">
+	#container{
+		width: 50px;
+		height: 30px;
+		background-color: #ccc;
+	}
+	#content{
+		width: 200px;
+		height: 200px;
+		margin-top:10px;
+		background-color: #000;
+	}
+</style>
+<script type="text/javascript">
+	window.onload = function () {
+		var oBtn = document.getElementById("container");
+		var oDiv = document.getElementById("content");
+		var timer = null;
+		oBtn.onmouseover = oDiv.onmouseover = show;
+		oBtn.onmouseout  = oDiv.onmouseout = hide;
+			function show() {
+                 oDiv.style.display="block";
+                 clearTimeout(timer);//关闭计时器,就等于取消掉那个函数的运行;
+		}
+		    function hide() {
+             timer = setTimeout(function () {
+                 oDiv.style.display="none"; 
+            }, 300);  //执行隐藏的时候延迟;  
+		}
+	}
+</script>
+</head>
+<body>
+    <div id="container"></div>
+    <div id="content" style="display: none;"></div>
+</body>
+</html>

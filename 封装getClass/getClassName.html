@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>getClassName</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link href="" rel="stylesheet">
+<script>
+	window.onload = function(){
+		var oDiv = document.getElementsByTagName("div")[0];
+		
+		function getClass(oParent,aClass){
+			var aTag = oParent.getElementsByTagName("*");
+			var array = [];
+			var re=new RegExp("\\b"+aClass+"\\b");
+			for(i=0;i<aTag.length;i++){
+				if(re.test(aTag[i].className)){
+					array.push(aTag[i]);
+				}
+			}
+			return array;
+		}
+
+		var oLi = getClass(oDiv,"box");
+		for(var i = 0, length1 = oLi.length; i < length1; i++){
+			oLi[i].style.background="red";
+		}
+
+		function getClass(oParent,aClass){
+			var aTag = oParent.getElementsByTagName("*");
+			var aResult=[];
+			var re = new RegExp("\\b"+aClass+"\\b");
+			for(var i=0;i<aTag.length;i++){
+				if (re.test(aTag[i].className)) {
+					aResult.push(aTag[i]);
+				}
+			}
+			return aRrsult;
+		}
+
+
+	}
+</script>
+</head>
+<body>
+    <div>
+    	<ul>
+    		<li></li>
+    		<li class="box box1"></li>
+    		<li class="box"></li>
+    		<li></li>
+    		<li></li>
+    	</ul>
+    </div>
+</body>
+</html>

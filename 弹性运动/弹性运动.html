@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>弹性运动</title>
+	<style type="text/css">
+		#box{
+			width: 100px;
+			height: 100px;
+			background-color: #3BFE16;
+			position: absolute;
+			margin-top: 40px;
+		}
+		ul{
+			font-size: 0;
+			margin-top: 50px;
+			margin-left: 500px;
+			position: relative;
+			padding: 0;
+		}
+		li{
+			border-bottom: 1px dashed #000;
+			border-right: 1px solid #000;
+			display: inline-block;
+			font-size: 16px;
+			width: 80px;
+			padding: 5px 0;
+			text-align: center;
+			background-color: #ccc;
+			cursor: pointer;
+		}
+		#hover{
+			background-color: red;
+			opacity: 0.4;
+			border-bottom: 0;
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			height: 1.2em;
+			border-radius: 5px;
+		}
+		body{
+			margin-left: 0;
+		}
+		#bd{
+			width: 1px;
+			height: 500px;
+			background-color: #000;
+			position: absolute;
+			left: 400px;
+		}
+	</style>
+	<script type="text/javascript">
+			window.onload=function(){
+				var oLeft=0;
+				function springMove(iEnd,obj){
+				var iSpeed=0;
+				var timer=null;
+				clearInterval(obj.timer);
+				obj.timer = setInterval(function(){
+						iSpeed+=(iEnd-obj.offsetLeft)/3;
+						iSpeed*=0.6;
+						oLeft+=iSpeed;
+						if (Math.abs(iSpeed)<1 && Math.abs(oLeft-iEnd)<1) {
+							clearInterval(obj.timer);
+							obj.style.left=iEnd+"px";
+						}else{
+							obj.style.left=oLeft+"px";
+
+						}
+				}, 30)
+			}
+				var oDiv=document.getElementById("nav");
+				var oHover=document.getElementById("hover");
+				var oLi=oDiv.getElementsByTagName("li");
+					for(var i=0;i<oLi.length-1;i++){
+						oLi[i].index=i;
+					oLi[i].onmouseover=function(){
+						springMove(this.offsetLeft,oHover);
+					}
+				}
+			}
+	</script>
+</head>
+<body>
+	<!-- <div id="box"></div>
+	<button>start</button>
+	<div id="bd"></div> -->
+	<div id="nav">
+		<ul>
+			<li>首页</li>
+			<li>第一夜</li>
+			<li>第二夜</li>
+			<li>第三夜</li>
+			<li>第四夜</li>
+			<li id="hover"></li>
+		</ul>
+	</div>
+</body>
+</html>
