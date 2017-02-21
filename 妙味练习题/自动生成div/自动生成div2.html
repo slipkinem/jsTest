@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自动生成DIV</title>
+</head>
+<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	li{
+		list-style: none;
+		float: left;
+		width: 50px;
+		height: 50px;
+		border: 1px solid #ccc;
+		text-align: center;
+		line-height: 50px;
+		font-size: 30px;
+		color: #eee;
+		position: absolute;
+		background-color: red;
+	}
+	ul{
+		width: 620px;
+		position: relative;
+	}
+	button{}
+</style>
+<script type="text/javascript">
+	window.onload = function () {
+		 var oBtn = document.getElementsByTagName("button")[0];
+		 var oUl = 	document.getElementsByTagName("ul")[0];
+		 var arr = 	[10]
+		 var bTrue=true;
+		 oBtn.onclick = function(){
+			if (bTrue) {
+				for(var i=0;i<5;i++){
+					oUl.innerHTML+="<li></li>";					
+				}
+				var x = oUl.getElementsByTagName("li");
+
+				for(var k = 0, length3 = x.length; k < length3; k++){
+					x[k].style.left = x[0].offsetWidth*k+"px";
+					for(var j = 0, length2 = k; j <= length2; j++){
+						if (j<k/2) {
+							x[j].style.top = x[j].offsetHeight*(j)+"px";
+						}else{
+							x[j].style.top = x[j].offsetHeight*(k-j)+"px";
+						}
+						console.log("k:"+" "+k+ "  "+"j:"+" "+j+" "+(k-j));
+					}
+				}
+			}
+		}
+	}
+</script>
+<body>
+	<button>点击生成10个LI</button>
+	<ul></ul>
+</body>
+</html>

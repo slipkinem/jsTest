@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>乘法口诀表</title>
+	<script type="text/javascript">
+		window.onload = function(){
+			for(var i = 1;i<10;i++){
+				for(var j=1;j<=i;j++){
+					for(var k = 1, length3 = j; k <= length3; k++){
+						document.write("i:"+i+" "+"j:"+j+" "+"k:"+k);
+						document.write("<br/>");
+					}
+					document.write("<br/>");
+				}
+				document.write("<br/>");
+			}
+		}
+	</script>
+</head>
+<body>
+i                  	j
+
+1                  	1
+2					1 2
+3					1 2 3
+4					1 2 3 4
+5					1 2 3 4 5
+6  					1 2 3 4 5 6 
+7					1 2 3 4 5 6 7 
+8					1 2 3 4 5 6 7 8
+9					1 2 3 4 5 6 7 8 9
+
+
+i  	1
+j	1
+k	1
+i 	2
+j	1	2
+k	1	1	2		
+</body>
+</html>

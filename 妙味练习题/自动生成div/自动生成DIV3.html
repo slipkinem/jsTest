@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自动生成DIV</title>
+</head>
+<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	li{
+		list-style: none;
+		float: left;
+		width: 50px;
+		height: 50px;
+		border: 1px solid #ccc;
+		text-align: center;
+		line-height: 50px;
+		font-size: 30px;
+		color: #eee;
+		position: absolute;
+		background-color: green;
+	}
+	ul{
+		width: 620px;
+		position: relative;
+	}
+	button{}
+</style>
+<script type="text/javascript">
+	window.onload = function () {
+		 var oBtn = document.getElementsByTagName("button")[0];
+		 var oUl = 	document.getElementsByTagName("ul")[0];
+		 var bTrue=true;
+		 var flag=0;
+		 oBtn.onclick = function(){
+			if (bTrue) {
+				for(var i=0;i<9;i++){
+				oUl.innerHTML+="<li>"+(i+1)+"</li>";					
+				}
+				bTrue = false;
+			}
+			var x = oUl.getElementsByTagName("li");
+
+			if (flag==0) {
+				for(var k = 0, length3 = x.length; k < length3; k++){
+					x[k].style.left = x[0].offsetWidth*k+"px";
+					for(var j = 0, length2 = k; j <= length2; j++){
+						if (j<k/2) {
+							x[j].style.top = x[j].offsetHeight*(j)+"px";
+						}else{
+							x[j].style.top = x[j].offsetHeight*(k-j)+"px";
+						}
+					}
+					flag=1;
+				}
+			}else if (flag==1) {
+				for(var k = 0, length3 = x.length; k < length3; k++){
+					x[k].style.left = x[0].offsetWidth*k+"px";
+					for(var j = 0, length2 = k; j <= length2; j++){
+						if (j<k/2) {
+							x[j].style.top = x[j].offsetHeight*(k-k/2-j)+"px";
+						}else{
+							x[j].style.top = x[j].offsetHeight*(j-k/2)+"px";
+						}
+					}
+				}
+				flag=2;
+			}else if (flag==2) {
+				for(var k = 0, length3 = x.length; k < length3; k++){
+					x[k].style.top = x[0].offsetHeight*k+"px";
+					for(var j = 0, length2 = k; j <= length2; j++){
+						if (j<k/2) {
+							x[j].style.left = x[j].offsetWidth*(j)+"px";
+						}else{
+							x[j].style.left = x[j].offsetWidth*(k-j)+"px";
+						}
+					}
+				}
+				flag=3;
+			}else if (flag==3) {
+				for(var k = 0, length3 = x.length; k < length3; k++){
+					x[k].style.top = x[0].offsetHeight*k+"px";
+					for(var j = 0, length2 = k; j <= length2; j++){
+						if (j<k/2) {
+							x[j].style.left = x[j].offsetWidth*(k-k/2-j)+"px";
+						}else{
+							x[j].style.left = x[j].offsetWidth*(j-k/2)+"px";
+						}
+					}
+				}
+				flag=0;
+			}
+		}
+
+		var z = 0;
+
+	document.onclick = function(){ 
+		switch (z) {
+			case 0:
+				alert(z)
+				return z=1;
+			case 1:
+				alert(z)
+				return z=2;
+			case 2:
+				alert(z)
+				return z=0;
+		}
+	}
+}
+</script>
+<body>
+	<button>点击生成10个LI</button>
+	<ul></ul>
+</body>
+</html>

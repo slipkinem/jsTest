@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>提示框</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			text-align: center;
+			padding-top: 100px;
+		}
+		.con{
+			width: 50px;
+			height: 50px;
+			border: 1px solid red;
+			margin: 30px;
+			display: inline-block;
+			position: relative;		
+		}
+		.box{
+			width: 50px;
+			height: 50px;
+			border: 1px solid blue;
+			position: absolute;
+			top: -50px;
+			left: 50px;
+			display: none;
+		}
+	</style>
+	<script type="text/javascript">
+	function getClass (oParent,aClass) {
+				var aTag = oParent.getElementsByTagName("*");
+				var arr =[];
+				var re = new RegExp("\\b"+aClass+"\\b");
+				for(var i = 0, length1 = aTag.length; i < length1; i++){
+					if (re.test(aTag[i].className)) {
+						arr.push(aTag[i]);
+					}
+				}
+				return arr;
+			}
+
+	// function setime (obj,obj2) {
+	// 	timer  = setTimeout(function  () {
+	// 			for(var i = 0, length1 = obj.length; i < length1; i++){
+	// 				obj[i].index = i;
+	// 				obj[i].onmouseout = function  () {
+	// 					obj2[this.index].style.display="none";
+	// 				}
+	// 			}
+	// 	}, 300)
+	// }
+		window.onload = function(){
+			var aDiv = getClass(document,"con");
+			var aDiv2 = getClass(document,"box");
+			var timer = null;
+			for(var i = 0, length1 = aDiv.length; i < length1; i++){
+				aDiv[i].index = i;
+				aDiv[i].onmouseover=function () {
+
+					aDiv2[this.index].style.display="block";
+					
+				}
+				aDiv2[i].onmouseover=function () {
+
+					this.style.display="block";
+					
+				}
+				aDiv[i].onmouseout=function () {
+					aDiv2[this.index].style.display="none";
+
+				}
+				aDiv2[i].onmouseout=function () {
+					this.style.display="none";
+
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div class="con">
+		<div class="box">1</div>
+	</div>
+	<div class="con"><div class="box">2</div></div>
+	<div class="con"><div class="box">3</div></div>
+	<div class="con"><div class="box">4</div></div><br/>
+	<div class="con"><div class="box">5</div></div>
+	<div class="con"><div class="box">6</div></div>
+	<div class="con"><div class="box">7</div></div>
+	<div class="con"><div class="box">8</div></div>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

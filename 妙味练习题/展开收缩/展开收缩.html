@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>展开收缩</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding: 0;
+		}
+		#ul1{
+			width: 150px;
+		}
+		#ul1 li{
+			padding: 5px 10px;
+			border: 1px solid #eee;
+		}
+		li{
+			list-style: none;
+		}
+		span{
+			padding-left: 20px;
+		}
+		#ul1>li{
+			background-color: #ccc;
+		}
+		#ul1>li:hover{
+			background-color: green;
+		}
+		#ul1>li>ul{
+			background-color: red;
+			height: 0;
+			overflow: hidden;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var oUl = document.getElementById("ul1");
+			var aLi = oUl.children;
+			var aUl2 = oUl.getElementsByTagName('ul');
+			var arr = [];
+			for(var i = 0, length1 = aUl2.length; i < length1; i++){
+					var a = aUl2[i].getElementsByTagName('li');
+					for(var j = 0, length2 = a.length; j < length2; j++){
+						arr.push(a[j]);
+				}
+			}
+			for(var i = 0, length1 = arr.length; i < length1; i++){
+				arr[i].onclick = function () {
+					for(var j = 0, length2 = arr.length; j < length2; j++){
+						arr[j].style.backgroundColor="red";
+					}
+					this.style.backgroundColor='#F1F1F1';
+					event.stopPropagation();	
+				}
+			}
+			for(var i = 0, length1 = aLi.length; i < length1; i++){
+				aLi[i].index = i;
+				aLi[i].onclick = function () {
+					for(var j = 0, length2 = aLi.length; j < length2; j++){
+						aUl2[j].style.height="0";
+					}
+					for(var k = 0, length3 = arr.length; k < length3; k++){
+							arr[k].style.backgroundColor="red";
+						}
+					aUl2[this.index].style.height="auto";
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<ul id="ul1">
+		<li>
+			<span>我的好友</span>
+			<ul>
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+			</ul>
+		</li>
+		<li>
+			<span>笔友</span>
+			<ul>
+				<li>5</li>
+				<li>6</li>
+				<li>7</li>
+			</ul>
+		</li>
+		<li>
+			<span>网友</span>
+			<ul>
+				<li>8</li>
+				<li>9</li>
+				<li>10</li>
+				<li>11</li>
+				<li>12</li>
+				<li>13</li>
+			</ul>
+		</li>
+		<li>
+			<span>朋友</span>
+			<ul>
+				<li>14</li>
+				<li>15</li>
+				<li>16</li>
+			</ul>
+		</li>
+	</ul>
+</body>
+</html>

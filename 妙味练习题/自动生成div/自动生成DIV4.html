@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自动生成DIV</title>
+</head>
+<style type="text/css">
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	li{
+		list-style: none;
+		float: left;
+		width: 50px;
+		height: 50px;
+		border: 1px solid #ccc;
+		text-align: center;
+		line-height: 50px;
+		font-size: 30px;
+		color: #eee;
+		position: absolute;
+		background-color: green;
+	}
+	ul{
+		width: 620px;
+		position: relative;
+	}
+	button{}
+</style>
+<script type="text/javascript">
+	window.onload = function () {
+		 var oBtn = document.getElementsByTagName("button")[0];
+		 var oUl = 	document.getElementsByTagName("ul")[0];
+		 var bTrue=true;
+		 var flag=0;
+		 oBtn.onclick = function(){
+			if (bTrue) {
+				for(var i=0;i<9;i++){
+				oUl.innerHTML+="<li>"+(i+1)+"</li>";					
+				}
+				bTrue = false;
+			}
+
+			var x = oUl.getElementsByTagName("li");
+			var a = x[0].offsetWidth;
+			var b = x[0].offsetHeight;
+			switch (flag) {
+				case 0:
+					for(var k = 0, length3 = x.length; k < length3; k++){
+					x[k].style.left = a*k+"px";
+					for(var j = 0, length2 = k; j <= length2; j++){
+						j<k/2?x[j].style.top = b*(j)+"px":x[j].style.top = b*(k-j)+"px";
+					}
+				}
+				return flag=1;
+				break;
+
+				case 1:
+					for(var k = 0, length3 = x.length; k < length3; k++){
+					x[k].style.left = a*k+"px";
+					for(var j = 0, length2 = k; j <= length2; j++){
+						j<k/2?x[j].style.top = b*(k-k/2-j)+"px":x[j].style.top = b*(j-k/2)+"px";
+					}
+				}
+				return flag=2;
+				break;
+
+				case 2:
+					for(var k = 0, length3 = x.length; k < length3; k++){
+					x[k].style.top = b*k+"px";
+					for(var j = 0, length2 = k; j <= length2; j++){
+						j<k/2?x[j].style.left = a*(j)+"px":x[j].style.left = a*(k-j)+"px";
+					}
+				}
+				return flag=3;
+				break;
+
+				default:
+					for(var k = 0, length3 = x.length; k < length3; k++){
+					x[k].style.top = b*k+"px";
+					for(var j = 0, length2 = k; j <= length2; j++){
+						j<k/2?x[j].style.left = a*(k-k/2-j)+"px":x[j].style.left = a*(j-k/2)+"px";
+					}
+				}
+				return flag=0;
+				break;
+			}
+		}
+	}
+</script>
+<body>
+	<button>点击生成10个LI</button>
+	<ul></ul>
+</body>
+</html>

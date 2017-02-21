@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>下拉菜单</title>
+	<style type="text/css">
+		li{
+			list-style: none;
+			float: left;
+			background-color: red;
+			position: relative;
+			padding: 10px 30px;
+			text-align: center;
+		}
+		li>div{
+			position: absolute;
+			width: 300px;
+			background-color: blue;
+			color: #fff;
+			z-index: 100;
+			display: none;
+			left: -100px;
+			top: 38px;
+			height: 30px;
+		}
+		.active{
+			background-color: #000;
+		}
+		a{
+			color: #fff;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function () {
+			var aDiv = document.getElementById("box").getElementsByTagName("div");
+			var aLi = document.getElementById("box").getElementsByTagName("li");
+			for(var i = 0, length1 = aLi.length; i < length1; i++){
+				aLi[i].index=i;
+				aLi[i].onmouseover = function () {
+					this.className="active";
+					aDiv[this.index].style.display="block";
+				}
+				aLi[i].onmouseout = function () {
+					this.className="";
+					aDiv[this.index].style.display="none";
+				}
+			}
+			// document.onclick = function(){
+			// 	if (event.target.tagName=="HTML") {
+			// 		alert("X");
+			// 	}
+			// }
+		}
+	</script>
+</head>
+<body>
+	<div id="box">
+		<ul>
+			<li><a href="">1</a>
+				<div>1</div>
+			</li>
+			<li><a href="">2</a>
+				<div>2</div>
+			</li>
+			<li><a href="">3</a>
+				<div>3</div>
+			</li>
+			<li><a href="">4</a>
+				<div>4</div>
+			</li>
+			<li><a href="">5</a>
+				<div>5</div>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>

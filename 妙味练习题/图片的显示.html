@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>图片显示</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		div{
+			border: 5px solid #ccc;
+			margin: 100px;
+			width: 1034px;
+		}
+		div:after{
+			content: ".";
+			clear: both;
+			display: block;
+			font-size: 0;
+			line-height: 0;
+		}
+		img{
+			margin: 1px;
+			float: left;
+			opacity: 0;
+			filter: alpha(opacity:0);
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var aImg = document.getElementsByTagName("img");
+			for(var i = 0, length1 = aImg.length; i < length1; i++){
+				aImg[i].onmouseover = function  () {
+					this.style.opacity=100;
+					this.style.fliter="alpha(opacity:100)";
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div>
+		<img src="images/1_01.jpg" alt="">
+		<img src="images/1_02.jpg" alt="">
+		<img src="images/1_03.jpg" alt="">
+		<img src="images/1_04.jpg" alt="">
+		<img src="images/1_05.jpg" alt="">
+		<img src="images/1_06.jpg" alt="">
+		<img src="images/1_07.jpg" alt="">
+		<img src="images/1_08.jpg" alt="">
+		<img src="images/1_09.jpg" alt="">
+		<img src="images/1_10.jpg" alt="">
+		<img src="images/1_11.jpg" alt="">
+		<img src="images/1_12.jpg" alt="">
+		<img src="images/1_13.jpg" alt="">
+		<img src="images/1_14.jpg" alt="">
+		<img src="images/1_15.jpg" alt="">
+		<img src="images/1_16.jpg" alt="">
+		<img src="images/1_17.jpg" alt="">
+		<img src="images/1_18.jpg" alt="">
+		<img src="images/1_19.jpg" alt="">
+		<img src="images/1_20.jpg" alt="">
+		<img src="images/1_21.jpg" alt="">
+		<img src="images/1_22.jpg" alt="">
+		<img src="images/1_23.jpg" alt="">
+		<img src="images/1_24.jpg" alt="">
+		<img src="images/1_25.jpg" alt="">
+	</div>
+</body>
+</html>
