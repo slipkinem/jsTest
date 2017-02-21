@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>json</title>
+	<script type="text/javascript">
+		var json = {};
+		json={
+			a:5,
+			b:6,
+			c:7,
+			width:"300px",
+			height:"200px"
+			}
+
+		for (attr in json) {
+			alert(attr+":"+json[attr]);//a,b,c   : 5,6,7
+		}
+
+		for (i in json) {
+			alert(i+":"+json[i]);
+		}
+		var x = "sdsd";
+		alert(typeof(x));
+
+		var Oobj = 3; 
+		var Oobj2 = 5;
+
+		console.log(Oobj.toString(2));
+		console.log(Oobj2.toString(2));
+		console.log(Oobj2 | Oobj);
+		console.log(json)
+	</script>
+</head>
+<body>
+	<div style="height:34px;width:59px;background-color: #ddd">
+		
+	</div>
+
+</body>
+</html>
