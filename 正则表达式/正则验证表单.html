@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>表单验证</title>
+	<style type="text/css">
+		input{
+			margin-bottom: 10px;
+			margin-left: 20px;
+		}
+		span{
+			text-align: left;
+			display: inline-block;
+		}
+		div{
+			font-size: 10px;
+			color: red;
+		}
+		#close{
+			position: absolute;
+			top: 5px;
+			right: 5px;
+			cursor: pointer;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			var oBtn = document.getElementById("btn2");
+			var oForm = document.getElementsByTagName("form")[1];
+			var oClose = document.getElementById("close");
+			var oText = oForm.getElementsByTagName("input");
+			var oDiv=oForm.getElementsByTagName("div");
+			console.log(oDiv)
+			oBtn.onclick=function(){
+				oForm.style.display="block";
+			}
+			oClose.onclick = function(){
+				oForm.style.display="none";
+			}
+			oText[0].onfocus=function(){
+					oDiv[0].style.display="block";
+			}
+			oText[0].onblur=function(){
+					oDiv[0].style.display="none";
+			}
+			oText[1].onfocus=function(){
+					oDiv[1].style.display="block";
+			}
+			oText[1].onblur=function(){
+					oDiv[1].style.display="none";
+			}
+			var re = /^[1-9a-z]{2,10}$/;
+			var rePassword = /^\w{6,20}$/;
+			var reMail = /^\w+@[1-9a-z]{2,6}\.[a-z]{2,5}$/;
+			var reQQ = /^[1-9]\d{4,10}$/;
+
+		}
+	</script>
+</head>
+<body>
+	<form action="">
+		用户名:<input type="text"><br/>
+		密&nbsp;码:<input type="password"><br/>
+		<input type="submit" id="btn1" value="登录">	
+		<input type="button" id="btn2" value="注册">
+	</form>
+	<form action="" style="display: none;position: relative;width:300px;border: 3px solid #ccc;text-align: center;">
+		<h3>注册</h3>
+		<label>*用户名&nbsp;:</label><input type="text"><br/>
+			<div style="display: none;">2-10位字符,数字和字母均可</div>
+		<label>*密&nbsp;码&nbsp;:</label><input type="password"><br/>
+		<div style="display: none;">6-20位字符,数字和字母下划线均可</div>
+		<label>*确认密码:</label><input type="password"><br/>
+		<label>*电子邮箱:</label><input type="text"><br/>
+		<!-- <label>*性别:</label>
+		<select>
+			<option>男</option>	
+			<option>女</option>	
+		</select> -->
+		<input type="radio" value="男" checked="checked"><label>男</label>
+		<input type="radio" value="女"><label>女</label><br/>
+		<input type="submit" value="提交"></input>
+		<div id="close">关闭</div>
+	</form>	
+</body>
+</html>

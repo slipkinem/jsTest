@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>移动DIV</title>
+	<style>
+		html{
+			font-size: 20px;
+		}
+		body{
+			background-color: #000;
+			font-size: 10px;
+		}
+		div{
+			width: 100px;
+			height: 100px;
+			border: 1px solid #fff;
+			position: absolute;
+			bottom: 20px;
+			left: 50%;
+			background-color: #ccc;
+			font-size: 2rem;
+			text-align: center;
+		}
+		span{
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	</style>
+	<script type="text/javascript">
+	
+		window.onload=function(){
+			var oDiv = document.getElementsByTagName("div")[0];
+			function show(ev){
+					var oEvent = ev||event;
+					switch (oEvent.keyCode) {
+						case 37:
+							oDiv.style.left=oDiv.offsetLeft-10+"px";
+							break;
+						case 39:
+							oDiv.style.left=oDiv.offsetLeft+10+"px";
+							break;
+						case 38:
+							oDiv.style.top=oDiv.offsetTop-10+"px";
+							break;
+						case 40:
+							oDiv.style.top=oDiv.offsetTop+10+"px";
+							break;
+					}
+				}
+			var timer=null;
+			var bStop=true;				
+				document.onkeydown = function(e){
+					if(bStop){
+						timer=setInterval(
+							function(){show(e)},30)
+					}
+					bStop=false;
+				}
+				 document.onkeyup = function(){
+				 	clearInterval(timer);
+				 	bStop=true;
+				 };
+		};
+	</script>
+</head>
+<body>
+	<div><span>SB</span></div>
+</body>
+</html>
