@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>缓冲运动淡入淡出</title>
+	<style type="text/css">
+		div{
+			width: 300px;
+			height: 300px;
+			opacity: 0.3;
+			filter: alpha(opacity:30);
+			background-color: #2AD77E;
+		}
+	</style>
+	<script type="text/javascript">
+		function getStyle(obj,attr){
+			if (obj.currentStyle) {
+				// statement
+				return obj.currentStyle[attr];
+			}else{
+				return window.getComputedStyle(obj,false)[attr];
+			}
+		}
+		function bufferMove(obj,json,fn){
+			
+			var timer=null;
+			clearInterval(obj.timer);//obj.timer是为了给多个物体用
+			//开始时清空定时器,不然速度会越来越快
+			obj.timer=setInterval(function(){
+				var bTrue=true;
+				for (var attr in json) {//josn循环获取要改变对象属性
+					var alpha=0;
+					if (attr=="opacity") {
+						alpha=parseInt(parseFloat(getStyle(obj,attr))*100); //封装获取CSS内样式的函数
+						//小数所以用parseF
+					}else{
+						alpha=parseInt(getStyle(obj,attr));
+					}
+					//attr=="opacity"?alpha=parseFloat(getStyle(obj,attr))*100:alpha=parseInt(getStyle(obj,attr));
+					//速度
+					var iSpeed=0;
+					iSpeed=(json[attr]-alpha)/8;
+					if (iSpeed>0) {
+						iSpeed=Math.ceil(iSpeed);//防止结束时不是整数的差距
+						//0.5→1
+						//-0.5→0
+					}else{
+						iSpeed=Math.floor(iSpeed);
+						//-0.5→-1
+					}
+					//iSpeed>0?iSpeed=Math.ceil(iSpeed):iSpeed=Math.floor(iSpeed);
+					//终止
+					if (alpha!=json[attr]) {
+						bTrue=false;
+					}
+
+				    if (attr=="opacity") {
+							obj.style[attr]=alpha/100+iSpeed/100;
+							obj.style.fliter="alpha("+attr+"="+alpha+iSpeed+")";
+						}
+					else{
+							obj.style[attr]=alpha+iSpeed+"px";
+						}
+				}
+
+				if (bTrue) {
+					clearInterval(obj.timer);
+						if (fn) {
+							fn();
+					}
+				}
+			}, 30)
+		}
+		window.onload=function(){
+			var oDiv=document.getElementById("div1");
+
+			oDiv.onmouseover=function () {
+				 bufferMove(oDiv,{opacity:100},function(){
+				 	bufferMove(oDiv,{width:700,height:30});
+				 });
+			}
+			oDiv.onmouseout=function () {
+				 bufferMove(oDiv,{width:300,height:300},function(){
+				 	bufferMove(oDiv,{opacity:30});
+				 });
+			}
+		}
+	</script>
+</head>
+<body>
+	<div id="div1"></div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>匀速淡入淡出</title>
+	<style type="text/css">
+		#div1{
+			width: 300px;
+			height: 300px;
+			background-color: red;
+			opacity: 0.3;
+			filter: alpha(opacity=30);
+		}
+	</style>
+	<script type="text/javascript">
+		function getStyle (obj,attr) {
+			 if (obj.currentStyle) {
+			 	return obj.currentStyle[attr];
+			 }else{
+			 	return window.getComputedStyle(obj,false)[attr];
+			 }  
+		}
+		function balanceMove(obj,attr,iEnd,fn,num){
+				var timer=null;
+				clearInterval(obj.timer);
+				obj.timer=setInterval(function(){
+					
+					var alpha=0;
+
+					if (attr=="opacity") {
+						alpha=parseFloat(getStyle(obj,attr))*100;
+					}else{
+						alpha=parseInt(getStyle(obj,attr));
+					}
+					var iSpeed=0;
+					if (iEnd>alpha) {
+						if (num) {
+							iSpeed=num;
+						}else{
+							iSpeed=10
+						}
+					}else{
+						if (num){
+							iSpeed=-num
+						}
+							else{
+								iSpeed=-10;
+							}
+						}
+
+
+					if (alpha==iEnd) {
+						clearInterval(timer);
+						obj.style[attr]=iEnd/100;
+						if (fn) {
+							fn();
+						}
+					}else{ 
+						if (attr=="opacity") {
+								obj.style[attr]=alpha/100+iSpeed/100;
+								obj.style.fliter="alpha("+attr+"="+alpha+iSpeed+")";
+					}else{
+							obj.style[attr]=alpha+iSpeed+"px";
+						}
+					}
+				}, 30)
+			}
+		window.onload=function () {
+			var oDiv=document.getElementById("div1");
+			var oDiv2=document.getElementById("div2");
+		oDiv.addEventListener("mouseover", function () {
+				 balanceMove(oDiv,"opacity",100,function () {
+				 		balanceMove(oDiv,"width",1000)
+				 });
+			}, false);
+		oDiv.addEventListener("mouseout", function () {
+				 balanceMove(oDiv,"width",300,function () {
+				 		balanceMove(oDiv,"opacity",30);
+				 });
+			}, false);
+		}	
+	</script>
+</head>
+<body>
+	<div id="div1"></div>
+	<div id="div2"></div>
+</body>
+</html>

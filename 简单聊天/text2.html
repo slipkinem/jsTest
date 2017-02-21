@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>text2</title>
+	<style type="text/css">
+         .container{
+         	width: 280px;
+         	height: 550px;
+         	margin: 0 auto;
+         	border: 5px solid #D6C6A5;
+         	border-radius: 20px;
+         }
+		 .clear:after {
+			content:".";
+			display:block;
+			clear:both;
+			height:0;
+			font-size:0;
+			line-height:0;
+			} 
+         #content{
+         	border: 5px solid #000000;
+         	width: 240px;
+         	height: 426px;
+         	margin: 50px auto 0 auto;
+         	position: relative;
+         	border-radius: 5px;
+         }
+         .foot{
+         	position: absolute;
+         	bottom: 0;
+         	text-align: center;
+         	border-top: 2px solid #C0C0C0;
+         	width: 100%;
+         }
+         #face{
+         	border: 1px solid #ccc;
+         	border-radius: 10px;
+         	width: 30px;
+         	height: 34px;
+         	margin: 0 2px;
+         	float: left;
+         	cursor: pointer;
+         }
+         #face img{
+         	vertical-align: middle;
+         	margin-top: 5px;
+         }
+         #btnt{
+         	width: 140px;
+         	height: 34px;
+         	border-radius: 10px;
+         	border: 1px solid #ccc;
+         	display: inline-block;
+         	font-size: 20px;
+         }
+         #btns{
+         	color: #A0A0A4;
+         	font-size: 20px;
+         	border: 0;
+         	background: none;
+         	display: inline;
+         	vertical-align: middle;
+         	margin: 0;
+         	cursor: pointer;
+         }
+         #message{
+         	margin-top: 5px;
+         	height: 380px;
+         	overflow: auto;
+         }
+         .sp1{
+         	vertical-align: middle;
+         	padding: 5px;
+         	border-radius: 5px;
+         	background-color: red;
+            display: inline-block;
+            max-width: 160px;
+          }
+          .sp2{
+         	vertical-align: middle;
+         	padding: 5px;
+         	border-radius: 5px;
+         	background-color: pink;
+            display: inline-block;
+            max-width: 160px;
+            float: right;
+          }
+         .pic1{
+         	float: left;
+         	background: url(QQ20160413163846.png) no-repeat left top;
+         	margin-left: 5px;
+         	margin-right: 5px; 
+         	width: 24px;
+         	height: 24px;
+         	padding: 3px;
+         }
+         .pic2{
+         	float: right;
+         	background: url(QQ20160413163915.png) no-repeat left top;
+         	margin-left: 5px;
+         	margin-right: 5px; 
+         	width: 24px;
+         	height: 24px;
+         	padding: 3px;
+         }
+         .crs{
+         	border: 5px solid #D6C6A5;
+         	width: 30px;
+         	height: 30px;
+         	border-radius: 30px;
+         	margin: 15px auto 0 auto;
+         }
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div id="content">
+		  <div id="message"></div>
+			<div class="foot">
+				<div id="face"><img src="QQ20160413163846.png" /></div>
+				<input type="text" id="btnt"></input>
+				<input type="submit" value="发送" id="btns"></input>
+			</div>
+		</div>
+		<div class="crs"></div>
+	</div>
+    <script type="text/javascript">
+    	var face = document.getElementById("face");
+    	var faceImg = face.getElementsByTagName("img")[0];
+    	var btnt = document.getElementById("btnt");
+    	var btns = document.getElementById("btns");
+    	var message = document.getElementById("message");
+    	function Fimg() {
+    		faceImg.getAttribute("src")=="QQ20160413163846.png"?faceImg.src="QQ20160413163915.png":faceImg.src="QQ20160413163846.png";
+    	}
+        function btn () {
+        	if (btnt.value=="") {
+        		// statement
+        		alert("请输入对话");
+        	}else {
+        		if (faceImg.getAttribute("src")=="QQ20160413163846.png") {
+        			// statement
+        			message.innerHTML+='<div class="clear">'+'<div class="pic1">'+'</div>'+'<span class="sp1">'+btnt.value+'</span>'+'</div>'+'<br/>';
+        			// alert(flga);
+        			btnt.value="";
+        		}else {
+        			message.innerHTML+='<div class="clear">'+'<div class="pic2">'+'</div>'+'<span class="sp2">'+btnt.value+'</span>'+'</div>'+'<br/>';
+        			btnt.value="";
+        		}
+        	}
+        }
+         face.addEventListener("click", Fimg);
+         btns.addEventListener("click", btn);
+
+    </script>    
+
+</body>
+</html>
