@@ -1,0 +1,371 @@
+<!doctype html>
+<html> 
+<head> 
+<title>无殇 - 正则练习器</title> 
+<style type="text/css"> 
+<!-- 
+BODY { 
+    background:#44B6FA url(1.jpg); 
+    BORDER-RIGHT: #000000 0px outset; 
+    FONT-SIZE: 9pt; 
+    LINE-HEIGHT: 14px; 
+    TEXT-DECORATION: none; 
+    margin-left: 6px; 
+    margin-top: 6px; 
+    margin-right: 6px; 
+    margin-bottom: 6px; 
+    border:1 #000000 solid 
+} 
+td{ 
+FONT-SIZE: 10pt; 
+color:blue; 
+height:30px; 
+LINE-HEIGHT: 18px; 
+} 
+.bu{ 
+    BACKGROUND-COLOR: #f7f7f7; BORDER-BOTTOM: #999999 1px solid; BORDER-LEFT: #ffffff 1px solid; BORDER-RIGHT: #999999 1px solid; BORDER-TOP: #ffffff 1px solid; COLOR: #000000; FONT-SIZE: 9pt; HEIGHT: 20px; WIDTH:60px 
+} 
+.tx1{font-size:12px;border:1px solid;border-color:black black #000000;color: #0000FF} 
+--> 
+</style> 
+</head> 
+<script> 
+window.onerror=function(a,b,c){alert("发生未知错误："+a+"\n第"+c+"行")} 
+</script> 
+<body> 
+<span id="window2" style="display:none;"> 
+<center><input type=button value="正则例子详解" onclick="document.getElementById('window2').style.display='none';document.getElementById('window3').style.display='inline';" class=bu style="width:200px;"></center>
+ 
+一个正则表达式就是由普通字符（例如字符 a 到 z）以及特殊字符（称为<I>元字符</I>）组成的文字模式。该模式描述在查找文字主体时待匹配的一个或多个字符串。正则表达式作为一个模板，将某个字符模式与所搜索的字符串进行匹配。</P> 
+
+<P>这里有一些可能会遇到的正则表达式示例：</P> 
+
+<TABLE border=1 cellspacing=0 cols=3 frame=box rules=all> 
+
+<TR VALIGN="top"> 
+<TH width=30%>JScript</TH> 
+<TH width=30%>VBScript</TH> 
+<TH width=40%>匹配</TH> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=30%>/^\[ \t]*$/</TD> 
+<TD width=30%>"^\[ \t]*$"</TD> 
+<TD width=40%>匹配一个空白行。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=30%>/\d{2}-\d{5}/</TD> 
+<TD width=30%>"\d{2}-\d{5}"</TD> 
+<TD width=40%>验证一个ID 号码是否由一个2位数字，一个连字符以及一个5位数字组成。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=30%>/<(.*)>.*<\/\1>/</TD> 
+<TD width=30%>"<(.*)>.*<\/\1>"</TD> 
+<TD width=40%>匹配一个 HTML 标记。</TD> 
+</TR> 
+</TABLE>
+ 
+
+<P>下表是元字符及其在正则表达式上下文中的行为的一个完整列表：</P> 
+
+<TABLE border=1 cellspacing=0 cols=2 frame=box rules=all> 
+
+<TR VALIGN="top"> 
+<TH width=16%>字符</TH> 
+<TH width=84%>描述</TH> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>\</TD> 
+<TD width=84%>将下一个字符标记为一个特殊字符、或一个原义字符、或一个 后向引用、或一个八进制转义符。例如，'n' 匹配字符 "n"。'\n' 匹配一个换行符。序列 '\\' 匹配 "\" 而 "\(" 则匹配 "("。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>^</TD> 
+<TD width=84%>匹配输入字符串的开始位置。如果设置了 <B>RegExp</B> 对象的 <B>Multiline</B> 属性，^ 也匹配 '\n' 或 '\r' 之后的位置。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>$</TD> 
+<TD width=84%>匹配输入字符串的结束位置。如果设置了<B>RegExp</B> 对象的 <B>Multiline</B> 属性，$ 也匹配 '\n' 或 '\r' 之前的位置。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>*</TD> 
+<TD width=84%>匹配前面的子表达式零次或多次。例如，zo* 能匹配 "z" 以及 "zoo"。 * 等价于{0,}。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>+</TD> 
+<TD width=84%>匹配前面的子表达式一次或多次。例如，'zo+' 能匹配 "zo" 以及 "zoo"，但不能匹配 "z"。+ 等价于 {1,}。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>?</TD> 
+<TD width=84%>匹配前面的子表达式零次或一次。例如，"do(es)?" 可以匹配 "do" 或 "does" 中的"do" 。? 等价于 {0,1}。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>{<I>n</I>}</TD> 
+<TD width=84%><I>n</I> 是一个非负整数。匹配确定的 <I>n</I> 次。例如，'o{2}' 不能匹配 "Bob" 中的 'o'，但是能匹配 "food" 中的两个 o。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>{<I>n</I>,}</TD> 
+<TD width=84%><I>n</I> 是一个非负整数。至少匹配<I>n</I> 次。例如，'o{2,}' 不能匹配 "Bob" 中的 'o'，但能匹配 "foooood" 中的所有 o。'o{1,}' 等价于 'o+'。'o{0,}' 则等价于 'o*'。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>{<I>n</I>,<I>m</I>}</TD> 
+<TD width=84%><I>m</I> 和 <I>n</I> 均为非负整数，其中<I>n</I> <= <I>m</I>。最少匹配 <I>n</I> 次且最多匹配 <I>m</I> 次。刘， "o{1,3}" 将匹配 "fooooood" 中的前三个 o。'o{0,1}' 等价于 'o?'。请注意在逗号和两个数之间不能有空格。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>?</TD> 
+<TD width=84%>当该字符紧跟在任何一个其他限制符 (*, +, ?, {<I>n</I>}, {<I>n</I>,}, {<I>n</I>,<I>m</I>}) 后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。例如，对于字符串 "oooo"，'o+?' 将匹配单个 "o"，而 'o+' 将匹配所有 'o'。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>.</TD> 
+<TD width=84%>匹配除 "\n" 之外的任何单个字符。要匹配包括 '\n' 在内的任何字符，请使用象 '[.\n]' 的模式。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>(<I>pattern</I>)</TD> 
+<TD width=84%>匹配<I>pattern</I> 并获取这一匹配。所获取的匹配可以从产生的 Matches 集合得到，在VBScript 中使用 <B>SubMatches</B> 集合，在JScript 中则使用 <B>$0</B>…<B>$9</B> 属性。要匹配圆括号字符，请使用 '\(' 或 '\)'。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>(?:<I>pattern</I>)</TD> 
+<TD width=84%>匹配 <I>pattern</I> 但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 "或" 字符 (|) 来组合一个模式的各个部分是很有用。例如， 'industr(?:y|ies) 就是一个比 'industry|industries' 更简略的表达式。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>(?=<I>pattern</I>)</TD> 
+<TD width=84%>正向预查，在任何匹配 <I>pattern</I> 的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如， 'Windows (?=95|98|NT|2000)' 能匹配 "Windows 2000" 中的 "Windows" ，但不能匹配 "Windows 3.1" 中的 "Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>(?!<I>pattern</I>)</TD> 
+<TD width=84%>负向预查，在任何不匹配Negative lookahead matches the search string at any point where a string not matching <I>pattern</I> 的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如'Windows (?!95|98|NT|2000)' 能匹配 "Windows 3.1" 中的 "Windows"，但不能匹配 "Windows 2000" 中的 "Windows"。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始 </TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%><I>x</I>|<I>y</I></TD> 
+<TD width=84%>匹配 <I>x</I> 或 <I>y</I>。例如，'z|food' 能匹配 "z" 或 "food"。'(z|f)ood' 则匹配 "zood" 或 "food"。 </TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>[<I>xyz</I>]</TD> 
+<TD width=84%>字符集合。匹配所包含的任意一个字符。例如， '[abc]' 可以匹配 "plain" 中的 'a'。 </TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>[^<I>xyz</I>]</TD> 
+<TD width=84%>负值字符集合。匹配未包含的任意字符。例如， '[^abc]' 可以匹配 "plain" 中的'p'。 </TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>[<I>a-z</I>]</TD> 
+<TD width=84%>字符范围。匹配指定范围内的任意字符。例如，'[a-z]' 可以匹配 'a' 到 'z' 范围内的任意小写字母字符。 </TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>[^<I>a-z</I>]</TD> 
+<TD width=84%>负值字符范围。匹配任何不在指定范围内的任意字符。例如，'[^a-z]' 可以匹配任何不在 'a' 到 'z' 范围内的任意字符。 </TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>\b</TD> 
+<TD width=84%>匹配一个单词边界，也就是指单词和空格间的位置。例如， 'er\b' 可以匹配"never" 中的 'er'，但不能匹配 "verb" 中的 'er'。 </TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>\B</TD> 
+<TD width=84%>匹配非单词边界。'er\B' 能匹配 "verb" 中的 'er'，但不能匹配 "never" 中的 'er'。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>\c<I>x</I></TD> 
+<TD width=84%>匹配由<I>x</I>指明的控制字符。例如， \cM 匹配一个 Control-M 或回车符。 <I>x</I> 的值必须为 A-Z 或 a-z 之一。否则，将 c 视为一个原义的 'c' 字符。 </TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>\d</TD> 
+<TD width=84%>匹配一个数字字符。等价于 [0-9]。 </TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>\D</TD> 
+<TD width=84%>匹配一个非数字字符。等价于 [^0-9]。 </TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>\f</TD> 
+<TD width=84%>匹配一个换页符。等价于 \x0c 和 \cL。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>\n</TD> 
+<TD width=84%>匹配一个换行符。等价于 \x0a 和 \cJ。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>\r</TD> 
+<TD width=84%>匹配一个回车符。等价于 \x0d 和 \cM。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>\s</TD> 
+<TD width=84%>匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>\S</TD> 
+<TD width=84%>匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>\t</TD> 
+<TD width=84%>匹配一个制表符。等价于 \x09 和 \cI。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>\v</TD> 
+<TD width=84%>匹配一个垂直制表符。等价于 \x0b 和 \cK。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>\w</TD> 
+<TD width=84%>匹配包括下划线的任何单词字符。等价于'[A-Za-z0-9_]'。 </TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>\W</TD> 
+<TD width=84%>匹配任何非单词字符。等价于 '[^A-Za-z0-9_]'。 </TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>\x<I>n</I></TD> 
+<TD width=84%>匹配 <I>n</I>，其中 <I>n</I> 为十六进制转义值。十六进制转义值必须为确定的两个数字长。例如， '\x41' 匹配 "A"。'\x041' 则等价于 '\x04' & "1"。正则表达式中可以使用 ASCII 编码。.</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>\<I>num</I></TD> 
+<TD width=84%>匹配 <I>num</I>，其中 <I>num</I> 是一个正整数。对所获取的匹配的引用。例如，'(.)\1' 匹配两个连续的相同字符。 </TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>\<I>n</I></TD> 
+<TD width=84%>标识一个八进制转义值或一个后向引用。如果 \<I>n</I> 之前至少 <I>n</I> 个获取的子表达式，则 <I>n</I> 为后向引用。否则，如果 <I>n</I> 为八进制数字 (0-7)，则 <I>n</I> 为一个八进制转义值。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>\<I>nm</I></TD> 
+<TD width=84%>标识一个八进制转义值或一个后向引用。如果 \<I>nm</I> 之前至少有is preceded by at least <I>nm</I> 个获取得子表达式，则 <I>nm</I> 为后向引用。如果 \<I>nm</I> 之前至少有 <I>n</I> 个获取，则 <I>n</I> 为一个后跟文字 <I>m </I>的后向引用。如果前面的条件都不满足，若  <I>n</I> 和 <I>m</I> 均为八进制数字 (0-7)，则 \<I>nm</I> 将匹配八进制转义值 <I>nm</I>。</TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>\<I>nml</I></TD> 
+<TD width=84%>如果 <I>n</I> 为八进制数字 (0-3)，且 <I>m</I> 和 <I>l</I> 均为八进制数字 (0-7)，则匹配八进制转义值 <I>nml。</I></TD> 
+</TR> 
+
+<TR VALIGN="top"> 
+<TD width=16%>\u<I>n</I></TD> 
+<TD width=84%>匹配 <I>n</I>，其中 <I>n</I> 是一个用四个十六进制数字表示的 Unicode 字符。例如， \u00A9 匹配版权符号 (?)。</TD> 
+</TR> 
+</TABLE> 
+</span> 
+<span id="window3" style="display:none;color:blue;font-size:13px;"> 
+<center><button class=bu style="width:300px;" onclick="sender();">以下内容纯属个人所做，如有缺失，请帮忙指正！</button>
+<input type=button class=bu style="width:300px;" onclick="document.getElementById('window3').style.display='none';document.getElementById('window2').style.display='inline';" value="正则说明"></center>
+ 
+例子1：.+
+ 
+详解：这是最简单的一行全部匹配，也就是获取的内容是一整行的内容！因为"."是除换行(\n)外的所有字符集，而"+"又代表至少一个的意思，合起来就是拥有至少一个除换行外的所有字符集，而行与行之间是以换行符（\r\n）进行简隔的，所以这句正则代表了一行，由于换行符中包含了\r这个"."元字符所拥有的字符，所以就算行为空也是匹配的，如果换成[^\r\n]+的话就空行就不匹配了！<input type=button value="试验" class=bu onclick="set('第一行\n\n第三行','.+');"><p> 
+例子2：<.+?>
+ 
+这个匹配HTML元素的正则，就是以<为开头，中间含有至少一个非换行字符直到出现结束符>为止！正则里面的?是非贪婪模式，详情请看正则说明！也就是遇到第一个符合的匹配就停止搜索！如果没加，就会一直搜索到最后一个>为止！<input type=button value="试验" class=bu onclick="set('<font>试验<\/font>','<.+?>');">如果没加"?"，以贪婪模式进行搜索结果：<input type=button value="试验" class=bu onclick="set('<font>试验<\/font>其它不相关内容','<.+>');"><p> 
+例子3：<tr.*?>[\s\S]*?<\/tr>
+ 
+这个正则匹配表格中的tr行！并且是跨换行进行匹配！首先<tr.*?>是对tr开头进行匹配，因为有些tr开头有参数，所以加上.*?对参数部分进行匹配，如果没有参数，则.*?为空！[\s\S]是对包括换行符在内的任务字符进行匹配，因为\s匹配空白字符，而\S又与它相反，两个合在一个字符集合"[]"中就代表了所有的电脑字符！"*"代表0或无限个，合起来就是匹配所有字符串，"?"是非贪婪模式，也就是找到第一个<\/tr>之后就停止搜索，例子2有相关介绍<input type=button value="试验" class=bu onclick="set('<table>\n<tr>\n<td>相关内容\n<\/td>\n<\/tr>\n\n<tr bgcolor=red><td>相关内容<\/td><\/tr><table>','<tr.*?>[\\s\\S]*?<\\/tr>');"> 
+</span> 
+<span id=window1> 
+<textarea style="font-size:13px;" name="a" rows="20" cols="120" class=tx1></textarea> 
+
+ 
+正则：<input type=text size=60 name="zhe" class=tx1><select onchange="zhe.value+=this.value;this.selectedIndex=0;"><option>常用字符</option><option value=".">除换行外任意字符</option><option value="[]">范围内的字符</option><option value="[^]">范围外的字符</option><option value="?">非贪婪模式</option><option value="*">0或无限个</option><option value="+">至少一个</option><option value="{n}">含有n个</option><option value="{n,}">含有至少n个</option><option value="{n,m}">含有n至m个</option><option value="()">获取子匹配</option><option value="(?:)">非获取子匹配</option><option value="(?=)">正向预查</option><option value="(?!)">负向预查</option><option value="[\s\S]">换行在内任意字符</option><option value="[a-z]">小写字母</option><option value="[a-zA-Z]">大小写字母</option><option value="[\u4e00-\u9fa5]">中文</option><option value="[ -~]">常用字符(单字节)</option></select>替换：<input type=text size=60 name="ti" class=tx1><select onchange="if(this.selectedIndex!=10)ti.value+=this.value;else ti.value=this.value;this.selectedIndex=0;"><option>常用字符</option><option value="$1">子匹配1</option><option value="$2">子匹配2</option><option value="$3">子匹配3</option><option value="$4">子匹配4</option><option value="$5">子匹配5</option><option value="$6">子匹配6</option><option value="$7">子匹配7</option><option value="$8">子匹配8</option><option value="$9">子匹配9</option><option value="function(a){return a;}">函数</option></select>
+ 
+<input type=button value="查找" onclick="if(zhe.value!='')zhen(0)" class=bu><input type=button value="替换" onclick="if(zhe.value!='')zhen(1)" class=bu><input type=button value="生成" onclick="if(zhe.value!='')shen()" class=bu> 
+<input type=button value="g" name=gg onclick="if(this.value=='g'){this.value='';}else{this.value='g';};l=gg.value+ii.value+mm.value;" style="width:25" class=bu> 
+<input type=button value="i" name=ii onclick="if(this.value=='i'){this.value='';}else{this.value='i';};l=gg.value+ii.value+mm.value;" style="width:25" class=bu> 
+<input type=button value="m" name=mm onclick="if(this.value=='m'){this.value='';}else{this.value='m';};l=gg.value+ii.value+mm.value;" style="width:25" class=bu> 
+<input type=button value="不带函数" onclick="this.value=(this.value=='不带函数'?'带函数':'不带函数')" name=fun style="width:85" class=bu><input type=button value="显示子匹配" onclick="this.value=(this.value=='隐藏子匹配'?'显示子匹配':'隐藏子匹配')" name=zhip style="width:85" class=bu> <input type=button value="使用帮助" class=bu onclick="alert('左边的gim三个按钮为目前正则的参数,默认情况下三个参数都为true,点击参数按钮,按钮变空则参数消除!另外两个[不带函数]和[显示子匹配]为目前正则搜索设定,点击可更换设定![生成]为快速生成正则表达式和字符串转换代码!');"> <input type=button value="正则帮助" onclick="window.showModelessDialog(location.href,document.all,'overflow:auto;dialogHeight:600px;dialogWidth:700px;');" style="color:red;" class=bu> 说明:天蓝色部分为主匹配,土色部分为子匹配!
+ 
+表达式：<input type=text size=30 onFocus="this.select();" name=zz> <input type=text style="width:25px;" value="str" onFocus="this.select();" name=thename> <input type=text size=50 onFocus="this.select();" name=tiz> 
+<center id=b>搜索结果区域</center> 
+</span> 
+
+
+<script> 
+var obj=window.dialogArguments; 
+if (obj==null) 
+{ 
+var l="gim"; 
+function zhen(id) 
+{ 
+    var re =eval("\/"+zhe.value+"\/"+l) 
+    var k=0,p=document.all.zhip.value,c=new Array(); 
+    if(id==0) 
+    { 
+        var arr; 
+        b.innerHTML="" 
+        while ((arr=re.exec(a.value))!=null && k==0) 
+        { 
+            c[c.length]=new Array(); 
+            if(gg.value!="g")k=1 
+            if(p!="隐藏子匹配") 
+            p=arr.length 
+            for(var i=0;i<p;i++) 
+            { 
+                c[c.length-1][i]=arr[i] 
+            } 
+        } 
+        for(var i=0;i<c.length;i++) 
+        c[i]=c[i].join("-------------------------") 
+        b.innerText=c.join("——————————————————————") 
+        b.innerHTML="<table width='100%' border='0' cellpadding='1' cellspacing='1' bgcolor='#000000'><tr bgcolor='#E7FFFF'><td>"+b.innerHTML.replace(/\-{20,}/g,"<\/td><\/tr><tr bgcolor='#84B2E7'><td>").replace(/—{10,}/g,"<\/td><\/tr><tr bgcolor='#E7FFFF'><td>")+"<\/td><\/tr><\/table>" 
+    }else{ 
+        if(document.all.fun.value=="带函数") 
+            a.value=eval("'"+a.value.replace(/\\/g,"\\\\").replace(/\'/g,"\\'")+"'.replace(re,"+ti.value+");"); 
+        else 
+            a.value=eval("'"+a.value.replace(/\\/g,"\\\\").replace(/\'/g,"\\'")+"'.replace(re,\""+ti.value.replace(/"/g,'\\"')+"\");"); 
+            //a.value=a.value.replace(re,ti.value.replace(/\\([rntf])/g,function(a,b){return b=="r"?"\r":(b=="n"?"\n":(b=="t"?"\t":"\f"));}).replace(/\\u([a-zA-Z\d]{4})/,function(a,b){return unescape("%u"+b);}).replace(/\\x([a-zA-Z\d]{2})/,function(a,b){return unescape("%u00"+b);}).replace(/\\\\/g,"\\").replace(/\\\//g,"\/")) 
+    } 
+} 
+function shen(){ 
+zz.value="\/"+zhe.value+"\/"+l 
+tiz.value=thename.value+"="+thename.value+".replace(\/"+zhe.value+"\/"+l+","+((document.all.fun.value=="带函数")?ti.value:"'"+ti.value+"'")+");" 
+} 
+window.onerror=function(){alert("正则错误！");return false;} 
+}else{ 
+    document.getElementById("window1").style.display="none"; 
+    document.getElementById("window2").style.display="inline"; 
+} 
+function set(a,b){ 
+obj.a.value=a; 
+obj.zhe.value=b; 
+window.close(); 
+} 
+function sender() 
+{ 
+    var str=prompt("请输入你的建议或者错误说明!","有什么地方出错?还是你有什么建议?"); 
+    if(str!=null && str!="") 
+    window.open("http:\/\/001.first01.net\/minhai\/er.asp?name="+str+"&id=0&title="+document.title) 
+} 
+</script>
+</body> 
+</html> 
+

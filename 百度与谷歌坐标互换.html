@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript">
+		//BD-09 坐标转换成 GCJ-02 坐标
+function bd_decrypt(bd_lat, bd_lon)
+{
+    var x = bd_lon - 0.0065, y = bd_lat - 0.006;
+    var z = this.sqrt(x * x + y * y) - 0.00002 * this.sin(y * this.pi);
+    var theta = this.atan2(y, x) - 0.000003 * this.cos(x * this.pi);
+    var gg_lon = z * this.cos(theta);
+    var gg_lat = z * this.sin(theta);
+    return [gg_lat, gg_lon];
+}
+
+//GCJ-02 坐标转换成 BD-09 坐标
+function bd_encrypt(gg_lat, gg_lon)
+{
+    var x = gg_lon, y = gg_lat;
+    var z = Math.sqrt(x * x + y * y) + 0.00002 * Math.sin(y * Math.pi);
+    var theta = Math.atan2(y, x) + 0.000003 * Math.cos(x * Math.pi);
+    var bd_lon = z * Math.cos(theta) + 0.0065;
+    var bd_lat = z * Math.sin(theta) + 0.006;
+    return [bd_lat, bd_lon];
+}
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
