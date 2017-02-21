@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>切换</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		ul{
+			list-style: none;
+		}
+		#hover:after{
+			display: block;
+			content: ".";
+			font-size: 0;
+			line-height: 0;
+			height: 0;
+		}
+		#hover ul{
+			font-size: 0;
+		}
+		#hover li{
+			display: inline-block;
+			font-size: 16px;
+			padding: 5px 30px;
+			background-color: red;
+		}
+		#hover .show{
+			background-color: white;
+		}
+		#change li{
+			display: none;
+			width: 300px;
+			height: 300px;
+			background-color: green;
+		}
+	</style>
+</head>
+<script type="text/javascript">
+function Tab (ele1,ele2){
+	this.ele1 = document.getElementById(ele1);
+	this.ele2 = document.getElementById(ele2);
+}
+
+Tab.prototype.hover = function () {
+	for (var i = 0; i < this.ele1.length; i++) {
+		this.ele1[i] 
+	}
+}
+
+Tab.propertype.showTab = function(){
+	for (var i = 0; i < ele1.length; i++) {
+		ele1[i].index = i;
+		ele1[i].onmouseover = this.hover;
+	}
+}
+
+	var show=null;
+	var aLi=null;
+	window.onload=function () {
+		aLi=document.getElementById("hover").getElementsByTagName("li");
+		show=document.getElementById("change").getElementsByTagName("li");
+		for(var i=0;i<aLi.length;i++){
+			aLi[i].index=i;
+			aLi[i].onmouseover=function (){
+				for(var j=0;j<aLi.length;j++){
+					show[j].style.display="none";
+					aLi[j].className="";
+				}
+				show[this.index].style.display="block";
+				aLi[this.index].className="show";
+			}
+		};
+	}
+	// alert(oSpan.clientWidth);
+</script>
+<body style="height: 15454px;">
+<div id="hover">
+	<ul>
+		<li class="show">1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+</div>
+<div style="background-color: red;width: 80px;height: 50px;overflow: hidden;">
+	<span id="span" style="display: inline-block;background-color: yellow">
+		sdfffffffffffffffffffffffffsdfsdafsdafdsfsdfsdfffffffffffffffffffffffffffffffffsadfsdfds
+	</span>
+</div>
+<div id="change">
+	<ul>
+		<li style="display: block;">4</li>
+		<li>5</li>
+		<li>6</li>
+	</ul>
+</div>	
+</body>
+</html>

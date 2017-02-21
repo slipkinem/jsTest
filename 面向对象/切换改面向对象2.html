@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>切换</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		ul{
+			list-style: none;
+		}
+		#hover:after{
+			display: block;
+			content: ".";
+			font-size: 0;
+			line-height: 0;
+			height: 0;
+		}
+		#hover ul{
+			font-size: 0;
+		}
+		#hover li{
+			display: inline-block;
+			font-size: 16px;
+			padding: 5px 30px;
+			background-color: red;
+		}
+		#hover .show{
+			background-color: white;
+		}
+		#change li{
+			display: none;
+			width: 300px;
+			height: 300px;
+			background-color: green;
+		}
+	</style>
+</head>
+<script type="text/javascript">
+
+	window.onload=function () {
+		var oTab=new tabS("hover","change");
+	}
+
+	function tabS(id1,id2) {
+			this.aLi=document.getElementById(id1).getElementsByTagName("li");
+			this.show=document.getElementById(id2).getElementsByTagName("li");
+			var _this=this;
+			for(var i=0;i<this.aLi.length;i++){
+				this.aLi[i].index=i;
+				this.aLi[i].onmouseover=function(){
+					_this.tab(this);
+				};
+		}
+	}
+
+	tabS.prototype.tab =  function(oBtn){
+					for(var j=0;j<this.aLi.length;j++){
+						this.show[j].style.display="none";
+						this.aLi[j].className="";
+					}
+					this.show[oBtn.index].style.display="block";
+					oBtn.className="show";
+				}
+				
+</script>
+<body>
+<div id="hover">
+	<ul>
+		<li class="show">1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+</div>
+<div id="change">
+	<ul>
+		<li style="display: block;">4</li>
+		<li>5</li>
+		<li>6</li>
+	</ul>
+</div>	
+</body>
+</html>
