@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Document</title>
+		<script type="text/javascript" src="angular.js"></script>
+		<script type="text/javascript" src="angulartest.js"></script>
+	</head>
+	<body ng-app="app">
+		<div class="container" ng-controller="users">
+			<div class="panel">
+				<div class="panel-default panel-heading">
+					<h1>指令下的compile和link操作</h1>
+				</div>
+				<div class="panel-body">
+					<h2>请填写信息</h2>
+					<div class="write-info">                     请输入你的名字：
+						<input type="text" ng-model="userinfo.name" /><br /><br/>                      请输入你的手机：
+						<input type="text" ng-model="userinfo.tel" /><br /><br />                      请输入你的邮箱：
+						<input type="text" ng-model="userinfo.email" /><br /><br />
+					</div>
+					<h2>用户信息</h2>
+					<div class="showinfo">
+						用户信息123
+						<userinfo>
+						<div>asdasd</div>
+						</userinfo>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
