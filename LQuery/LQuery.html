@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>LQurey</title>
+</head>
+<script type="text/javascript" src="LQuery.js"></script>
+<script type="text/javascript">
+	// $(function () {
+	// 	var a = [1,2,3,4]
+	// 	$("button").click(function () {
+	// 		$("#box4").hide();
+	// 	})
+	// 	console.log($("button"));
+	// 	console.log(a[0])
+	// })
+	$(function () {
+		$("#box").hover(function () {
+			$("#box4").hide();
+		},function () {
+			$("#box4").show();
+		});
+	})
+</script>
+<body>
+	<button id="box">haha1</button>
+	<button id="box2">haha2</button>
+	<button id="box3">haha3</button>
+	<button id="box4">haha4</button>
+</body>
+</html>
