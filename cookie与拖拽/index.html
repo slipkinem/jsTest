@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>test</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		#div1{
+			width: 50px;
+			height: 200px;
+			background-color: #000;
+			position: absolute;
+			display: none;
+			color: #fff;
+			margin: 10px;
+		}
+		#div2{
+			width: 200px;
+			height: 200px;
+			background-color:#000;
+		}
+		#div1 li{
+			padding: 10px 0;
+		}
+		#div1 li:hover{
+			background-color: red;
+			cursor: pointer;
+			padding: 20px 0;
+		}
+		div{
+			width: 5px;
+			height: 5px;
+			background-color:purple;
+			position: absolute;
+		}
+		body{
+			height: 1000px;
+		}
+	</style>
+</head>
+<script type="text/javascript">
+	window.onload = function () {
+		 
+		 // document.onclick = function(){
+		 // 	alert("a");
+		 // }
+		 // document.onclick = function(ev){
+		 // 	// var a = ev||event;   //事件对象用的时候有兼容性,所以||一下
+		 // 	// alert(a.clientX+","+a.clientY);
+		 // 	// ev==true? alert(ev.clientX+","+ev.clientY):alert(event.clientX+","+event.clientY);
+		 // 	// alert(event.clientX);
+		 // 	alert(document.clientWidth);
+		 // }
+		 /*var oDiv = document.getElementsByTagName("div");
+		 var i = 0;
+		 document.onmousemove=function(ev){
+		 	var oEvent=ev||event;
+		 	var oScrollLeft=document.scrollLeft||document.body.scrollLeft;
+		 	var oScrollTop=document.scrollTop||document.body.scrollTop;
+		 	for(i=oDiv.length-1;i>0;i--){
+			 	oDiv[i].style.left=oDiv[i-1].style.left;
+			 	oDiv[i].style.top=oDiv[i-1].style.top;
+			 	oDiv[0].style.left=oEvent.clientX+oScrollLeft+"px";
+			 	oDiv[0].style.top=oEvent.clientY+oScrollTop+"px";
+		 	}
+		 }*/
+		 //跟随鼠标的DIV
+		 /*document.oncontextmenu=function(ev){
+		 	var oEvent = ev||event;
+		 	var oScrollLeft=document.scrollLeft||document.body.scrollLeft;
+		 	var oScrollTop=document.scrollTop||document.body.scrollTop;
+		 	var oDiv = document.getElementById("div1");
+		 	oDiv.style.display="block";
+		 	oDiv.style.left=oEvent.clientX+oScrollLeft+"px";
+		 	oDiv.style.top=oEvent.clientY+oScrollTop+"px";
+		 	document.onclick=function(){
+		 		oDiv.style.display="none";
+		 	}
+		 	return false;
+		 }*/
+		 //鼠标右键
+		 function setCookie (userName,value,iDay) {
+		 	 var oDate=new Date();
+		 	 oDate.setDate(oDate.getDate()+iDay);
+		 	 document.cookie=userName+"="+value+";expires="+oDate;
+		 }
+		 // userName=slipkinem; password=123456; ls=555
+		 //设置cookie
+		 function getCookie(name){
+		 	var arry=document.cookie.split("; ");
+		 	var i=0;
+		 	for(i=0;i<arry.length;i++){
+		 		var arry2=arry[i].split("=");
+		 	 	if(arry2[0]==name){
+		 	 		return arry2[1];
+		 	 	}
+		 	}
+		 	return "";
+		 }
+		 //获取cookies
+		 function removeCookie(name){
+		 	setCookie(name,"23",-1);
+		 }
+		 //删除要的cookie
+		 // var oDate = new Date();
+		 // oDate.setDate(oDate.getDate()+31);
+		 // document.cookie="userName=slipkinem;expires="+oDate;
+		 // document.cookie="password=123456;expires="+oDate;
+		 // var username=document.cookie.split("; ")[0].split("=")[1];
+		 // document.write(username);
+		 // function removeCookie(){
+		 // 	document.cookie="userName=slipkinem;expires="+oDate-1;
+		 
+		 var oDiv2 = document.getElementById("div2");
+		 oDiv2.onmousedown=function(ev){
+		 	removeCookie("oLeft");
+		 	removeCookie("oTop");
+		 	var oEvent=ev||event;
+		 	var disX=0;
+		 	var disY=0;
+		 	disX=oEvent.clientX-oDiv2.offsetLeft;
+		 	disY=oEvent.clientY-oDiv2.offsetTop;
+		 	document.onmousemove=function(ev){
+		 		var oEvent = ev||event;
+		 		var x=oEvent.clientX-disX;
+		 		var y=oEvent.clientY-disY;
+		 		if (x<0) {x=0}else if (x>document.documentElement.clientWidth-oDiv2.offsetWidth) {
+		 			x=document.documentElement.clientWidth-oDiv2.offsetWidth;
+		 		}
+		 		if (y<0) {y=0;}else if (y>document.documentElement.clientHeight-oDiv2.offsetHeight) {
+		 			y=document.documentElement.clientHeight-oDiv2.offsetHeight;
+		 		}
+		 		oDiv2.style.left=x+"px";
+		 		oDiv2.style.top=y+"px";
+		 	}
+		 	 document.onmouseup=function(){
+		 		document.onmousemove=null;
+		 		document.onmouseup=null;
+		 		var e = oDiv2.style.left;
+		 	 	var f = oDiv2.style.top;
+		 	 	setCookie ("oLeft",e,30);
+		 	 	setCookie ("oTop",f,30);
+		 	}
+		 	return false;
+		 }
+		 var oX =getCookie("oLeft");
+		 var oY =getCookie("oTop");
+		 if(oX && oY){
+		 oDiv2.style.left=oX;
+		 oDiv2.style.top=oY;
+		 }
+	}
+</script>
+<body>
+	<div id="div1">
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+	</div>
+	<div id="div2"></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	<div></div>
+	
+	<!-- <div id="tar" style="width:300px;height:300px;background:#ddd"></div>
+  <script type="text/javascript">
+    // 鼠标两次移动间隔超过50毫秒为停止移动事件触发
+    var TIMEOUT_OF_STOP_MOVE = 50;
+ 
+    window.onload = function(){
+        var tar = document.getElementById('tar');
+        // 给div绑定鼠标移动事件
+        tar.onmousemove = function(){
+            // 获取系统时间，亦为目标最新鼠标移动事件触发时间
+            var now = new Date();
+            // this.lastMove == null 
+            // 表示鼠标移动开始
+            // now - this.lastMove < TIMEOUT_OF_STOP_MOVE 
+            // 表示距离上次触发鼠标移动事件不超过TIMEOUT_OF_STOP_MOVE毫秒 
+            if(this.lastMove == null || (now - this.lastMove < TIMEOUT_OF_STOP_MOVE)){
+                // 更新最后移动时间
+                this.lastMove = now;
+                // 终止鼠标停止事件处理
+                clearTimeout(this.timer);
+                // 重新绑定鼠标停止事件处理
+                this.timer = setTimeout(function(){
+                    alert('鼠标停止移动了！');
+                    // 鼠标停止移动事件处理
+                    // ...
+                    // 鼠标停止移动事件的处理代码就写在这里
+                    // ...
+                    // 清除最后移动时间
+                    this.lastMove = null;
+                }, TIMEOUT_OF_STOP_MOVE);
+            }
+        }
+    }
+  </script> -->
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>碰撞运动</title>
+	<style type="text/css">
+		#box{
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			position: absolute;
+			top: 300px;
+			z-index: 2;
+		}
+
+		#box2{
+			width: 100px;
+			height: 100px;
+			background-color: yellow;
+			position: absolute;
+			top: 200px;
+			left: 500px;
+			z-index: 1;
+		}
+	</style>
+	<script type="text/javascript">
+			window.onload=function(){
+		drag("box","box2");
+	}
+	function drag(id,id2){
+		var oDiv=document.getElementById(id);
+		var oDiv2 = document.getElementById(id2);
+		oDiv.onmousedown=function(ev){
+			var oEvent=ev||event;
+			var disX=oEvent.clientX-this.offsetLeft;
+			var disY=oEvent.clientY-this.offsetTop;
+			var _this=this;
+
+			document.onmousemove=dragMove;
+			document.onmouseup=dragUp;
+			
+			if (this.setCapture) {
+				this.setCapture();
+			}else{
+				return false;
+			}
+			
+			return false;
+
+			function dragMove(ev){
+				var oEvent=ev||event;
+				var left = oEvent.clientX-disX;
+				var top = oEvent.clientY-disY;
+				if (left<0) {//改变数值就可以磁性吸附
+					left=0;  
+				}else if (left>this.documentElement.clientWidth-_this.offsetWidth) {
+					left=this.documentElement.clientWidth-_this.offsetWidth;
+				}
+				if (top<0) {
+					top=0;
+				}else if (top>this.documentElement.clientHeight-_this.offsetHeight) {
+					top=this.documentElement.clientHeight-_this.offsetHeight;
+				}
+
+
+				var l1=oDiv.offsetLeft;
+				var r1=oDiv.offsetLeft+oDiv.offsetWidth;
+				var t1=oDiv.offsetTop;
+				var b1=oDiv.offsetTop+oDiv.offsetHeight;
+				
+				var l2=oDiv2.offsetLeft;
+				var r2=oDiv2.offsetLeft+oDiv2.offsetWidth;
+				var t2=oDiv2.offsetTop;
+				var b2=oDiv2.offsetTop+oDiv2.offsetHeight;
+
+				if(r1<l2 || l1>r2 || b1<t2 || t1>b2)
+				{
+					oDiv2.style.background='yellow';
+				}
+				else
+				{
+					oDiv2.style.background='green';
+				}
+
+				_this.style.left=left+"px";
+				_this.style.top=top+"px";
+			}
+
+			
+			function dragUp(){
+				if (_this.releaseCapture) {
+					_this.releaseCapture();
+				}
+				this.onmousemove=null;
+				this.onmouseup=null;
+			}
+		}		
+	}
+	</script>
+</head>
+<body>
+	<div id="box"></div>
+	<div id="box2"></div>
+</body>
+</html>

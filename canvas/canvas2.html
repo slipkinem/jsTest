@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas2</title>
+</head>
+<style type="text/css">
+	canvas{
+		background-color: #000;	
+	}
+</style>
+<script type="text/javascript">
+	window.onload = function(){
+		var oCons = document.getElementById('canvas');
+		var cxt = oCons.getContext('2d');
+
+		// cxt.beginPath();
+		cxt.strokeStyle="#ccc";
+		cxt.lineWidth=3;
+		// cxt.moveTo(10, 10);
+		// cxt.lineTo(50,50);
+		// cxt.stroke();
+		// cxt.closePath();
+
+		oCons.onmousedown = function(ev){
+			var oEvent = ev || event;
+			cxt.beginPath();
+			cxt.moveTo(oEvent.clientX-oCons.offsetLeft, oEvent.clientY-oCons.offsetTop);
+			document.onmousemove = function(ev){
+				var oEvent = ev || event;
+				cxt.lineTo(oEvent.clientX-oCons.offsetLeft, oEvent.clientY-oCons.offsetTop);
+				cxt.stroke();
+			}
+			document.onmouseup = function(){
+				cxt.closePath();
+				document.onmousemove = null;
+				document.onmouseup = null;
+			}
+		}
+	}
+</script>
+<body>
+	<canvas id="canvas" width="500" height="400"></canvas>
+</body>
+</html>

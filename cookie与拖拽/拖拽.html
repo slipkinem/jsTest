@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拖拽</title>
+	<style type="text/css">
+		#box{
+			width: 100px;
+			height: 100px;
+			background: red;
+			position: absolute;
+		}
+	</style>
+	<script type="text/javascript">
+	window.onload=function(){
+		drag("box");
+	}
+	function drag(id){
+		var oDiv=document.getElementById(id);
+		oDiv.onmousedown=function(ev){
+			var oEvent=ev||event;
+			var disX=oEvent.clientX-this.offsetLeft;
+			var disY=oEvent.clientY-this.offsetTop;
+			var _this=this;
+
+			document.onmousemove=dragMove;
+			document.onmouseup=dragUp;
+			
+			if (this.setCapture) {
+				this.setCapture();
+			}else{
+				return false;
+			}
+			
+			return false;
+
+			function dragMove(ev){
+				var oEvent=ev||event;
+				var l = oEvent.clientX-disX;
+				var t = oEvent.clientY-disY;
+				if (l<0) {//改变数值就可以磁性吸附
+					l=0;
+				}else if (l>this.documentElement.clientWidth-_this.offsetWidth) {
+					l=this.documentElement.clientWidth-_this.offsetWidth;
+				}
+				if (t<0) {
+					t=0;
+				}else if (t>this.documentElement.clientHeight-_this.offsetHeight) {
+					t=this.documentElement.clientHeight-_this.offsetHeight;
+				}
+
+				_this.style.left=l+"px";
+				_this.style.top=t+"px";
+			}
+
+			
+			function dragUp(){
+				if (_this.releaseCapture) {
+					_this.releaseCapture();
+				}
+				this.onmousemove=null;
+				this.onmouseup=null;
+			}
+		}		
+	}
+	</script>
+</head>
+<body>
+sdsdsad
+	<div id="box">sdsds</div>
+</body>
+</html>

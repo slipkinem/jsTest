@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+	<style type="text/css">
+	</style>
+	<script type="text/javascript">
+		function draw(id) {
+			 var myCanvas = document.getElementById(id);
+			 var cxt = myCanvas.getContext('2d');
+			 cxt.fillStyle = '#000'; //填充样式颜色
+			 cxt.fillRect(0, 0, 500, 500);//填充的巨型块
+			 cxt.lineWidth = 10; //线的宽度
+			 cxt.lineJoin='round'; //边角形状
+			 cxt.strokeStyle='#ccc'; //边框类型的矩形边框色
+
+			 cxt.strokeRect(40,40,100,50); //画边框矩形(top,left,width,height)
+			 cxt.strokeRect(60,60,100,50);
+
+			 cxt.moveTo(10, 10);//一条线开始位置
+			 cxt.lineTo(100,180);//一条线结尾位置,还可以继续下个点
+			 cxt.stroke();//画线,将开始点和结束点连接起来,才能画线,边框类型
+			 cxt.fill();//填充型画形状
+		}
+	</script>
+</head>
+<body onload="draw('canvas')">
+	<canvas id="canvas" width="500" height="500">
+		不支持canvas的浏览器
+	</canvas>
+</body>
+</html>

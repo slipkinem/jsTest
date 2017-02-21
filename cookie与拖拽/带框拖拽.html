@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>拖拽</title>
+	<style type="text/css">
+		#box{
+			width: 100px;
+			height: 100px;
+			background: red;
+			position: absolute;
+		}
+		.border{
+			border: 1px dashed #000;
+			position: absolute;
+		}
+	</style>
+	<script type="text/javascript">
+	window.onload=function(){
+		drag("box");
+	}
+	function drag(id){
+		var oDiv=document.getElementById(id);
+		oDiv.onmousedown=function(ev){
+			var oEvent=ev||event;
+			var disX=oEvent.clientX-this.offsetLeft;
+			var disY=oEvent.clientY-this.offsetTop;
+			var _this=this;
+
+			document.onmousemove=dragMove;
+			document.onmouseup=dragUp;
+			
+			var newDiv=document.createElement("div");
+			newDiv.className="border";
+			newDiv.style.width=this.offsetWidth-2+"px";
+			newDiv.style.height=this.offsetHeight-2+"px";
+			newDiv.style.left=this.offsetLeft+"px";
+			newDiv.style.top=this.offsetTop+"px";
+
+			document.documentElement.appendChild(newDiv);
+
+			if (this.setCapture) {
+				this.setCapture();
+			}
+			
+			return false;
+
+			function dragMove(ev){
+				var oEvent=ev||event;
+				var l = oEvent.clientX-disX;
+				var t = oEvent.clientY-disY;
+
+				oDiv.style.opacity="0.5";
+
+				if (l<0) {//改变数值就可以磁性吸附
+					l=0;
+				}else if (l>document.documentElement.clientWidth-newDiv.offsetWidth) {
+					l=document.documentElement.clientWidth-newDiv.offsetWidth;
+				}
+				if (t<0) {
+					t=0;
+				}else if (t>document.documentElement.clientHeight-newDiv.offsetHeight) {
+					t=document.documentElement.clientHeight-newDiv.offsetHeight;
+				}
+
+				newDiv.style.left=l+"px";
+				newDiv.style.top=t+"px";
+			}
+
+			
+			function dragUp(){
+				if (newDiv.releaseCapture) {
+					newDiv.releaseCapture();
+				}
+				this.onmousemove=null;
+				this.onmouseup=null;
+
+				oDiv.style.left=newDiv.style.left;
+				oDiv.style.top=newDiv.style.top;
+				oDiv.style.opacity="1";
+
+				document.documentElement.removeChild(newDiv);
+			}
+		}		
+	}
+	</script>
+</head>
+<body>
+sdsdsad
+	<div id="box">sdsds</div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas3</title>
+	<style type="text/css">
+		canvas{
+			background-color: green;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var oCan = document.getElementById('canvas');
+			var cxt = oCan.getContext('2d');
+			cxt.lineWidth=2;
+			cxt.fillStyle='#000';
+			cxt.fillRect(0,0,150,150);
+			var num=0;
+			var timer = null;
+			timer=setInterval(function(){
+				num+=1;
+				cxt.clearRect(0,0,500,500);
+				cxt.fillRect(num,num,150,150);
+				if (oCan.offsetWidth-150-num<=0 || oCan.offsetHeight-150-num<=0) {
+					num=0;
+				}
+			}, 30);
+		}
+	</script>
+</head>
+<body>
+	<canvas id="canvas" width="500" height="350"></canvas>
+</body>
+</html>
