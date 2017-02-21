@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>图片轮播</title>
+  <script type="text/javascript" src="js.js"></script>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #list {
+      position: relative;
+      width: 900px;
+      height: 400px;
+      overflow: hidden;
+      border: 3px solid #ccc;
+      margin: 30px auto;
+    }
+
+    #list:hover div {
+      display: block;
+    }
+
+    ul {
+      width: 3700px;
+      list-style: none;
+      position: absolute;
+      left: 0;
+    }
+
+    li {
+      float: left;
+      width: 900px;
+      height: 400px;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+
+    #last {
+      width: 40px;
+      height: 40px;
+      background-color: #fff;
+      position: absolute;
+      top: 130px;
+      left: 10px;
+      text-align: center;
+      line-height: 40px;
+      cursor: pointer;
+      display: none;
+    }
+
+    #next {
+      width: 40px;
+      height: 40px;
+      background-color: #fff;
+      position: absolute;
+      top: 130px;
+      right: 10px;
+      text-align: center;
+      line-height: 40px;
+      cursor: pointer;
+      display: none;
+    }
+
+    #list > div {
+      z-index: 100;
+    }
+
+    #list .btn:hover {
+      background-color: #eee;
+    }
+
+    #spa span {
+      display: inline-block;
+      *zoom: 1;
+      *display: inline;
+      width: 30px;
+      height: 30px;
+      border-radius: 100%;
+      border: 2px solid #000;
+      cursor: pointer;
+      background-color: #fff;
+    }
+
+    #spa {
+      position: absolute;
+      z-index: 1000;
+      bottom: 0;
+      left: 380px;
+    }
+
+    #spa .hover {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+<div id="list">
+  <ul>
+    <li><img src="images/psd20270_007_07.jpg" alt=""></li>
+    <li><img src="images/psd20270_007_07.jpg" alt=""></li>
+    <li><img src="images/psd20270_007_07.jpg" alt=""></li>
+    <li><img src="images/psd20270_007_07.jpg" alt=""></li>
+  </ul>
+  <div id="last" class="btn"><</div>
+  <div id="next" class="btn">></div>
+  <div id="spa">
+    <span class="hover"></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<a href="#fg">dsfdsfd</a>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="">fdsfdsfsdfdsf</div>
+<div id="fg" style="display: block;">fgfgfgfgfgfg</div>
+</body>
+</html>
