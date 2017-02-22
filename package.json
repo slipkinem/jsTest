@@ -1,0 +1,10 @@
+{
+  "name": "jsTest",
+  "version": "1.0.0",
+  "description": "js test",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "^3.1.1"
+  }
+}

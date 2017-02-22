@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="pub@sub.js"></script>
+</head>
+<body>
+呵呵<input type="text" data-bind-123="name">
+<p data-bind-123="name"></p>
+哈哈<input type="text" data-bind-223="name2">
+<p data-bind-223="name2"></p>
+<button onclick="哈哈()">关闭哈哈双向绑定</button>
+<script>
+  var user = new User(123)
+  user.set('name', '123123')
+  var user2 = new User(223)
+  user2.set('name2', '32423432')
+
+  function 哈哈() {
+    user2.off('223')
+  }
+</script>
+</body>
+</html>

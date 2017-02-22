@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../node_modules/jquery/dist/jquery.js"></script>
+  <script src="pub@sub.js"></script>
+</head>
+<body>
+<input type="text" data-bind-123="name">
+<input type="text" data-bind-123="name">
+<p data-bind-123="name"></p>
+<input type="text" data-bind-234="hehe">
+<p data-bind-234="hehe"></p>
+<button onclick="test()">哈哈</button>
+<script type="text/javascript">
+  var user = new User(123)
+  user.set('name', '123213')
+  var user2 = new User(234)
+  user2.set('hehe', '234324')
+  function test() {
+    user.set('name', '34324324')
+  }
+</script>
+</body>
+</html>
