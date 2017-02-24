@@ -17,6 +17,12 @@
   'use strict'
   window.User = User
 
+  /**
+   * 绑定数据
+   * @param objectId
+   * @returns {{callbacks: {}, on: on, publish: publish, off: off}}
+   * @constructor
+   */
   function DataBinder(objectId) {
 
     var pubSub = {
@@ -30,6 +36,7 @@
 
         publish: function (msg) {
           this.callbacks[msg] = this.callbacks[msg] || []
+
           for (var i = 0, ii = this.callbacks[msg].length; i < ii; i++) {
             /**
              * 用apply来进行柯里化操作
@@ -40,9 +47,9 @@
 
         off: function (eventName, callbacks) {
           eventName += ':change'
+
           var listenerCallbacks = this.callbacks[eventName],
             cbs = []
-
           if (!listenerCallbacks) {
             return false
           }
@@ -107,15 +114,27 @@
     return pubSub
   }
 
-  function User(uid) {
-    var binder = new DataBinder(uid),
+  /**
+   * 数据模型 modal
+   * @example <input type="text" data-bind-uuid="name"> <p data-bind-uuid="name"></p>
+   * @param uuid
+   * @returns {{attributes: {}, set: set, get: get, off: off, _binder: DataBinder}}
+   * @constructor
+   */
+  function User(uuid) {
+    var binder = new DataBinder(uuid),
 
       user = {
         attributes: {},
 
-        set: function (attrName, val) {
+        set: function (attrName, val, isView) {
           this.attributes[attrName] = val
-          binder.publish(uid + ':change', attrName, val, this)
+          /**
+           * 避免过多次更新视图
+           */
+          if (!isView) {
+            binder.publish(uuid + ':change', attrName, val, this)
+          }
         },
 
         get: function (attrName) {
@@ -132,10 +151,9 @@
         _binder: binder
       }
 
-    binder.on(uid + ':change', function (e, attrName, newVal, initiator) {
+    binder.on(uuid + ':change', function (e, attrName, newVal, initiator) {
       if (initiator !== user) {
-
-        user.set(attrName, newVal)
+        user.set(attrName, newVal, true)
       }
     })
 

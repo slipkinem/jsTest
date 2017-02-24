@@ -5,3 +5,7 @@
 jquery@^3.1.1:
   version "3.1.1"
   resolved "http://registry.npm.taobao.org/jquery/download/jquery-3.1.1.tgz#347c1c21c7e004115e0a4da32cece041fad3c8a3"
+
+zepto@^1.2.0:
+  version "1.2.0"
+  resolved "http://registry.npm.taobao.org/zepto/download/zepto-1.2.0.tgz#e127bd9e66fd846be5eab48c1394882f7c0e4f98"
