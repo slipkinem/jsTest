@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="bundle.js"></script>
+</head>
+<body>
+<div id="app">
+  <div v-html="ele"></div>
+  <input type="text" v-model="str">
+  <p>{{str}}</p>
+  <button v-on:click="test">哈哈哈</button>
+</div>
+<script>
+  console.dir(MVVM)
+  var vm = new MVVM({
+    data: {
+      str: 'test',
+      ele: '<p>你这个傻吊</p>'
+    },
+    method: {
+      test: function (e) {
+        alert(this.str)
+        this.str = '你是谁啊，小伙子'
+      }
+    }
+  })
+  vm.$watch('str', function () {
+    console.log(vm.str)
+  })
+</script>
+</body>
+</html>

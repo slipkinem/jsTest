@@ -1,3 +1,4 @@
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /**
  * Created by slipkinem on 2017/2/23.
  */
@@ -297,3 +298,307 @@ var updater = {
 }
 
 module.exports = Compile
+},{"../watcher/watcher":5}],2:[function(require,module,exports){
+/**
+ * Created by slipkinem on 2017/2/24.
+ */
+window.MVVM = require('./mvvm')
+
+
+},{"./mvvm":3}],3:[function(require,module,exports){
+/**
+ * Created by slipkinem on 2017/2/24.
+ */
+'use strict'
+var Compile = require('./compile/compile')
+var observe = require('./observe/observe2').observe
+var Watcher = require('./watcher/watcher')
+
+function MVVM(options) {
+  /**
+   * 获取实例模型的设置
+   */
+  this.$options = options
+  var data = this._data = this.$options.data // {name: 'value'}
+  var _this = this
+
+  Object.keys(data).forEach(function (key/*name*/) {
+    _this._proxy(key)
+  })
+  /**
+   * 给data的所有属性加上get/set 数据拦截
+   */
+  observe(data)
+
+  this.$compile = new Compile(options.el || document.body, this/*vm*/)
+}
+
+MVVM.prototype = {
+  constructor: MVVM,
+
+  $watch: function (key, cb, options) {
+    new Watcher(this, key, cb)
+  },
+  /**
+   * 给vm设置vm._data的属性
+   * @param key
+   * @private
+   */
+  _proxy: function (key/*name*/) {
+    var _this = this
+    /**
+     * vm[key] = vm.data[key]
+     * 在这里vm有和vm.data一样的属性key，当给vm[key]，set,get的时候
+     * 代理到vm.data 但显示的看vm[key]是没有值的
+     * 起到代理的作用可以方便传值
+     */
+    Object.defineProperty(_this/*MVVM的实例vm*/, key/*name*/, {
+      configurable: false,
+      enumerable: true,
+
+      get: function () {
+        return _this._data[key]
+      },
+
+      set: function (newValue) {
+        _this._data[key] = newValue
+      }
+    })
+  }
+}
+
+module.exports = MVVM
+},{"./compile/compile":1,"./observe/observe2":4,"./watcher/watcher":5}],4:[function(require,module,exports){
+/**
+ * Created by slipkinem on 2017/2/23.
+ */
+'use strict'
+
+/**
+ * Observe观察者
+ * @param data
+ * @constructor
+ */
+function Observe(data) {
+  this.data = data
+  this.convert(data) //
+}
+
+Observe.prototype = {
+  /**
+   * 循环调用defineReactive初始化数据模型
+   * @param data
+   */
+  convert: function (data) {
+    var _this = this
+    Object.keys(data).forEach(function (key) {
+      _this.defineReactive(data, key, data[key])
+    })
+  },
+  /**
+   * 设置数据的set和get
+   * @param data
+   * @param key
+   * @param val
+   */
+  defineReactive: function (data, key, val) {
+    var dep = new Dep()
+    /**
+     * 看对象的属性值是不是obj，如果是的话继续循环添加此属性值的set,get
+     */
+    var childObj = observe(val)
+    /**
+     * 主方法设置对象属性参数：1，obj 2, obj的属性key 3，options{}
+     */
+    Object.defineProperty(data, key, {
+      enumerable: true,
+      configurable: false, // 对象属性不可再使用defineProperty方法
+      /**
+       * get 比如console.log(a.b) 取值过程调用get方法
+       * @returns {*}
+       */
+      get: function () {
+        /**
+         * 取值时进入
+         */
+        if (Dep.target/*this*/) {
+          dep.depend()
+        }
+        return val
+      },
+      /**
+       * set方法就是拦截对象的赋值
+       * 比如 var a = {} a.b = 4 “=”这个过程被拦截
+       * @param newValue
+       */
+      set: function (newValue) {
+        if (val === newValue) return
+
+        val = newValue
+        /**
+         * 看新赋值属性值是不是对象，是的话加get set
+         */
+        childObj = observe(newValue)
+        /**
+         * 将变化通知给dep
+         */
+        dep.notify()
+      }
+    })
+  }
+}
+
+/**
+ * 检测value是否为obj
+ * @param value
+ * @returns {Observe}
+ */
+function observe(value) {
+  if (!value || typeof value !== 'object') return
+  return new Observe(value)
+}
+/**
+ * 身份标示
+ * @type {number}
+ */
+var uid = 0
+/**
+ * 作为watcher的枢纽，可以看做一个代表，代替Observe向watcher提供改变通知
+ * watcher通过Dep添加订阅者
+ * subs subscribes
+ * @constructor
+ */
+function Dep() {
+  this.id = uid++
+  this.subs = [] // 定阅队列
+}
+
+Dep.prototype = {
+  constructor: Dep,
+
+  /**
+   * 添加订阅
+   * @param sub
+   */
+  addSub: function (sub/*{vm: '', exp: 'name', depIds: {}, cb: compile bind函数传过来的cb}*/) {
+    this.subs.push(sub/*watcher的实例*/) //给subs列队添加一个
+  },
+
+  depend: function () {
+    /**
+     * watcher的实例
+     */
+    Dep.target.addDep(this/*dep的实例*/)
+  },
+  /**
+   * 移除订阅
+   * @param sub
+   */
+  removeSub: function (sub) {
+    var index = this.subs.indexOf(sub)
+
+    if (!!~index) {
+      this.subs.splice(index, 1)
+    }
+  },
+  /**
+   * 事件通知/也就是执行订阅的事件 每一个加进订阅列队的个体都有一个update方法
+   * 也就是有一个观察者，在watcher里面定义
+   */
+  notify: function () {
+    this.subs.forEach(function (sub /*sub也就是Watcher的实例，拥有update方法*/) {
+      /**
+       * 数据修改后更新视图
+       */
+      sub.update()
+    })
+  }
+}
+/**
+ * 此target指要加入到subs里面的目标
+ * @type {null}
+ */
+Dep.target = null
+
+module.exports = {
+  observe: observe,
+  Dep: Dep
+}
+},{}],5:[function(require,module,exports){
+/**
+ * Created by slipkinem on 2017/2/23.
+ */
+'use strict'
+
+var Dep = require('../observe/observe2').Dep
+/**
+ * 观察者
+ * @param vm MVVM的实例
+ * @param exp expression
+ * @param cb callback
+ * @constructor
+ */
+function Watcher(vm/*MVVM实例vm*/, exp/*name*/, cb/*func*/) {
+  this.vm = vm
+  this.exp = exp
+  this.cb = cb
+  this.depIds = {}
+  this.value = this.get() // value
+}
+
+Watcher.prototype = {
+  constructor: Watcher,
+  /**
+   * 事件队列的update方法
+   */
+  update: function () {
+    this.run()
+  },
+
+  run: function () {
+    var value = this.get()
+    var oldVal = this.value
+
+    if (value !== oldVal) {
+      this.value = value
+      this.cb.call(this.vm, value, oldVal)
+    }
+  },
+
+  addDep: function (dep) {
+    /**
+     * 判断此dep是不是被添加过
+     */
+    if (!this.depIds/*{}*/.hasOwnProperty(dep.id)) {
+      dep.addSub(this)
+      this.depIds[dep.id] = dep /*记录dep.id防止重复添加到订阅列队*/
+    }
+  },
+  /**
+   * 返回value
+   * @returns {*}
+   */
+  get: function () {
+    Dep.target = this // Dep
+    var value = this.getVMVal() /*value*/
+    Dep.target = null
+    return value
+  },
+  /**
+   * 进入observe的get，返回需要的val
+   * @returns {jQuery._data|*}
+   */
+  getVMVal: function () {
+    var exp = this.exp.split('.') /*[name]*/
+    var val = this.vm._data /*{name: 'value'} 取值进入数据拦截*/
+
+    exp.forEach(function (key/*name*/) {
+      val = val[key] /*value*/
+    })
+    return val
+  }
+
+}
+
+module.exports = Watcher
+},{"../observe/observe2":4}]},{},[2]);

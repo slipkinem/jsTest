@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>star</title>
+	<style type="text/css">
+    	img{
+    		margin: 0;
+    		padding: 0;
+    		cursor: pointer;
+    	}
+	</style>
+	<script type="text/javascript">
+		window.onload = function () {
+			var oImg = document.getElementsByTagName("img");//获取星星图	
+			for(var i = 0, length1 = oImg.length; i < length1; i++){
+				oImg[i].index=i;//索引I,因为下一个函数相对i是闭包
+				oImg[i].onmouseover = function () {
+					for(j=0;j<oImg.length;j++){
+					oImg[j].src = 'img/star-off.png'; //让星星全变黑
+						for(var k = 0, length3 = this.index; k <= length3; k++){/*触摸的那个星星的索引就是this.index,如this.index=1;则小于1就成了0了,只有0位置的星星会变,所以触摸的那个也要变亮,就要等于他的长度*/
+							 	oImg[k].src = "img/star-on.png";//触摸的星星之前的星星都变亮
+						 } 
+					}
+				}
+				oImg[i].onclick = function(){
+					// var attr = "一二三四五";//字符串
+					var attr = new Array("一","二","三","四","五");//定义数组
+					var oDiv = document.getElementById("box");//获取容器的ID
+					// oDiv.innerHTML = attr.charAt(this.index)+"星好评";//charAt索引字符串
+					oDiv.innerHTML = attr[this.index]+"星好评";//数组的索引方式
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<div class="container" style="cursor: pointer;">		
+		<img src="img/star-on.png" />
+		<img src="img/star-on.png" />
+		<img src="img/star-on.png" />
+		<img src="img/star-on.png" /><br/>
+		<img src="img/star-on.png" />
+		<div id="box"></div>
+	</div>
+</body>
+</html>
