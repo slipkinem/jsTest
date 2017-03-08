@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../build/react.js"></script>
+  <script src="../build/react-dom.js"></script>
+  <script src="../build/browser.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+  var NoteList = React.createClass({
+    render: function () {
+      return (
+          <ol>
+            {
+              React.Children.map(this.props.children/*组件的所有子节点*/, function (child, index) {
+                return <li>{index},{child}</li>
+              })
+//              下面代码可能由于数据类型有误而出错，循环children用上面的
+              /**
+               * this.props.children 组件无子节点 => undefined
+               * this.props.children 组件1子节点 => object
+               * this.props.children 组件多子节点 => array
+               */
+//              this.props.children.map(function (child) {
+//                return <li>{child}</li>
+//              })
+            }
+          </ol>
+      )
+    }
+  })
+
+  ReactDOM.render(
+      <NoteList>
+        <span>hello</span>
+        <span>hehe</span>
+      </NoteList>,
+    document.getElementById('example')
+  )
+
+</script>
+</body>
+</html>

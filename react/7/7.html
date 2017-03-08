@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../build/react.js"></script>
+  <script src="../build/react-dom.js"></script>
+  <script src="../build/browser.min.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+  var MyComponent = React.createClass({
+    handleClick: function () {
+      this.refs.myTextInput.style.display = 'none'
+    },
+    render: function () {
+      return (
+        <div>
+          <p>用ref保持引用，可以获取到真实的DOM，放入refs里面</p>
+          <input type="text" ref="myTextInput"/>
+          <input type="button" value="test" onClick={this.handleClick}/>
+          {
+            [1,2,3].map(function (item, index) {
+              /**
+               * Each child in an array or iterator should have a unique "key" prop
+               */
+              return <div key={index}>{item}</div>
+            })
+          }
+        </div>
+      )
+    }
+  })
+
+  ReactDOM.render(
+    <MyComponent></MyComponent>,
+    document.getElementById('example')
+  )
+
+
+</script>
+</body>
+</html>
