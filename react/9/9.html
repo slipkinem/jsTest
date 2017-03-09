@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../node_modules/react/dist/react.js"></script>
+  <script src="../../node_modules/react-dom/dist/react-dom.js"></script>
+  <script src="//cdn.bootcss.com/babel-core/5.8.35/browser.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+  var Input = React.createClass({
+    getInitialState: function () {
+      return {
+        value: 'hello'
+      }
+    },
+    handleChange: function (event) {
+      this.setState({
+        value: event.target.value
+      })
+    },
+    handleClick: function () {
+      this.setState({
+        value: 'listen'
+      })
+    },
+    render: function () {
+      var value = this.state.value
+      return (
+        <div>
+          <input type="text" value={value} onChange={this.handleChange}/>
+          <p onClick={this.handleClick}>{value}</p>
+        </div>
+      )
+    }
+
+  })
+
+  ReactDOM.render(
+    <Input></Input>,
+    document.getElementById('example')
+  )
+
+</script>
+</body>
+</html>

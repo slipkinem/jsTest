@@ -3,14 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-  <script src="../build/react.js"></script>
-  <script src="../build/react-dom.js"></script>
-  <script src="../build/browser.min.js"></script>
+  <script src="../../node_modules/react/dist/react.js"></script>
+  <script src="../../node_modules/react-dom/dist/react-dom.js"></script>
+  <script src="//cdn.bootcss.com/babel-core/5.8.35/browser.js"></script>
 </head>
 <body>
 <div id="example"></div>
 <script type="text/babel">
+  /**
+   * state
+   */
   var LinkButton = React.createClass({
+    /**
+     * 设置初始化state, 存到this.state里面
+     * */
     getInitialState: function () {
       return {
         liked: false
@@ -18,6 +24,10 @@
     },
     handleClick: function (event) {
       console.log(this /*Construct*/)
+      /**
+       * this.setState 方法就修改状态值，每次修改以后，自动调用 this.render 方法，再次渲染组件。
+       * this.props 表示那些一旦定义，就不再改变的特性，而 this.state 是会随着用户互动而产生变化的特性
+       */
       this.setState({
         liked: !this.state.liked
       })
@@ -26,7 +36,7 @@
       var text = this.state.liked ? 'like' : 'haven\'t liked'
       return (
           <p onClick={this.handleClick}>
-            You{text} this.Click to toggle
+            You {text} this.Click to toggle
           </p>
       )
     }

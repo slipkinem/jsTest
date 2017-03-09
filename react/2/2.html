@@ -12,14 +12,22 @@
 <script type="text/babel">
   var names = ['h2h2', '343', '34']
   ReactDOM.render(
-    <div>
-      {
-        names.map(function (name) {
-          return <div>Hello, {name}!</div>
-        })
-      }
-    </div>,
-    document.getElementById('example')
+      <div>
+        {
+          (function () {
+            var test = []
+            names.forEach(function (name, index) {
+              test.push(<div key={index}>Hello, {name}!</div>)
+            })
+            console.log(test)
+            return test
+          }())
+        }
+      </div>,
+    document.getElementById('example'),
+    function () {
+      console.log('我被执行')
+    }
   )
 </script>
 </body>

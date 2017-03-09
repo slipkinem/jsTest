@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../../node_modules/react/dist/react.js"></script>
+  <script src="../../node_modules/react-dom/dist/react-dom.js"></script>
+  <script src="//cdn.bootcss.com/babel-core/5.8.35/browser.js"></script>
+</head>
+<body>
+<div id="example"></div>
+<script type="text/babel">
+  var Hello = React.createClass({
+    getInitialState () {
+      return {
+        opacity: 1.0
+      }
+    },
+    componentWillMount () {
+      console.info('开始插入DOM')
+    },
+    componentWillUpdate() {
+      console.info('开始更新DOM')
+    },
+    componentDidUpdate () {
+      console.info('更新DOM完成')
+    },
+    componentWillUnmount () {
+      console.info('已移除真实DOM')
+    },
+    componentWillReceiveProps (nextProps) {
+      console.info('组件收到新的参数', nextProps)
+    },
+    /**
+     * 是否重新渲染 return true/false
+     * @param nextProps
+     * @param nextState
+     * @returns {boolean}
+     */
+    shouldComponentUpdate (nextProps, nextState) {
+      console.info('是否重新渲染', nextProps, nextState)
+      return true
+    },
+    componentDidMount () {
+      console.info('插入DOM完成')
+      /**
+       * 进入组件加载完生命周期后，直接调用，不用手动
+       * */
+      this.funcName = setTimeout(function () {
+        var opacity = this.state.opacity
+        opacity -= 0.5
+
+        if (opacity < 0.1) {
+          opacity = 1.0
+        }
+
+        this.setState({
+          opacity: opacity
+        })
+
+      }.bind(this), 1000)
+    },
+    render () {
+      return (
+          <div style={
+            /**
+             * 因为style组件样式是一个对象，所以是js语法，所以要用花括号
+             */
+            {
+              opacity: this.state.opacity
+            }
+          }>
+            Hello {this.props.name}
+          </div>
+      )
+    }
+
+  })
+  ReactDOM.render(
+      <Hello name="haha"></Hello>,
+    document.getElementById('example')
+  )
+
+</script>
+</body>
+</html>
