@@ -3,10 +3,16 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Document</title>
-		<script type="text/javascript" src="angular.js"></script>
+		<script type="text/javascript" src="../../node_modules/angular/angular.js"></script>
 		<script type="text/javascript" src="angulartest.js"></script>
 	</head>
 	<body ng-app="app">
+  <form name="focus_form">
+    <input type="text" name="input_name" ng-model="test" test>
+    <div ng-show="focus_form.input_name.$fuck">$fuck</div>
+  </form>
+
+
 		<one>
 	      <two>
 	        <three>

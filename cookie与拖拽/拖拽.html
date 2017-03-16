@@ -38,16 +38,16 @@
 				var oEvent=ev||event;
 				var l = oEvent.clientX-disX;
 				var t = oEvent.clientY-disY;
-				if (l<0) {//改变数值就可以磁性吸附
-					l=0;
-				}else if (l>this.documentElement.clientWidth-_this.offsetWidth) {
-					l=this.documentElement.clientWidth-_this.offsetWidth;
-				}
-				if (t<0) {
-					t=0;
-				}else if (t>this.documentElement.clientHeight-_this.offsetHeight) {
-					t=this.documentElement.clientHeight-_this.offsetHeight;
-				}
+//				if (l<0) {//改变数值就可以磁性吸附
+//					l=0;
+//				}else if (l>this.documentElement.clientWidth-_this.offsetWidth) {
+//					l=this.documentElement.clientWidth-_this.offsetWidth;
+//				}
+//				if (t<0) {
+//					t=0;
+//				}else if (t>this.documentElement.clientHeight-_this.offsetHeight) {
+//					t=this.documentElement.clientHeight-_this.offsetHeight;
+//				}
 
 				_this.style.left=l+"px";
 				_this.style.top=t+"px";
