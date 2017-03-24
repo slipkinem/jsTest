@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  for(var j=i;j<=getMin(i+3,listQipai.length);j++){
+    var picName =listQipai[j].qipaiImg;
+    var paths =path+"static/images/dianji.png" ;
+    var money =path+"static/images/qian.jpg";
+    var num =$("#text"+j).val;
+    str+='<td width =300px>'+
+      '<table>'+
+      '<tr>'
+      +'<td rowspan="8">'
+      +'<img height="200" width="190" id=img'+j+' src='+path+picName+' />'
+      +'</td>'
+      +'</tr>'
+      +'<tr>'
+      +'<td >书名：</td>'
+      +'<td >'+listQipai[j].qipaiName+'</td>'
+      +'</tr>'
+      +'<tr>'
+      +'<td >作者：</td>'
+      +'<td >'+listQipai[j].qipaiAuthor+'</td>'
+      +'</tr>'
+      +'<tr>'
+      +'<td >出版社：</td>'
+      +'<td ">'+listQipai[j].qipaiPub+'</td>'
+      +'</tr>'
+      +'<tr>'
+      +'<td >价格：</td>'
+      +'<td><img src='+money+'>'+listQipai[j].qipaiPrice
+      +'</td>'
+      +'</tr>'
+      +'<tr>'
+      +'<td>'
+      +'<a href="javascript:void(0);" onclick="show(' +'\''+listQipai[j].id+'\''+','+'\''+j+'\''+ ')"><img src='+paths+'>'
+      +'</td>'
+      +'</tr>'
+      +'</table>'
+      +'</td>';
+    $('img'+j).attr("style","background:url("+path+picName+") no-repeat;width:100%;height:100%;");
+  }
+  str+='</tr>';
+  }
+  $("#qipaiTable").append(str);
+  }
+</script>
+
+</body>
+</html>

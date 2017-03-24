@@ -8,21 +8,23 @@
 <body>
 <div id="app">
   <div v-html="ele"></div>
-  <input type="text" v-model="str">
-  <p>{{str}}</p>
+  <input type="text" v-model="str.name">
+  <p>{{str.name}}</p>
   <button v-on:click="test">哈哈哈</button>
 </div>
 <script>
   console.dir(MVVM)
   var vm = new MVVM({
     data: {
-      str: 'test',
+      str: {
+        name: 'sdfsdaf'
+      },
       ele: '<p>你这个傻吊</p>'
     },
     method: {
       test: function (e) {
         alert(this.str)
-        this.str = '你是谁啊，小伙子'
+        this.str.name = 'fsdfsdaf'
       }
     }
   })

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script type="text/javascript" src="../../node_modules/angular/angular.js"></script>
+  <script type="text/javascript" src="angulartest.js"></script>
+</head>
+<body ng-controller="testC">
+  <input type="date" name="input_name" ng-model="test" test-dir>
+  <p>{{test}}</p>
+  <button ng-click="clickTest()">改变数据</button>
+  <button ng-click="clickTest2()">获取数据</button>
+</body>
+</html>

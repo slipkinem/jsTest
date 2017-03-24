@@ -7,8 +7,10 @@
   给显示的文本排序
 
 3. ``$parsers``  
-   当用户同控制器进行交互，并且``ngModelController``中的``$setViewValue()``方法被调用时，
-   ``$parsers``数组中的函数会以流水线的形式被逐个调用。第一个``$parse``被调用后，执行结果会传
+   当用户同控制器进行交互，并且``ngModelController``  
+   中的``$setViewValue()``方法被调用时，
+   ``$parsers``数组中的函数会以流水线的形式被逐个调用。  
+   第一个``$parse``被调用后，执行结果会传
    递给第二个``$parse``，以此类推
    
    ```
@@ -35,8 +37,10 @@
    ```
 
 4. ``$formatters``
-  当绑定的``ngModel``值发生了变化，并经过``$parsers``数组中解析器的处理后，这个值会被传递
-  给``$formatters``流水线。同``$parsers``数组可以修改表单的合法性状态类似， ``$formatters``中的函
+  当绑定的``ngModel``值发生了变化，并经过``$parsers``  
+  数组中解析器的处理后，这个值会被传递
+  给``$formatters``流水线。同``$parsers``  
+  数组可以修改表单的合法性状态类似， ``$formatters``中的函
   数也可以修改并格式化这些值
   ```
   angular.module('myApp')
@@ -53,9 +57,11 @@
       });
   ```
 
-5. 表单验证：``ngModelController.$我是自定义`` 取出 ``form_name.input_name.$我是自定义``
-  angular可以通过``form_name.input_name.XX`` 拿到在``directive``里面给``ngModelController``自定义的布尔值
-  从而可以通过判断来进行show/hide的表单验证
+5. 表单验证：``ngModelController.$我是自定义``   
+    取出 ``form_name.input_name.$我是自定义``
+    angular可以通过``form_name.input_name.XX``   
+    拿到在``directive``里面给``ngModelController``自定义的布尔值
+    从而可以通过判断来进行show/hide的表单验证
   
 6. 用属性声明指令比较好
 
@@ -88,31 +94,55 @@
 12. 指令API
   ```
   .directive('', ['', function(){
+  
           	// Runs during compile
           	return {
+  
           	  name: '',  `指令名称`
+  
           	  priority: 1, `加载优先级`
+  
           	  terminal: true, `是否让优先级以下的指令不运行`
+  
           	  scope: {}, // {} = isolate, true = child, false/undefined = no change
           	  `作用域，如果是true则不让外部继承，外部读不到
           	    如果是对象则是隔离作用域（作用域不传递）
           	    具有隔离作用域的指令最主要的使用场景是创建可复用的组件，组件可以在未知上下文中使
                 用，并且可以避免污染所处的外部作用域或不经意地污染内部作用域`
+  
           	  controller: function($scope, $element, $attrs, $transclude) {},
+  
           	  `指令的控制`
-          	  require: 'ngModel', // Array = multiple requires, ? = optional（指找不到控制器传递null）, ^ = check parent elements
-              `可以在link方法的第四个参数指向该指令的controller`
-          	  restrict: 'A', // E = Element, A = Attribute, C = Class, M = Comment
-          	  `声明方式`
+          	  require: 'ngModel', // Array = multiple requires,   
+          	                     // ? = optional（指找不到控制器传递null）,   
+          	                    // ^ = check parent elements
+                               // PS:可以在link方法的第四个参数指向该指令的controller
+  
+          	  restrict: 'A', // E = Element,   
+          	                // A = Attribute,   
+          	               // C = Class,  
+          	              // M = Comment
+          	             // 声明方式
+          	             
           	  template: '', // 字符串
-          	  templateUrl: '', `指令html的地址`
-          	  replace: true, `用html标签完全替代此指令`
+          	  
+          	  templateUrl: '', // 指令html的地址
+          	  
+          	  replace: true, // 用html标签完全替代此指令
+          	  
           	  transclude: true, 
-          	    // 如果为true则无法正常监听数据变化，被用来，
-          	    //  只有当你希望创建一个可以包含任意内容的指令时， 
-          	    //  才使用transclude: true。
+          	       // 如果为true则无法正常监听数据变化，被用来，
+          	      //  只有当你希望创建一个可以包含任意内容的指令时， 
+          	     //  才使用transclude: true。
           	    //  配合ng-transclude插进去
-          	  compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
+          	  
+          	  compile: function(tElement, tAttrs,   
+                          function transclude(  
+                        
+                          function(scope, cloneLinkingFn){   
+                        
+                            return function linking(scope, elm, attrs){}})),
+          		
           		link: function($scope, iElm, iAttrs, controller) {
           			
           		}
@@ -229,4 +259,69 @@
       fucker.getFucker() // motherfucker
     })
   ```
+
+19. 分析ng-include为什么会导致无法正常双向绑定
+  * ng-include指令会生成一个作用域 (child)
+  * ng-include父节点的作用域（parent）
+  * parent.flag = "test" 根据原型继承原理 child._proto_.flag = "test"
+  * 当parent.flag变成"dev" 则child._proto_.flag = "dev"
+  * 如果child.flag = "product" 则 child.flag 与 parent.flag 失去联系
+  * 解决这种问题需要，将要传递的属性变为对象形式
+```
+  function Parent() {
+    this.face = "哈哈"
+  }
+  
+  Parent.prototype = {
+    constructor: Parent,
+  
+    $new: function () {
+      var child
+  
+      this.$$childScope = function () {
+        this.$id = 112212
+      }
+      this.$$childScope.prototype = this
+      child = new this.$$childScope()
+  
+      return child
+    }
+  
+  }
+  var parentScope = new Parent()
+  
+  var childScope = parentScope.$new()
+  
+console.log(
+  [parentScope.face, parentScope.fixed.face],
+  [childScope.face, childScope.fixed.face]
+) // ["哈哈", "哈哈"] ["哈哈", "哈哈"]
+  
+  
+parentScope.face = "test"
+parentScope.fixed.face = "test"
+console.log(
+  [parentScope.face, parentScope.fixed.face],
+  [childScope.face, childScope.fixed.face]
+) // ["test", "test"] ["test", "test"]
+  
+  
+childScope.face = "我是谁"
+childScope.fixed.face = "我是谁"
+console.log(
+  [parentScope.face, parentScope.fixed.face],
+  [childScope.face, childScope.fixed.face]
+)// ["test", "我是谁"] ["我是谁", "我是谁"]
+  
+```
+20. $scope生命周期
+  * 创建
+    * 创建控制器或指令时，angular会用``$injector``创建一个作用域，并在新建的控制器指令中将作用域传递进去
+        * ``$scope``会通过``$new``创建通过原型与父级保持联系
+  * 链接
+    * 用$watch将数据监听
+  * 更新
+    * 当$watch监听到变化，触发回调
+  * 销毁
+    * 视图不需要会销毁自己
   
