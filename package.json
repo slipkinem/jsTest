@@ -10,5 +10,9 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "zepto": "^1.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.18.0",
+    "eslint-config-google": "^0.7.1"
   }
 }

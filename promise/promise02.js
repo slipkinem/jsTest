@@ -2,8 +2,6 @@ function isFunction(value) {
   return typeof value === 'function'
 }
 
-
-
 function Promise(resolver) {
   var promise = this,
     value = null

@@ -3,8 +3,8 @@
  */
 'use strict'
 
-let promise = new Promise(function (resolve, reject) {
-  setTimeout(function () {
+var promise = new Promise(function(resolve, reject) {
+  setTimeout(function() {
     resolve('resolve')
   })
 })
