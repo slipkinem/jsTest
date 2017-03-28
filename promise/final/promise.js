@@ -49,13 +49,13 @@ class Promise extends util {
      */
     this._reason = Object.create(null)
     /**
-     * 正确回调的方法集
+     * 储存错误回调
      * @type {Array}
      * @private
      */
     this._rejecteds = []
     /**
-     * 储存错误回调
+     * 正确回调的方法集
      * @type {Array}
      * @private
      */
