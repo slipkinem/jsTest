@@ -16,7 +16,7 @@
   1. ``then``注册成功后的回调
   2. ``catch``注册失败后的回调
 
-上代码：
+上代码（由于使用es6所以用babel，[编译过的代码](https://github.com/slipkinem/jsTest/blob/master/promise/final/promise.dist.js)）：
 ```
 'use strict'
 /**
