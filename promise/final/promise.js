@@ -21,23 +21,69 @@ class util {
  */
 class Promise extends util {
   constructor(executor) {
+    /**
+     * 继承绑定，作为context调用父类的constructor
+     */
     super(executor)
 
     if (!Promise.isFunction(executor)) throw new TypeError('参数必须是一个函数')
+    /**
+     * @description
+     * 状态分为 PENDING  可以过度到RESOLVED或REJECTED
+     *        RESOLVED
+     *        REJECTED
+     * @type {string}
+     * @private
+     */
     this._status = 'PENDING'
+    /**
+     * 正确值
+     * @type {Object}
+     * @private
+     */
     this._value = Object.create(null)
+    /**
+     * 错误值
+     * @type {Object}
+     * @private
+     */
     this._reason = Object.create(null)
+    /**
+     * 正确回调的方法集
+     * @type {Array}
+     * @private
+     */
     this._rejecteds = []
+    /**
+     * 储存错误回调
+     * @type {Array}
+     * @private
+     */
     this._deferreds = []
+    /**
+     * 在class中 constructor里面的函数无法直接访问this
+     * 为了形成private，所以不放外面
+     * @type {Promise}
+     * @private
+     */
     let _this = this
 
+    /**
+     * 执行承诺的函数
+     * @param value
+     */
     function resolve(value) {
+      /**
+       * 异步，为了让then先执行，注册进回调
+       */
       setTimeout(() => {
         try {
           if (_this._status === 'PENDING') {
             _this._status = 'RESOLVED'
             _this._value = value
-
+            /**
+             * 循环执行所有的回调
+             */
             _this._deferreds.forEach((deferred) => {
               deferred(value)
             })
@@ -75,19 +121,38 @@ class Promise extends util {
 
   }
 
+  /**
+   * resolve方法
+   * @example Promise.resolve('test').then(function(result){ result // test })
+   * @param value
+   * @returns {Promise}
+   */
   static resolve(value) {
     return new Promise((resolve, reject) => {
       resolve(value)
     })
   }
 
+  /**
+   * all方法 当需要许多promise一起执行的时候用，最后返回一个存有所有promise返回值的数组
+   * 当一个promise reject掉了，认为此all方法执行失败，进入reject
+   * @param promises
+   * @returns {Promise}
+   */
   static all(promises) {
     if (!Promise.isArray(promises)) throw new TypeError('promises 必须是一个数组')
 
+    /**
+     * 返回一个Promise
+     */
     return new Promise((resolve, reject) => {
       let result = [],
         len = promises.length
 
+      /**
+       * 将所有的返回值存储起来
+       * @param value
+       */
       function resolveAll(value) {
         result.push(value)
 
@@ -107,11 +172,24 @@ class Promise extends util {
     })
   }
 
+  /**
+   * 方便使用，封装catch方法
+   * @param onRejected
+   */
   catch(onRejected) {
     this.then(null, onRejected)
   }
 
+  /**
+   * 重点方法，then
+   * @param onFulfilled
+   * @param onRejected
+   * @returns {Promise}
+   */
   then(onFulfilled, onRejected) {
+    /**
+     * 每次执行then都会返回一个promise供链式调用
+     */
     return new Promise((resolve, reject) => {
       let returnedValue = Object.create(null)
       /**
@@ -125,6 +203,20 @@ class Promise extends util {
        * @private
        */
       function _RESOLVED(value) {
+        /**
+         * 取得onFulfilled的返回值，判断是否返回一个promise
+         * 回调方式的then
+         * @example
+         * new Promise(function(resolve, reject){
+         *  resolve('test')
+         * })
+         *  .then(function(result){
+         *    return new Promise(function(resolve, reject){
+         *      resolve(result + 'test')
+         *    })
+         *      .then()
+         *  })
+         */
         returnedValue = Promise.isFunction(onFulfilled) && onFulfilled(value) || value
 
         try {
@@ -154,6 +246,12 @@ class Promise extends util {
         reject(returnedValue)
       }
 
+      /**
+       * 直接调用resolve的情况
+       * @example
+       * Promise.resolve('test')
+       *  .then(function() {})
+       */
 
       if (this._status === 'RESOLVED') {
         _RESOLVED(this._value)
@@ -175,5 +273,8 @@ class Promise extends util {
   }
 
 }
-
+/**
+ * 将类返回，外面用babel编译
+ * @type {Promise}
+ */
 module.exports = Promise
