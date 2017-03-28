@@ -20,33 +20,84 @@ function Promise(executor) {
 
   function resolve(value) {
     setTimeout(function () {
-      if (_this._status === 'PENDING') {
-        _this._status = 'RESOLVED'
-        _this._value = value
+      try {
+        if (_this._status === 'PENDING') {
+          _this._status = 'RESOLVED'
+          _this._value = value
 
-        _this._deferreds.forEach(function (deferred) {
-          deferred(value)
-        })
+          _this._deferreds.forEach(function (deferred) {
+            deferred(value)
+          })
 
+        }
+      } catch (e) {
+        reject(e)
       }
+
     })
   }
 
   function reject(reason) {
     setTimeout(function () {
-      if (_this._status === 'PENDING') {
-        _this._status = 'REJECTED'
-        _this._reason = reason
+      try {
+        if (_this._status === 'PENDING') {
+          _this._status = 'REJECTED'
+          _this._reason = reason
 
-        _this._rejecteds.forEach(function (_rejected) {
-          _rejected(reason)
-        })
+          _this._rejecteds.forEach(function (rejected) {
+            rejected(reason)
+          })
+        }
+      } catch (e) {
+        reject(e)
       }
     })
   }
 
-  executor(resolve, reject)
+  try {
+    executor(resolve, reject)
+  } catch (e) {
+    reject(e)
+  }
 
+}
+
+Promise.resolve = function (value) {
+  return new Promise(function (resolve, reject) {
+    resolve(value)
+  })
+}
+
+Promise.all = function (promises) {
+  if (!Array.isArray(promises)) throw new TypeError('promises 必须是一个数组')
+
+  return new Promise(function (resolve, reject) {
+    var result = [],
+      len = promises.length
+
+    function resolveAll(value) {
+      result.push(value)
+
+      if (--len === 0) {
+        resolve(result)
+      }
+    }
+
+    promises.forEach(function (promise) {
+      /**
+       * 将成功后的加入result数组
+       * 一旦有一个失败，则直接返回失败
+       */
+      promise.then(resolveAll, reject)
+    })
+
+  })
+
+
+}
+
+Promise.prototype.catch = function (onRejected) {
+  this.then(null, onRejected)
 }
 
 Promise.prototype.then = function (onFulfilled, onRejected) {
@@ -59,41 +110,101 @@ Promise.prototype.then = function (onFulfilled, onRejected) {
      * e.g. Promise.resolve('resolve').then(function(result){})
      * 最主要看onFulfilled返回值是什么
      */
+    /**
+     * _RESOLVED
+     * @param value
+     * @private
+     */
+    function _RESOLVED(value) {
+      returnedValue = isFunction(onFulfilled) && onFulfilled(value) || value
+
+      try {
+        if (returnedValue && returnedValue instanceof Promise) {
+          returnedValue.then(function (value) {
+            resolve(value)
+          }, function (reason) {
+            reject(reason)
+          })
+        } else {
+          resolve(returnedValue)
+        }
+
+      } catch (e) {
+        reject(e)
+      }
+    }
+
+    /**
+     * 失败的错误
+     * @param reason
+     * @private
+     */
+    function _REJECTED(reason) {
+      returnedValue = isFunction(onRejected) && onRejected(reason) || reason
+
+      reject(returnedValue)
+    }
+
+
     if (_this._status === 'RESOLVED') {
-      returnedValue = onFulfilled && onFulfilled(_this._value) || _this._value
-      resolve(returnedValue)
+      _RESOLVED(_this._value)
 
     } else if (_this._status === 'REJECTED') {
-      returnedValue = onRejected(_this._reason)
-      reject(returnedValue)
+      _REJECTED(_this._reason)
 
     } else if (_this._status === 'PENDING') {
       /**
        * e.g. new Promise().then(function(result){})
        */
-      _this._deferreds.push(function (value) {
-        returnedValue = isFunction(onFulfilled) && onFulfilled(value) || value
+      _this._deferreds.push(_RESOLVED)
 
-        // console.log(returnedValue)
-        resolve(returnedValue)
-      })
-
-      _this._rejecteds.push(function (reason) {
-        returnedValue = isFunction(onRejected) && onRejected(reason) || reason
-        reject(returnedValue)
-      })
+      _this._rejecteds.push(_REJECTED)
     }
 
   })
 
 }
 
+// new Promise(function (resolve, reject) {
+//   setTimeout(function () {
+//     resolve('haha')
+//   })
+// })
+//   .then(function (result) {
+//     console.log(result)
+//   })
+//   .then()
+//   .then(function (result) {
+//     console.log(result)
+//   })
+var promises = []
+
+for (var i = 0; i < 5; i++) {
+  promises.push(
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve('hahaha')
+      })
+    })
+  )
+}
+// promises.push(new Promise((resolve, reject) => {
+//   setTimeout(() => {
+//     reject('errfsdf')
+//   })
+// }))
+
+// Promise.all(promises)
+//   .then((result) => {
+//     console.log(result)
+//   })
+//   .catch(function (err) {
+//     console.log(err)
+//   })
+//
 new Promise(function (resolve, reject) {
-  setTimeout(function () {
-    resolve('haha')
-  })
+  resolve('dsf')
 })
-  .then('tests')
-  .then(function (result) {
-    console.log(result)
-  })
+.then(function (r) {
+  console.log(r)
+})

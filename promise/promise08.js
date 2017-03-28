@@ -178,32 +178,44 @@
 
 })(this);
 
-var promises = []
-for (let i = 0; i < 7; i++) {
-  promises.push(
-    new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve('haha')
-      })
-    })
-  )
-}
+// var promises = []
+// for (let i = 0; i < 7; i++) {
+//   promises.push(
+//     new Promise((resolve, reject) => {
+//       setTimeout(() => {
+//         resolve('haha')
+//       })
+//     })
+//   )
+// }
 
-promises.push(
-  new Promise((resolve, reject) => {
-    setTimeout(() => {
-      var x = {}
-      console.log(x.name.err)
-      reject('err')
-    })
+// promises.push(
+//   new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       var x = {}
+//       console.log(x.name.err)
+//       reject('err')
+//     })
+//   })
+// )
+//
+// Promise.all(promises)
+//   .then((result) => {
+//     console.log(result)
+//   })
+//   .catch(function (err) {
+//     console.log('fsda')
+//     console.log(err)
+//   })
+new Promise(function (resolve, reject) {
+  setTimeout(function () {
+    resolve('haha')
   })
-)
-
-Promise.all(promises)
-  .then((result) => {
+})
+  .then(function (result) {
     console.log(result)
   })
-  .catch(function (err) {
-    console.log('fsda')
-    console.log(err)
+  .then('tests')
+  .then(function (result) {
+    console.log(result)
   })
