@@ -324,4 +324,13 @@ console.log(
     * 当$watch监听到变化，触发回调
   * 销毁
     * 视图不需要会销毁自己
+    
+21. filter
+  * 视图中配合``ng-repeat``使用``filter``
+    * 过滤不需要的字段：``item in items| filter: type: '!1'``
+    * 过滤需要的：``item in items| filter: type: '1'``
+    * 多个过滤条件：``item in items| filter: {type: '1', name: '!HanMeiMei''}``
+  
+  * 视图中配合``ng-option`
+    * ``ng-options='c.name as c.showName for c in items |filter: {name: "o", showName: "!新闻"}'``
   
