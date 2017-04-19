@@ -13,7 +13,7 @@
  *
  */
 
-!function (window) {
+var dataBind =  function (window) {
   'use strict'
   window.User = User
 

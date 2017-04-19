@@ -1,0 +1,15 @@
+{
+  "name": "virtual-dom",
+  "version": "1.0.0",
+  "description": "学一下virtualDom",
+  "main": "element.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify front-virtual-dom.js -o dist/bundle.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "list-diff2": "^0.1.4"
+  }
+}
