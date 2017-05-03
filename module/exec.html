@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="./module.js"></script>
+</head>
+<body>
+<script>
+  window.onload = function () {
+    ls.define('a', [], function () {
+      console.log('cc')
+      return 'a'
+    })
+
+    ls.define('b', [], function () {
+      return 'b'
+    })
+
+    ls.define('test', ['a', 'b'], function (a, b) {
+      return a + b
+    })
+
+    ls.invoke('a')
+    var lsi = ls.invoke('test')
+    console.log(lsi)
+  }
+</script>
+</body>
+</html>
