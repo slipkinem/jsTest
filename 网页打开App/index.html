@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="javascript: void (0);" id="openApp">贴吧客户端</a>
+</body>
+12
+<script type="text/javascript">
+  document.getElementById('openApp').onclick = function (e) {
+
+    var ifr = document.createElement('iframe')
+    ;
+    ifr.src = 'com.baidu.tieba://';
+    //打开app的协议，有app同事提供
+    ifr.style.display = 'none';
+    document.body.appendChild(ifr);
+//    ifr.onload = function () {
+    alert('已经安装')
+    document.write('围殴福建省第六空间付款了速度将风口浪尖上岛咖啡')
+//    }
+    ifr.onerror = function () {
+      window.setTimeout(function () {
+        document.body.removeChild(ifr);
+        window.location.href = 'https://itunes.apple.com/cn/app/id477927812';//打开app下载地址，有app同事提供
+      }, 2000)
+    }
+  };
+</script>
+</html>
