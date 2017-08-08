@@ -7,19 +7,26 @@
   <script src="pub@sub.js"></script>
 </head>
 <body>
+<!--<input type="text" data-bind-123="name.heihei">-->
+<!--<input type="text" data-bind-123="name">-->
+<!--<p data-bind-123="name.heihei"></p>-->
+<!--<input type="text" data-bind-234="hehe">-->
+<!--<p data-bind-234="hehe"></p>-->
 <input type="text" data-bind-123="name">
-<input type="text" data-bind-123="name">
-<p data-bind-123="name"></p>
-<input type="text" data-bind-234="hehe">
-<p data-bind-234="hehe"></p>
 <button onclick="test()">哈哈</button>
 <script type="text/javascript">
-  var user = new User(123)
-  user.set('name', '123213')
-  var user2 = new User(234)
-  user2.set('hehe', '234324')
+  var data = {
+    name: 'xxx'
+  }
+  var user = new DataBind(123)
+  user.set('data.name', 4564654654)
+//  var user = new DataBind(123)
+//  user.set('name', '123213')
+//  var user2 = new DataBind(234)
+//  user2.set('hehe', '234324')
   function test() {
-    user.set('name', '34324324')
+//    user.set('name', '34324324')
+    user.get('data.name')
   }
 </script>
 </body>

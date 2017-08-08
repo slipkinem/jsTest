@@ -1,7 +1,7 @@
 var stream = require('stream'); //依赖stream流
 var util = require('util'); //依赖工具函数
 
-function ReadStream() {
+function ReadStream () {
   stream.Readable.call(this);  //声明 ReadStream,等于给this了stream.Readable方法
 }
 
@@ -17,7 +17,7 @@ ReadStream.prototype._read = function () {  //创建原型方法
   this.push(null);
 }
 
-function WriteStream() {
+function WriteStream () {
   stream.Writable.call(this);  //对象冒充，得到  stream.Writable的方法
   this._cached = new Buffer(''); //得到一个方法
 }
@@ -29,7 +29,7 @@ WriteStream.prototype._write = function (chunk, encode, callback) {
   callback();
 };
 
-function TransformStream() {
+function TransformStream () {
   stream.Transform.call(this);
 }
 

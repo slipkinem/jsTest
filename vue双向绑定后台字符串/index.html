@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vue双向绑定后台字符串</title>
+  <script src="./api.js"></script>
+  <script src="https://unpkg.com/vue@2.2.6/dist/vue.js"></script>
+  <script src="https://cdn.bootcss.com/x2js/1.2.0/xml2json.js"></script>
+</head>
+<body>
+<div id="app">
+  <p>{{userName}}</p>
+  <div id="id-name" ref="idName" v-html="htmlList.input">
+  </div>
+</div>
+</body>
+<script>
+  var x2js = new X2JS()
+  var user = {
+    userName: 'heihei',
+    htmlList: window.htmlList
+  }
+
+  var json = x2js.xml_str2json(htmlList.input)
+  json.form.div[1]['p']['__text'] = '{{userName}}'
+  json.form.div[0].input['_v-model'] = "userName"
+  user.htmlList = x2js.json2xml_str(json)
+//  var cHtml = Vue.compile(user.htmlList)
+//  console.log(cHtml)
+  var vm = new Vue({
+    el: '#app',
+    data: user,
+    created: function () {
+      this.$compile(user.htmlList)
+      console.log(this.$refs)
+      this.$refs['idName'].append(user.htmlList)
+    }
+  })
+</script>
+</html>

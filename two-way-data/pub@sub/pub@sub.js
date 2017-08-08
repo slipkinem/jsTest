@@ -4,7 +4,7 @@
 'use strict'
 
 !function (window, $, undefined) {
-  window.User = User
+  window.DataBind = DataBind
 
   function DataBinder(object_id) {
     /**
@@ -58,7 +58,7 @@
     return pubSub
   }
 
-  function User(uid) {
+  function DataBind(uid) {
     /**
      * 创建pubSub实例
      * @type {DataBinder}
