@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-  <script src="promise.dist.js"></script>
+  <script src="../promise-lite.js"></script>
   <script>
 //    console.dir(Promise.default)
     function tr(index) {
-      return new Promise(function (resolve, reject) {
+      return new window.Promise(function (resolve, reject) {
         if (index === 0) {
           resolve('re')
         } else {
@@ -20,7 +20,7 @@
       .then(function (r) {
         console.log(r)
       })
-      .catch(function (r) {
+      .fail(function (r) {
         console.log(r)
       })
   </script>
