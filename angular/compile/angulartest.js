@@ -1,6 +1,6 @@
 var app = angular.module('app', []);
 
-function cDirective(name) {
+function cDirective (name) {
   return function () {
     return {
       // name: '',
@@ -24,6 +24,7 @@ function cDirective(name) {
     };
   };
 }
+
 app.directive('one', cDirective('one'));
 app.directive('two', cDirective('two'));
 app.directive('three', cDirective('three'));
@@ -39,11 +40,12 @@ app.directive('test', function () {
         scope.$apply(function () {
           ctrl.$fuck = true
         })
-      }).bind('blur', function () {
-        scope.$apply(function () {
-          ctrl.$fuck = false
-        })
       })
+        .bind('blur', function () {
+          scope.$apply(function () {
+            ctrl.$fuck = false
+          })
+        })
     }
   }
 })

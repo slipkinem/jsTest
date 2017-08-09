@@ -1,0 +1,19 @@
+{
+  "name": "angular",
+  "version": "1.0.0",
+  "description": "",
+  "main": "digest.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "angular",
+    "change",
+    "detection"
+  ],
+  "author": "slipkinem",
+  "license": "ISC",
+  "devDependencies": {
+    "lodash": "^4.17.4"
+  }
+}
