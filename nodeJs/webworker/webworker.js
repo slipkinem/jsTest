@@ -1,0 +1,13 @@
+/**
+ * Created by slipkinem on 8/10/2017 at 2:14 PM.
+ */
+'use strict'
+var http = require('http')
+http
+  .createServer(function (req, res) {
+    res.writeHead(200, {
+      'Content-Type': 'text/plain'
+    })
+    res.end('Hello Word\n')
+  })
+  .listen(Math.round((1 + Math.random()) * 1000), '127.0.0.1')
