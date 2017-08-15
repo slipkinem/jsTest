@@ -1,127 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>碰撞运动</title>
-	<style type="text/css">
-		*{
-			margin: 0;
-			padding: 0;
-		}
-		#box{
-			width:200px;
-			height: 200px;
-			background-color: #19F714;
-			position: absolute; 
-			top: 50px;
-			left: 30px;
-			border-radius: 100%;
-		}
-		body{
-			height: 2000px;
-		}
-	</style>
-	<script type="text/javascript">
-	
-		function dragMove(obj,fn){
-			obj.onmousedown=function (ev) {
-				var oEvent=ev||event;
-				// var oScrollTop=document.body.scrollTop;
-				// var oScrollLeft=document.body.scrollLeft;
-				var disX=0;
-				var disY=0;
-				disX=oEvent.clientX-obj.offsetLeft;
-				disY=oEvent.clientY-obj.offsetTop;
-				document.onmousemove=function (ev) {
-					 var oEvent=ev||event;
-					 // var oScrollTop=document.body.scrollTop;
-					 // var oScrollLeft=document.body.scrollLeft;
-					 var left=oEvent.clientX-disX;
-					 var top=oEvent.clientY-disY;
-					 if (left<=0) {
-					 	left=0;
-					 }else if (left>=document.documentElement.clientWidth-obj.offsetWidth) {
-					 	left=document.documentElement.clientWidth-obj.offsetWidth;
-					 }
-					 if (top<=0) {
-					 	top=0;
-					 }else if (top>=document.documentElement.clientHeight-obj.offsetHeight) {
-					 	top=document.documentElement.clientHeight-obj.offsetHeight;
-					 }
-					 obj.style.left=left+"px";
-					 obj.style.top=top+"px";
-					 iSpeedX=left-lastX;
-					 iSpeedY=top-lastY;
-					 lastX=left;
-					 lastY=top;
-				}
-				document.onmouseup=function(){
-					document.onmousemove=null;
-					document.onmouseu=null;
-					if (Math.abs(iSpeedX)>3 || Math.abs(iSpeedY)>3 ) {
-						if(fn){
-							fn();
-						}
-					}
-				}
-				clearInterval(obj.timer);
-				return false;
-			}
-		}
-			var lastX=0;
-			var lastY=0;
-			var iSpeedX=0;
-			var iSpeedY=0;
-			var timer=null;	
-			function crashMove(obj){
-			clearInterval(obj.timer);
-			
-			obj.timer=setInterval(function(){
-				iSpeedY+=3;
-				var l=obj.offsetLeft+iSpeedX;
-				var t=obj.offsetTop+iSpeedY;
-				if (t>=document.documentElement.clientHeight-obj.offsetHeight) {
-					iSpeedY*=-0.8;
-					iSpeedX*=0.8;
-					t=document.documentElement.clientHeight-obj.offsetHeight;
-				}else if (t<=0) {
-					iSpeedY*=-0.8;
-					iSpeedX*=0.8;
-					t=0;
-				}
-				if(l>=document.documentElement.clientWidth-obj.offsetWidth){
-					iSpeedX*=-0.8;
-					l=document.documentElement.clientWidth-obj.offsetWidth;
-				}else if (l<=0) {
-					iSpeedX*=-0.8;
-					l=0;
-				}
-				if (Math.abs(iSpeedX)<1) {
-					iSpeedX=0;
-				}
-				if (Math.abs(iSpeedY)<1) {
-					iSpeedY=0;
-				}
-				if (iSpeedX==0 && iSpeedY==0 && t==document.documentElement.clientHeight-obj.offsetHeight) {
-					clearInterval(obj.timer);
-				}else {
-					obj.style.left=l+"px";
-					obj.style.top=t+"px";
-				}
-			}, 30)
-		}
-			
-		window.onload=function(){
-			var oDiv=document.getElementById("box");
-			var oBtn=document.getElementsByTagName("button")[0];
-				dragMove(oDiv,function(){
-					crashMove(oDiv);
-				});
-		}	
-	</script>
+  <meta charset="UTF-8">
+  <title>碰撞运动</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    #box {
+      width: 200px;
+      height: 200px;
+      background-color: #19F714;
+      position: absolute;
+      top: 50px;
+      left: 30px;
+      border-radius: 100%;
+    }
+
+    body {
+      height: 2000px;
+    }
+  </style>
+  <script type="text/javascript">
+
+    function dragMove (obj, fn) {
+      obj.onmousedown = function (ev) {
+        var oEvent = ev || event;
+        // var oScrollTop=document.body.scrollTop;
+        // var oScrollLeft=document.body.scrollLeft;
+        var disX = 0;
+        var disY = 0;
+        disX = oEvent.clientX - obj.offsetLeft;
+        disY = oEvent.clientY - obj.offsetTop;
+        document.onmousemove = function (ev) {
+          var oEvent = ev || event;
+          // var oScrollTop=document.body.scrollTop;
+          // var oScrollLeft=document.body.scrollLeft;
+          var left = oEvent.clientX - disX;
+          var top = oEvent.clientY - disY;
+          if (left <= 0) {
+            left = 0;
+          } else if (left >= document.documentElement.clientWidth - obj.offsetWidth) {
+            left = document.documentElement.clientWidth - obj.offsetWidth;
+          }
+          if (top <= 0) {
+            top = 0;
+          } else if (top >= document.documentElement.clientHeight - obj.offsetHeight) {
+            top = document.documentElement.clientHeight - obj.offsetHeight;
+          }
+          obj.style.left = left + "px";
+          obj.style.top = top + "px";
+          iSpeedX = left - lastX;
+          iSpeedY = top - lastY;
+          lastX = left;
+          lastY = top;
+        }
+        document.onmouseup = function () {
+          document.onmousemove = null;
+          document.onmouseu = null;
+          if (Math.abs(iSpeedX) > 3 || Math.abs(iSpeedY) > 3) {
+            if (fn) {
+              fn();
+            }
+          }
+        }
+        clearInterval(obj.timer);
+        return false;
+      }
+    }
+
+    var lastX = 0;
+    var lastY = 0;
+    var iSpeedX = 0;
+    var iSpeedY = 0;
+    var timer = null;
+
+    function crashMove (obj) {
+      clearInterval(obj.timer);
+
+      obj.timer = setInterval(function () {
+        iSpeedY += 3;
+        var l = obj.offsetLeft + iSpeedX;
+        var t = obj.offsetTop + iSpeedY;
+        if (t >= document.documentElement.clientHeight - obj.offsetHeight) {
+          iSpeedY *= -0.8;
+          iSpeedX *= 0.8;
+          t = document.documentElement.clientHeight - obj.offsetHeight;
+        } else if (t <= 0) {
+          iSpeedY *= -0.8;
+          iSpeedX *= 0.8;
+          t = 0;
+        }
+        if (l >= document.documentElement.clientWidth - obj.offsetWidth) {
+          iSpeedX *= -0.8;
+          l = document.documentElement.clientWidth - obj.offsetWidth;
+        } else if (l <= 0) {
+          iSpeedX *= -0.8;
+          l = 0;
+        }
+        if (Math.abs(iSpeedX) < 1) {
+          iSpeedX = 0;
+        }
+        if (Math.abs(iSpeedY) < 1) {
+          iSpeedY = 0;
+        }
+        if (iSpeedX == 0 && iSpeedY == 0 && t == document.documentElement.clientHeight - obj.offsetHeight) {
+          clearInterval(obj.timer);
+        } else {
+          obj.style.left = l + "px";
+          obj.style.top = t + "px";
+        }
+      }, 30)
+    }
+
+    window.onload = function () {
+      var oDiv = document.getElementById("box");
+      var oBtn = document.getElementsByTagName("button")[0];
+      dragMove(oDiv, function () {
+        crashMove(oDiv);
+      });
+    }
+  </script>
 </head>
 <body>
-	<div id="box"></div>
-	<button>start 鼠标按住小球甩出去</button>
+<div id="box"></div>
+<button>start 鼠标按住小球甩出去</button>
 </body>
 </html>
