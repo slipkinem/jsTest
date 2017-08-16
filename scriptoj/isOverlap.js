@@ -37,6 +37,12 @@ const rect1 = {
   "width": 100,
   "height": 100
 }
-const rect2 = { "x": 201, "y": 201, "width": 100, "height": 100 }
+
+const rect2 = {
+  "x": 201,
+  "y": 201,
+  "width": 100,
+  "height": 100
+}
 
 console.log(isOverlap(rect1, rect2))

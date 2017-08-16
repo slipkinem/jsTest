@@ -1,110 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>canvas4</title>
+  <meta charset="UTF-8">
+  <title>canvas4</title>
 </head>
 <style type="text/css">
-	canvas{
-		background-color: green;
-	}
+  canvas {
+    background-color: green;
+  }
 </style>
 <script type="text/javascript">
-	window.onload = function(){
-		var oCans = document.getElementById('canvas');
-		var oP = document.getElementById('pp');
-		var cxt = oCans.getContext('2d');
+  window.onload = function () {
+    var oCans = document.getElementById('canvas');
+    var oP = document.getElementById('pp');
+    var cxt = oCans.getContext('2d');
 
-		// cxt.strokeStyle='#000';
-		// cxt.lineWidth=3;
-		// cxt.beginPath(); //开始画画
-		// cxt.moveTo(200, 200); //第一点
-		// cxt.lineTo(300,300); //第二点
-		// cxt.arc(200, 200, 80 ,0, 360, false);
-		// //	  圆心位置  半径  开始弧度  结束弧度  默认顺时针,true为逆时针
-		// cxt.closePath();
-		// cxt.stroke();//将点连接 
-		function clock(){
+    // cxt.strokeStyle='#000';
+    // cxt.lineWidth=3;
+    // cxt.beginPath(); //开始画画
+    // cxt.moveTo(200, 200); //第一点
+    // cxt.lineTo(300,300); //第二点
+    // cxt.arc(200, 200, 80 ,0, 360, false);
+    // //	  圆心位置  半径  开始弧度  结束弧度  默认顺时针,true为逆时针
+    // cxt.closePath();
+    // cxt.stroke();//将点连接
+    function clock () {
 
-			cxt.clearRect(0,0,500,450); 
-			var oDate = new Date();
-			var oHours = oDate.getHours();
-			var oMin = oDate.getMinutes();
-			var oSen = oDate.getSeconds();
-			oP.innerHTML=oHours+'-'+oMin+'-'+oSen;
-			var oHoursV = (-90 + oHours*30+oMin/2)*Math.PI/180;
-			var oMinV = (-90 + oMin*6)*Math.PI/180;
-			var oSenV = (-90 + oSen*6)*Math.PI/180;
-	//获取时间;3点钟是90度,所以度数=小时数*30,即一小时走30度;15分是90度;-90是12点是0度,而画布0度在3点;
-			for(var i = 0, length1 = 60; i < length1; i++){
-				cxt.strokeStyle='#000';
-				cxt.lineWidth=1;
-				cxt.beginPath();
-				cxt.moveTo(200, 200);
-				cxt.arc(200,200,80,0*i*Math.PI/180,6*(i+1)*Math.PI/180,false);
-				cxt.closePath();
-				cxt.stroke();
-			}
-			//画一个表
-			cxt.fillStyle='green';
-			cxt.beginPath();
-			cxt.moveTo(200, 200);
-			cxt.arc(200,200,70,0,360*Math.PI/180,false);
-			cxt.closePath();
-			cxt.fill();
-			//白块遮住表,留出来表的秒刻度
-			for(var i = 0, length1 = 12; i < length1; i++){
-				cxt.strokeStyle='#000';
-				cxt.lineWidth=3;
-				cxt.beginPath();
-				cxt.moveTo(200, 200);
-				cxt.arc(200,200,80,0*i*Math.PI/180,30*(i+1)*Math.PI/180,false);
-				cxt.closePath();
-				cxt.stroke();
-			}
-			//画一个表的小时的刻度
-			cxt.fillStyle='green';
-			cxt.beginPath();
-			cxt.moveTo(200, 200);
-			cxt.arc(200,200,66,0,360*Math.PI/180,false);
-			cxt.closePath();
-			cxt.fill();
-			//白块遮住些许小时刻度
-			cxt.strokeStyle='#000';
-			cxt.beginPath();
-			cxt.moveTo(200, 200);
-			cxt.arc(200,200,40,oHoursV,oHoursV,false);
-			cxt.closePath();
-			cxt.stroke();
-			//时针
-			cxt.strokeStyle='#000';
-			cxt.lineWidth=2;
-			cxt.beginPath();
-			cxt.moveTo(200, 200);
-			cxt.arc(200,200,50,oMinV,oMinV,false);
-			cxt.closePath();
-			cxt.stroke();
-			//分针
-			cxt.strokeStyle='#000';
-			cxt.lineWidth=1;
-			cxt.beginPath();
-			cxt.moveTo(200, 200);
-			cxt.arc(200,200,60,oSenV,oSenV,false);
-			cxt.closePath();
-			cxt.stroke();
-			//秒针
-			cxt.fillStyle='#000';
-			cxt.beginPath();
-			cxt.moveTo(200, 200);
-			cxt.arc(200,200,3,0,360*Math.PI/180,false);
-			cxt.closePath();
-			cxt.fill();
-		}
-		setInterval(clock, 1000);
-	}
+      cxt.clearRect(0, 0, 500, 450);
+      var oDate = new Date();
+      var oHours = oDate.getHours();
+      var oMin = oDate.getMinutes();
+      var oSen = oDate.getSeconds();
+      oP.innerHTML = oHours + '-' + oMin + '-' + oSen;
+      var oHoursV = (-90 + oHours * 30 + oMin / 2) * Math.PI / 180;
+      var oMinV = (-90 + oMin * 6) * Math.PI / 180;
+      var oSenV = (-90 + oSen * 6) * Math.PI / 180;
+      //获取时间;3点钟是90度,所以度数=小时数*30,即一小时走30度;15分是90度;-90是12点是0度,而画布0度在3点;
+      for (var i = 0, length1 = 60; i < length1; i++) {
+        cxt.strokeStyle = '#000';
+        cxt.lineWidth = 1;
+        cxt.beginPath();
+        cxt.moveTo(200, 200);
+        cxt.arc(200, 200, 80, 0 * i * Math.PI / 180, 6 * (i + 1) * Math.PI / 180, false);
+        cxt.closePath();
+        cxt.stroke();
+      }
+      //画一个表
+      cxt.fillStyle = 'green';
+      cxt.beginPath();
+      cxt.moveTo(200, 200);
+      cxt.arc(200, 200, 70, 0, 360 * Math.PI / 180, false);
+      cxt.closePath();
+      cxt.fill();
+      //白块遮住表,留出来表的秒刻度
+      for (var i = 0, length1 = 12; i < length1; i++) {
+        cxt.strokeStyle = '#000';
+        cxt.lineWidth = 3;
+        cxt.beginPath();
+        cxt.moveTo(200, 200);
+        cxt.arc(200, 200, 80, 0 * i * Math.PI / 180, 30 * (i + 1) * Math.PI / 180, false);
+        cxt.closePath();
+        cxt.stroke();
+      }
+      //画一个表的小时的刻度
+      cxt.fillStyle = 'green';
+      cxt.beginPath();
+      cxt.moveTo(200, 200);
+      cxt.arc(200, 200, 66, 0, 360 * Math.PI / 180, false);
+      cxt.closePath();
+      cxt.fill();
+      //白块遮住些许小时刻度
+      cxt.strokeStyle = '#000';
+      cxt.beginPath();
+      cxt.moveTo(200, 200);
+      cxt.arc(200, 200, 40, oHoursV, oHoursV, false);
+      cxt.closePath();
+      cxt.stroke();
+      //时针
+      cxt.strokeStyle = '#000';
+      cxt.lineWidth = 2;
+      cxt.beginPath();
+      cxt.moveTo(200, 200);
+      cxt.arc(200, 200, 50, oMinV, oMinV, false);
+      cxt.closePath();
+      cxt.stroke();
+      //分针
+      cxt.strokeStyle = '#000';
+      cxt.lineWidth = 1;
+      cxt.beginPath();
+      cxt.moveTo(200, 200);
+      cxt.arc(200, 200, 60, oSenV, oSenV, false);
+      cxt.closePath();
+      cxt.stroke();
+      //秒针
+      cxt.fillStyle = '#000';
+      cxt.beginPath();
+      cxt.moveTo(200, 200);
+      cxt.arc(200, 200, 3, 0, 360 * Math.PI / 180, false);
+      cxt.closePath();
+      cxt.fill();
+    }
+
+    setInterval(clock, 1000);
+  }
 </script>
 <body>
-	<canvas id="canvas" width="500" height="450"></canvas>
-	<p id="pp"></p>
+<canvas id="canvas" width="500" height="450"></canvas>
+<p id="pp"></p>
 </body>
 </html>
