@@ -278,3 +278,21 @@ class Promise extends util {
  * @type {Promise}
  */
 module.exports = Promise
+
+let promises = [];
+for (let i = 0; i < 5; i++) {
+  let promise = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(i)
+      }, 0)
+    })
+  };
+  promises.push(promise)
+}
+
+console.log(promises[3])
+promises[3]()
+.then(r => {
+  console.log(r)
+})

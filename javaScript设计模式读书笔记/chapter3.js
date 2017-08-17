@@ -38,6 +38,7 @@ log('--------简单工厂，就是一个简单的封装--------')
 }()
 
 log('-------工厂方法模式---------')
+
 ~function () {
   function Button (type, content) {
     if (this instanceof Button) {
