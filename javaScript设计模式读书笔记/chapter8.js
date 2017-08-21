@@ -14,6 +14,7 @@ var single = (function () {
   Fuck.prototype.start = function () {
     return this.bitch
   }
+
   return {
     getInstance: function (bitch) {
       if (!instance) {

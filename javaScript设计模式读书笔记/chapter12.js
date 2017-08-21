@@ -1,12 +1,26 @@
 /**
- * 代理模式
- *    对于一个对象不能直接引用另一个对象，所以通过代理起个中介作用
- *    没想到这一章讲的是跨域，我的妈呀，这怎么成了设计模式了
- *    跨域解决方案：
- *      1. jsonp 创建script标签获取数据，不能post
- *      2. iframe 通过iframe拿数据，写起来麻烦，还很弱
- *      3. nginx或者其他服务器进行跨域，或者设置http cors
- *      4... 其他
+ * 装饰者模式
+ *    不改变原对象的基础上，通过添加属性或方法使原对象满足要求
  * Created by slipkinem on 8/17/2017 at 3:56 PM.
  */
 'use strict'
+// 装饰者
+var decorator = (function () {
+  return function (input, fn) {
+    // 获取事件源
+    var input = document.getElementById(input)
+    if (typeof input.onclick === 'function') {
+      // 将之前的存起来，那之前有很多怎么办
+      var old = input.onclick
+      input.onclick = function () {
+        old()
+        // 看见吗就是执行了之前的函数，顺便加了个回调
+        fn()
+      }
+    } else {
+      input.onclick = fn
+    }
+    // do something
+
+  }
+}())
