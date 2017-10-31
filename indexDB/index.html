@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>indexDB</title>
+</head>
+<body>
+<button onclick="insert()">点击</button>
+<button onclick="select()">select</button>
+<script>
+var database
+
+function LinkRecord (name, url, description) {
+  this.name = name;
+  this.url = url;
+  this.description = description;
+}
+
+window.onload = function () {
+  var request = window.indexedDB.open('TestDB', 1)
+  request.onsuccess = function (e) {
+    console.log(e)
+    database = request.result
+  }
+
+  request.onerror = function (e) {
+    console.log(e, request.error)
+  }
+
+  request.onupgradeneeded = function (e) {
+    console.log(e, 'init')
+    var db = request.result
+    var objectStore = db.createObjectStore('Links', {
+      keyPath: 'id',
+      autoIncrement: true
+    })
+  }
+}
+
+function insert () {
+  var linkRecord = new LinkRecord('hangge.com', 'http://www.hangge.com',
+    '航歌 - 做最好的开发者知识平台');
+  var transaction = database.transaction(['Links'], 'readwrite')
+  var objectStore = transaction.objectStore('Links')
+  var request = objectStore.put(linkRecord)
+  request.onsuccess = function (e) {
+    console.log(e)
+  }
+}
+
+function select () {
+  var transation = database.transaction(['Links'], 'readonly')
+  var objectStore = transation.objectStore('Links')
+  var request = objectStore.openCursor()
+  request.onerror = function (e) {
+    console.log(e)
+  }
+
+  var message = ''
+  request.onsuccess = function (e) {
+    var cursor = e.target.result
+
+    if (cursor) {
+      var linkRecord = cursor.value
+      message += linkRecord.name + ' ' + linkRecord.url + '\n'
+      cursor.continue()
+    } else {
+      console.log(message)
+    }
+  }
+}
+
+
+
+</script>
+</body>
+</html>
