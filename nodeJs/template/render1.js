@@ -25,9 +25,9 @@ var render = function (str, data) {
     .replace(/<%=([\s\S]+?)%>/g, function (match, code) {
       return "' + escape(obj['" + code + "']) + '"
     })
-    .replace(/<%=([\s\S]+?)%>/g, function (match, code) {
-      return "' + obj['" + code + "'] + '"
-    })
+    // .replace(/<%=([\s\S]+?)%>/g, function (match, code) {
+    //   return "' + obj['" + code + "'] + '"
+    // })
 
   tpl = "var tpl = '" + tpl + "'\nreturn tpl;"
 
