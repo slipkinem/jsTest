@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<canvas id="canvas" width="345" height="456"></canvas>
+<script>
+  var cxt = document.getElementById('canvas').getContext('2d')
+  cxt.fillStyle = 'rgb(255, 0, 0)'
+  cxt.fillRect(0, 0, 64, 36)
+
+  window.addEventListener('load', function () {
+    navigator.geolocation.watchPosition(update)
+  }, true)
+
+  function update (position) {
+    debugger
+    var lat = position.coords.latitude
+    var lng = position.coords.longitude
+    console.log(lat, lng)
+  }
+
+</script>
+</body>
+</html>
