@@ -3,10 +3,18 @@
  */
 const co = require('co')
 const buildDeps = require('../lib/buildDeps')
+const webpack = require('../lib/webpack')
 
+// co(function *() {
+//   const depTree = yield buildDeps('./main.js', {
+//     context: ''
+//   })
+//   console.dir(depTree)
+// })
 co(function *() {
-  const depTree = yield buildDeps('./main.js', {
-    context: ''
+  const test = yield webpack('./main.js', {
+    context: '',
+    output: 'output.js'
   })
-  console.dir(depTree)
+  console.log(test)
 })

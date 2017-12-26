@@ -22,19 +22,17 @@ module.exports = function (module) {
       to: require.nameRange[1],
       value: prefix + require.id
     })
-
-    // 排序，从后往前替换模块名，这样才能保证正确替换所有的模块
-    replaces.sort((a, b) => {
-      return b.from - a.from
-    })
-
-    // 逐个替换模块名为模块id
-    replaces.forEach(replace => {
-      let target = source.substring(replace.from, replace.to)
-      source = source.replace(target, replace.value)
-    })
-
-    return source
-
   })
+
+  // 排序，从后往前替换模块名，这样才能保证正确替换所有的模块
+  replaces.sort((a, b) => {
+    return b.from - a.from
+  })
+
+  // 逐个替换模块名为模块id
+  replaces.forEach(replace => {
+    let target = source.substring(replace.from, replace.to)
+    source = source.replace(target, replace.value)
+  })
+  return source
 }
