@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../node_modules/comma-separated-values/csv.min.js"></script>
+  <script src="./exporter.js"></script>
+</head>
+<body>
+<button id="btn">点击下载</button>
+<script>
+var _data = [
+  {
+    'shopCode': 'tjg0169',
+    'merchantCode': '2017120101',
+    'distance': 263,
+    'shopCityname': '重庆市',
+    'latitude': 29.56042,
+    'shopName': '重庆桐君阁大药房(新山城)',
+    'shopAddress': '渝中区中山三路127-131号（宋庆龄故居旁）',
+    'shopProvincename': '重庆市',
+    'shopDistrictname': '渝中区',
+    'shopMerchantname': '桐君阁',
+    'shopSign': '0',
+    'shopPhone': '023-63878434',
+    'shopId': 40334,
+    'shopType': 1,
+    'longitude': 106.555975,
+    'shortName': '',
+    'imgUrl': '/image/PKECMerchant/96e16025-38a9-4063-bb78-ccfb7f8d1d2d.jpg'
+  },
+  {
+    'shopCode': 'cqtsyy002',
+    'merchantCode': '3401010003',
+    'distance': 360,
+    'shopCityname': '重庆市',
+    'latitude': 29.559535,
+    'shopName': '重庆唐氏药业学田湾一店(新）',
+    'shopAddress': '渝中区学田湾正街37号第一层（LG层）外3号',
+    'shopProvincename': '重庆市',
+    'shopDistrictname': '渝中区',
+    'shopMerchantname': '重庆唐氏药业有限公司',
+    'shopSign': [
+      '健康咨询'
+    ],
+    'shopPhone': '62916990',
+    'shopId': 31357,
+    'shopType': 1,
+    'longitude': 106.552512,
+    'shortName': '重庆唐氏药业',
+    'imgUrl': '/image/PKECMerchant/7d9ecb17-49ca-4667-83ee-5210a00a8169.jpg'
+  },
+  {
+    'shopCode': 'YXTF145',
+    'merchantCode': '3401010001',
+    'distance': 365,
+    'shopCityname': '重庆市',
+    'latitude': 29.558855,
+    'shopName': '一心堂重庆学田湾正街店',
+    'shopAddress': '重庆市渝中区上清寺学田湾5号附3号',
+    'shopProvincename': '重庆市',
+    'shopDistrictname': '渝中区',
+    'shopMerchantname': '重庆鸿翔一心堂药业有限公司',
+    'shopSign': [
+      '医保'
+    ],
+    'shopPhone': '023-63038175',
+    'shopId': 30926,
+    'shopType': 1,
+    'longitude': 106.552162,
+    'shortName': '重庆鸿翔一心堂',
+    'imgUrl': '/image/PKECMerchant/5cc97539-f79d-4b53-84fe-aef7b18085bb.gif'
+  },
+  {
+    'shopCode': 'cqwhyf0028',
+    'merchantCode': '2017120102',
+    'distance': 406,
+    'shopCityname': '重庆市',
+    'latitude': 29.561371,
+    'shopName': '万和药房两路口二店',
+    'shopAddress': '中山支路16号西楼底楼5号',
+    'shopProvincename': '重庆市',
+    'shopDistrictname': '渝中区',
+    'shopMerchantname': '重庆万和药房',
+    'shopSign': '0',
+    'shopPhone': '023-63535721',
+    'shopId': 41028,
+    'shopType': 1,
+    'longitude': 106.557569,
+    'shortName': '',
+    'imgUrl': '/image/PKECMerchant/e35e2231-6653-45fd-b2a4-aa1a43abbe6c.jpg'
+  },
+  {
+    'shopCode': 'cqtsyy007',
+    'merchantCode': '3401010003',
+    'distance': 455,
+    'shopCityname': '重庆市',
+    'latitude': 29.56178,
+    'shopName': '重庆唐氏药业渝中区人和街店',
+    'shopAddress': '渝中区人和街15号正一层部分商铺',
+    'shopProvincename': '重庆市',
+    'shopDistrictname': '渝中区',
+    'shopMerchantname': '重庆唐氏药业有限公司',
+    'shopSign': [
+      '健康咨询'
+    ],
+    'shopPhone': '62967661',
+    'shopId': 31362,
+    'shopType': 1,
+    'longitude': 106.55776,
+    'shortName': '重庆唐氏药业',
+    'imgUrl': '/image/PKECMerchant/7d9ecb17-49ca-4667-83ee-5210a00a8169.jpg'
+  },
+  {
+    'shopCode': 'cqtsyy001',
+    'merchantCode': '3401010003',
+    'distance': 469,
+    'shopCityname': '重庆市',
+    'latitude': 29.559101,
+    'shopName': '重庆唐氏药业学田湾分店',
+    'shopAddress': '渝中区学田湾正街55号（农贸市场新世纪）',
+    'shopProvincename': '重庆市',
+    'shopDistrictname': '渝中区',
+    'shopMerchantname': '重庆唐氏药业有限公司',
+    'shopSign': [
+      '健康咨询'
+    ],
+    'shopPhone': '63855303',
+    'shopId': 31356,
+    'shopType': 1,
+    'longitude': 106.551127,
+    'shortName': '重庆唐氏药业',
+    'imgUrl': '/image/PKECMerchant/7d9ecb17-49ca-4667-83ee-5210a00a8169.jpg'
+  },
+  {
+    'shopCode': 'cqtsyy004',
+    'merchantCode': '3401010003',
+    'distance': 558,
+    'shopCityname': '重庆市',
+    'latitude': 29.563028,
+    'shopName': '重庆唐氏药业大礼堂分店',
+    'shopAddress': '渝中区人民路158号',
+    'shopProvincename': '重庆市',
+    'shopDistrictname': '渝中区',
+    'shopMerchantname': '重庆唐氏药业有限公司',
+    'shopSign': [
+      '健康咨询'
+    ],
+    'shopPhone': '63639632',
+    'shopId': 31359,
+    'shopType': 1,
+    'longitude': 106.555046,
+    'shortName': '重庆唐氏药业',
+    'imgUrl': '/image/PKECMerchant/7d9ecb17-49ca-4667-83ee-5210a00a8169.jpg'
+  },
+  {
+    'shopCode': 'tjg0237',
+    'merchantCode': '2017120101',
+    'distance': 584,
+    'shopCityname': '重庆市',
+    'latitude': 29.563281,
+    'shopName': '重庆桐君阁大药房(渝中区二十五店)',
+    'shopAddress': '渝中区中山三路153号（重庆市总工会大厦旁）',
+    'shopProvincename': '重庆市',
+    'shopDistrictname': '渝中区',
+    'shopMerchantname': '桐君阁',
+    'shopSign': '0',
+    'shopPhone': '023-86528020',
+    'shopId': 40402,
+    'shopType': 1,
+    'longitude': 106.555234,
+    'shortName': '',
+    'imgUrl': '/image/PKECMerchant/96e16025-38a9-4063-bb78-ccfb7f8d1d2d.jpg'
+  },
+  {
+    'shopCode': 'cqwhyf0097',
+    'merchantCode': '2017120102',
+    'distance': 816,
+    'shopCityname': '重庆市',
+    'latitude': 29.565387,
+    'shopName': '万和药房学田湾二店',
+    'shopAddress': '重庆市渝中区学田湾正街93号',
+    'shopProvincename': '重庆市',
+    'shopDistrictname': '渝中区',
+    'shopMerchantname': '重庆万和药房',
+    'shopSign': '0',
+    'shopPhone': '023-63629372',
+    'shopId': 41097,
+    'shopType': 1,
+    'longitude': 106.555951,
+    'shortName': '',
+    'imgUrl': '/image/PKECMerchant/e35e2231-6653-45fd-b2a4-aa1a43abbe6c.jpg'
+  },
+  {
+    'shopCode': 'cqttdyf041',
+    'merchantCode': '3401010005',
+    'distance': 820,
+    'shopCityname': '重庆市',
+    'latitude': 29.563761,
+    'shopName': '重庆通天大药房潼南区塘坝人民街店',
+    'shopAddress': '重庆市潼南县塘坝镇人民街156、158号',
+    'shopProvincename': '重庆市',
+    'shopDistrictname': '潼南区',
+    'shopMerchantname': '重庆通天大药房连锁有限公司潼南区西市场点',
+    'shopSign': [
+      '健康咨询'
+    ],
+    'shopPhone': '023-44340266',
+    'shopId': 31487,
+    'shopType': 1,
+    'longitude': 106.550464,
+    'shortName': '重庆通天大药房',
+    'imgUrl': '/image/PKECMerchant/085ae777-10fb-494d-a359-5e3335f141ed.jpg'
+  },
+  {
+    'shopCode': 'cqwhyf0119',
+    'merchantCode': '2017120102',
+    'distance': 838,
+    'shopCityname': '重庆市',
+    'latitude': 29.560844,
+    'shopName': '万和药房桂花园店',
+    'shopAddress': '重庆市渝中区桂花园路54-4号',
+    'shopProvincename': '重庆市',
+    'shopDistrictname': '渝中区',
+    'shopMerchantname': '重庆万和药房',
+    'shopSign': '0',
+    'shopPhone': '023-63861112',
+    'shopId': 41119,
+    'shopType': 1,
+    'longitude': 106.547779,
+    'shortName': '',
+    'imgUrl': '/image/PKECMerchant/e35e2231-6653-45fd-b2a4-aa1a43abbe6c.jpg'
+  },
+  {
+    'shopCode': 'tjg0239',
+    'merchantCode': '2017120101',
+    'distance': 894,
+    'shopCityname': '重庆市',
+    'latitude': 29.565737,
+    'shopName': '重庆桐君阁大药房(渝中区二十六店)',
+    'shopAddress': '渝中区学田湾正街37号（学田湾农贸市场）',
+    'shopProvincename': '重庆市',
+    'shopDistrictname': '渝中区',
+    'shopMerchantname': '桐君阁',
+    'shopSign': '0',
+    'shopPhone': '023-86362937',
+    'shopId': 40404,
+    'shopType': 1,
+    'longitude': 106.558536,
+    'shortName': '',
+    'imgUrl': '/image/PKECMerchant/96e16025-38a9-4063-bb78-ccfb7f8d1d2d.jpg'
+  }
+]
+var data = new CSV(_data, {
+  header: ['shopCode',
+    'merchantCode',
+    'distance',
+    'shopCityname',
+    'latitude',
+    '商店名称',
+    '商店地址',
+    'shopProvincename',
+    'shopDistrictname',
+    'shopMerchantname',
+    'shopSign',
+    'shopPhone',
+    'shopId',
+    'shopType',
+    'longitude',
+    'shortName',
+    'imgUrl']
+}).encode()
+var btn = document.getElementById('btn')
+btn.onclick = function () {
+  exporter.downloadFile('store.csv', data, ',', true, false)
+}
+</script>
+</body>
+</html>
