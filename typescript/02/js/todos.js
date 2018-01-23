@@ -11,7 +11,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var Todo = (function (_super) {
+var Todo = /** @class */ (function (_super) {
     __extends(Todo, _super);
     function Todo() {
         return _super !== null && _super.apply(this, arguments) || this;
@@ -39,7 +39,7 @@ var Todo = (function (_super) {
     };
     return Todo;
 }(Backbone.Model));
-var TodoList = (function (_super) {
+var TodoList = /** @class */ (function (_super) {
     __extends(TodoList, _super);
     function TodoList() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
@@ -64,7 +64,7 @@ var TodoList = (function (_super) {
     return TodoList;
 }(Backbone.Collection));
 var Todos = new TodoList();
-var TodoView = (function (_super) {
+var TodoView = /** @class */ (function (_super) {
     __extends(TodoView, _super);
     function TodoView(options) {
         var _this = _super.call(this, options) || this;
@@ -106,7 +106,7 @@ var TodoView = (function (_super) {
     };
     return TodoView;
 }(Backbone.View));
-var AppView = (function (_super) {
+var AppView = /** @class */ (function (_super) {
     __extends(AppView, _super);
     function AppView() {
         var _this = _super.call(this) || this;
