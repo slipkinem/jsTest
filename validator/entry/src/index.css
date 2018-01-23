@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.ls-form {
+  width: 600px;
+  margin: 50px auto;
+}
+
+.ls-form-item {
+  margin-bottom: 24px;
+}
+
+.ls-form-item.error .ls-form-input,
+.ls-form-item.error .ls-form-input:focus {
+  border-color: #e74c3c;
+}
+
+.ls-form-item.error .ls-form-item__message {
+  color: #e74c3c;
+}
+
+.ls-form-item.success .ls-form-input,
+.ls-form-item.success .ls-form-input:focus {
+  border-color: #16a085;
+}
+
+.ls-form-item.success .ls-form-item__message {
+  color: #16a085;
+}
+
+.ls-form-item.warning .ls-form-input,
+.ls-form-item.warning .ls-form-input:focus {
+  border-color: #eea236;
+}
+
+.ls-form-item.warning .ls-form-item__message {
+  color: #eea236;
+}
+
+.ls-form-label {
+  min-width: 4em;
+  text-align: right;
+  float: left;
+  font-size: 14px;
+  vertical-align: middle;
+  margin-top: 5px;
+}
+
+.ls-form-input {
+  border-radius: 5px;
+  height: 2em;
+  border: 1px solid #999;
+  text-indent: 0.3em;
+  width: 200px;
+  outline: none;
+}
+
+.ls-form-item__content {
+  margin-left: 5em;
+  position: relative;
+}
+
+.ls-form-item__message {
+  font-size: 12px;
+  color: #aaa;
+  position: absolute;
+}
+
+.btn-group {
+  text-align: center;
+}
+
+.btn--success {
+  background: #2AD77E;
+  border: 1px solid #2AD77E;
+  color: #fff;
+  padding: 10px 20px;
+  cursor: pointer;
+  outline: none;
+  border-radius: 5px;
+}
+
+.btn--success:hover {
+  background: #0cd759;
+}
