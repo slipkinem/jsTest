@@ -1,0 +1,30 @@
+{
+  "name": "simple",
+  "version": "1.0.0",
+  "description": "a egg.js quickstart",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "egg-bin dev",
+    "tsc": "tsc -p tsconfig.json",
+    "tsc:w": "tsc -p tsconfig.json -w",
+    "start": "npm run tsc:w | npm run dev",
+    "lint": "tslint"
+  },
+  "keywords": [
+    "egg.js"
+  ],
+  "author": "slipkinem <slipkinem@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "egg": "^2.2.1",
+    "egg-mysql": "^3.0.0",
+    "egg-view-nunjucks": "^2.1.4"
+  },
+  "devDependencies": {
+    "egg-bin": "^4.3.7",
+    "tslint": "^5.9.1",
+    "tslint-config-standard": "^7.0.0",
+    "typescript": "^2.6.2"
+  }
+}

@@ -64,3 +64,4 @@ nodeWebo/app/controllers/admin/
 nodeWebo/app/controllers/blog/
 nodeWebo/public/img/
 nodeWebo/public/js/
+*.map

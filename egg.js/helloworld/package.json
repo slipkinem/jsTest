@@ -1,7 +1,16 @@
 {
-  "name": "$package_name$",
-  "version": "0.0.1",
+  "name": "helloworld",
   "dependencies": {
-    $END$
-  }
+    "egg": "^2.2.1"
+  },
+  "devDependencies": {
+    "egg-bin": "^4.3.7",
+    "egg-mock": "^3.13.1"
+  },
+  "scripts": {
+    "dev": "egg-bin dev",
+    "test": "egg-bin test",
+    "cov": "egg-bin cov"
+  },
+  "private": true
 }

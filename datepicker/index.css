@@ -1,0 +1,87 @@
+ul, li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.s-input {
+  border-radius: 10px;
+  width: 400px;
+  text-indent: 0.5em;
+  border: 1px solid #777;
+  outline: none;
+  height: 30px;
+  font-size: 18px;
+}
+
+.s-input:focus {
+  border-color: #2ad77e;
+}
+
+.s-picker-content {
+  min-width: 200px;
+  padding: 5px;
+  float: left;
+  border: 1px solid #888888;
+  margin-top: 2px;
+  margin-left: 4.5em;
+  border-radius: 10px;
+}
+
+.s-picker-title {
+  text-align: center;
+  padding-bottom: 5px;
+  user-select: none;
+}
+
+.s-picker-title .prev,
+.s-picker-title .next {
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.s-picker-title .s-picker-subject {
+  cursor: pointer;
+  margin: 0 15px;
+}
+
+.s-picker-list {
+  width: 100%;
+}
+
+.s-picker-list .s-picker-item {
+  width: 30px;
+  height: 30px;
+  float: left;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+  margin: 1px;
+  padding: 3px;
+}
+
+.s-picker-list.day .s-picker-item {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.s-picker-list.week .s-picker-item {
+  color: #5a94ef;
+}
+
+.s-picker-list.day .s-picker-item.old,
+.s-picker-list.day .s-picker-item.new {
+  color: #9c949c;
+}
+
+.s-picker-list.day .s-picker-item:hover {
+  background: #888888;
+  color: #fff;
+}
