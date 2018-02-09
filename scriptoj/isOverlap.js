@@ -16,7 +16,6 @@
  isOverlap(rect1, rect2) // => true
  * Created by slipkinem on 2017/8/14 at 14:08.
  */
-'use strict'
 
 const isOverlap = (rect1, rect2) => {
   if (rect1.y + rect1.height < rect2.y) {

@@ -60,3 +60,7 @@ function removeClass (el, cls) {
     el.className = trim(curClass)
   }
 }
+
+const trim = function (string) {
+  return (string || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '')
+}

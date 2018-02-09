@@ -41,14 +41,18 @@ window.onload = function () {
 
   render.cb = function (value) {
     $select.value = value.toLocaleString()
-    util.addClass($content, 'hidden')
+    window.util.addClass($content, 'hidden')
   }
 
   $select.addEventListener('focus', function (e) {
-    util.removeClass($content, 'hidden')
+    window.util.removeClass($content, 'hidden')
   })
 }
 
+/**
+ * 主渲染函数
+ * @param date
+ */
 function render (date) {
   var $subject = $('#s-picker-subject')
   var $dayColumns = document.querySelectorAll('.s-picker-list.day')
@@ -77,7 +81,6 @@ function render (date) {
         if (j >= startWeek) {
           $dayColumns[i].innerHTML += '<li class="s-picker-item">' + (indexDay++) + '</li>'
         } else {
-          $dayColumns[i].innerHTML += '<li class="s-picker-item old">' + (oldDayIndex++) + '</li>'
         }
       } else {
         if (indexDay > currentDayCount) {
@@ -116,7 +119,7 @@ function getDayCount (month, date) {
   month = (month + 1) + ''
   var days31 = '1 3 5 7 8 10 12'.split(' ')
   var days30 = '4 6 9 11'.split(' ')
-  var isBig2Month = date.getFullYear() % 4 === 0
+  var isBigFebruary = date.getFullYear() % 4 === 0
 
   if (days30.indexOf(month) >= 0) {
     return 30
@@ -126,9 +129,10 @@ function getDayCount (month, date) {
     return 31
   }
 
-  return isBig2Month ? 29 : 28
+  return isBigFebruary ? 29 : 28
 }
 
+// 根据基姆拉尔森计算公式求出某一天是星期几
 function getStartWeek (y, m, d) {
   m += 1
   if (m === 1 || m === 2) {

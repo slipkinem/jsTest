@@ -2,18 +2,12 @@
  * Created by slipkinem on 1/2/2018 at 10:13 AM.
  */
 window.exporter = {
-  isIE: function () {
+  isIE () {
     var match = navigator.userAgent.search(/(?:Edge|MSIE|Trident\/.*; rv:)/);
-    var isIE = false;
-
-    if (match !== -1) {
-      isIE = true;
-    }
-
-    return isIE;
+    return match !== -1;
   },
   delay: 100,
-  downloadFile: function (fileName, csvContent, columnSeparator, exporterOlderExcelCompatibility, exporterIsExcelCompatible) {
+  downloadFile (fileName, csvContent, columnSeparator, exporterOlderExcelCompatibility, exporterIsExcelCompatible) {
     var D = document;
     var a = D.createElement('a');
     var strMimeType = 'application/octet-stream;charset=utf-8';
@@ -28,8 +22,8 @@ window.exporter = {
     if (navigator.msSaveBlob) {
       return navigator.msSaveOrOpenBlob(
         new Blob(
-          [exporterOlderExcelCompatibility ? "\uFEFF" : '', csvContent],
-          { type: strMimeType } ),
+          [exporterOlderExcelCompatibility ? '\uFEFF' : '', csvContent],
+          { type: strMimeType }),
         fileName
       );
     }
@@ -51,7 +45,7 @@ window.exporter = {
     //html5 A[download]
     if ('download' in a) {
       var blob = new Blob(
-        [exporterOlderExcelCompatibility ? "\uFEFF" : '', csvContent],
+        [exporterOlderExcelCompatibility ? '\uFEFF' : '', csvContent],
         { type: strMimeType }
       );
       rawFile = URL.createObjectURL(blob);
@@ -64,7 +58,7 @@ window.exporter = {
     a.href = rawFile;
     a.setAttribute('style', 'display:none;');
     D.body.appendChild(a);
-    setTimeout(function() {
+    setTimeout(function () {
       if (a.click) {
         a.click();
         // Workaround for Safari 5
