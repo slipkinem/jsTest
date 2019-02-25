@@ -1,4 +1,8 @@
 @charset "utf-8";
+body{
+  min-width: 1200px;
+}
+
 .m-r-5 {
     margin-right: 5px;
 }
@@ -55,7 +59,7 @@ header > div {
     flex: 1;
     color: #bfe8fa !important;
     font-size: 1.6rem;
-} 
+}
 header .item > img {
     width: auto !important;
     margin-right: 15px !important;
@@ -80,7 +84,7 @@ header .nav ul {
 header .nav ul li {
     padding: 0 10px;
 }
-header .nav ul li.nav-l {    
+header .nav ul li.nav-l {
     margin-right: 20%;
 }
 header .nav ul li.nav-r {
@@ -218,8 +222,8 @@ header .nav-r img {
     padding-bottom: 5px;
 }
 .cont .notice-ul li p > span {
-    overflow: hidden; 
-    white-space: nowrap; 
+    overflow: hidden;
+    white-space: nowrap;
     text-overflow: ellipsis;
 }
 .cont .notice-ul li > div {
