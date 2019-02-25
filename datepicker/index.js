@@ -59,8 +59,8 @@ function render (date) {
 
   var currentYear = date.getFullYear()
   var currentMonth = date.getMonth()
-  var currentWeek = date.getDay()
-  var currentDay = date.getDate()
+  // var currentWeek = date.getDay()
+  // var currentDay = date.getDate()
   var indexDay = 1
   var startWeek = getStartWeek(currentYear, currentMonth, 1)
   var currentDayCount = getDayCount(currentMonth, date)
@@ -74,7 +74,7 @@ function render (date) {
   // 根据开始的星期数求出上个月第一天
   var oldDayIndex = oldDayCount - startWeek + 1
 
-  for (var i = 0, ii = $dayColumns.length; i < ii; i++) {
+  for (let i = 0, ii = $dayColumns.length; i < ii; i++) {
     $dayColumns[i].innerHTML = ''
     for (var j = 0; j < 7; j++) {
       if (i === 0) {
@@ -94,7 +94,7 @@ function render (date) {
   indexDay = 1
   var $newDays = document.querySelectorAll('.s-picker-item')
 
-  for (var i = 0, ii = $newDays.length; i < ii; i++) {
+  for (let i = 0, ii = $newDays.length; i < ii; i++) {
     if (util.hasClass($newDays[i], 'new')) {
       $newDays[i].innerHTML = '' + indexDay++
     }
