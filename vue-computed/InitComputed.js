@@ -1,7 +1,8 @@
 /**
  * Created by slipkinem on 2019/2/28 at 5:02 PM.
  */
-import { Watcher } from './Watcher'
+import { Watcher } from './Watcher.js'
+import { Dep } from './Dep.js'
 
 const noop = () => {
 }

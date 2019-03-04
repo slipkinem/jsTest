@@ -2,7 +2,7 @@
  * Created by slipkinem on 2019/2/28 at 3:37 PM.
  */
 
-import { Dep } from './Dep'
+import { Dep } from './Dep.js'
 
 export function def (obj, key, val) {
   Object.defineProperty(obj, key, {
@@ -13,7 +13,7 @@ export function def (obj, key, val) {
   })
 }
 
-function observe (value) {
+export function observe (value) {
   if (typeof value !== 'object') return
   return new Observer(value)
 }
@@ -66,7 +66,7 @@ export class Observer {
     const keys = Object.keys(obj)
     keys.forEach(key => {
       if (key === '__ob__') return
-
+      defineReactive(obj, key, obj[key])
     })
   }
 

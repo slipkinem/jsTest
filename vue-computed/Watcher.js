@@ -1,7 +1,7 @@
 /**
  * Created by slipkinem on 2019/2/28 at 3:37 PM.
  */
-import { Dep } from './Dep'
+import { Dep } from './Dep.js'
 
 export class Watcher {
   static uid = 0
@@ -67,6 +67,7 @@ export class Watcher {
     if (this.user) {
       this.cb.call(this.vm, value, oldValue)
     } else {
+      console.log('视图更新')
       this.cb.call(this.vm, value, oldValue)
     }
   }
