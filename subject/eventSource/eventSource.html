@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EventSource</title>
+</head>
+<body>
+<script>
+var eventSource = new EventSource('http://127.0.0.1:8877');
+
+eventSource.onmessage = function(e) {
+  console.log(JSON.parse(e.data).message);
+};
+
+eventSource.addEventListener('hello_event', (e) => {
+  console.log(e)
+})
+</script>
+</body>
+</html>
