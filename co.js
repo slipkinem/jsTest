@@ -11,7 +11,7 @@ function test () {
 
 function* print () {
   const v = yield test()
-  const x = yield test()
+  const x = yield Promise.resolve(123123)
   console.log(v)
   console.log(v, x)
 }
@@ -22,18 +22,14 @@ co(print) // fuck
 function co (gen) {
   let ret = gen.call(this, null)
 
-  auto()
+   next()
 
-  function auto (r) {
+  function next (r) {
     let o = ret.next(r)
-    next(o)
-  }
-
-  function next (o) {
     if (o.done) return
 
     if (o.value instanceof Promise) {
-      o.value.then(auto)
+      o.value.then(next)
     }
   }
 }
