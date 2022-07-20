@@ -8,7 +8,7 @@
     "tsc": "tsc --sourcemap typescript/02/js/todos.ts"
   },
   "dependencies": {
-    "angular": "^1.6.4",
+    "angular": "^1.8.3",
     "co": "^4.6.0",
     "comma-separated-values": "^3.6.4",
     "core-js": "^2.5.3",
